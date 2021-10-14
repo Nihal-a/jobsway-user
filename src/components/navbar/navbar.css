@@ -1,6 +1,9 @@
 
 .navbar{
-    margin-top: .6rem;
+    padding: 10px 0px;
+    background-color: #ffffff;
+    height: 64px;
+    border-bottom: 1px solid #f1f1f1;
 }
 .logo{
     font-size: 29px;
@@ -20,7 +23,8 @@
 .login-btn{
     font-size: 20px;
     font-weight: 400;
-    margin-right: 7px;
+    margin-right: 1rem;
+    color: #212121 !important;
 }
 .reg-btn{
     font-size: 20px;

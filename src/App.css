@@ -14,3 +14,10 @@ body{
     width: 1280px;
     margin: auto;
 }
+.span-clr{
+    color: var(--primary-color);
+}
+.d-flex{
+    display: flex;
+    align-items: center;
+}

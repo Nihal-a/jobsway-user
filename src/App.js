@@ -1,6 +1,9 @@
+import Landing from "./pages/Landing";
+import './App.css'
+
 function App() {
   return (
-    <h1>Welcome User.</h1>
+    <Landing/>
   );
 }
 

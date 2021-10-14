@@ -1,0 +1,31 @@
+
+.navbar{
+    margin-top: .6rem;
+}
+.logo{
+    font-size: 29px;
+    color: #212121;
+    font-weight: 700;
+    letter-spacing: 0;
+}
+.nav-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.nav-wrapper a{
+    text-decoration: none;
+    color: #fff;
+}
+.login-btn{
+    font-size: 20px;
+    font-weight: 400;
+    margin-right: 7px;
+}
+.reg-btn{
+    font-size: 20px;
+    font-weight: 400;
+    padding: 7px 20px;
+    background-color: #008FAE;
+    border-radius: 5px;
+}

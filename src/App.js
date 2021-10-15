@@ -1,6 +1,7 @@
 import Landing from "./pages/Landing";
 import './App.css'
 import {BrowserRouter as Router,Route} from 'react-router-dom'
+import Signup from "./pages/Signup";
 
 function App() {
   return (
@@ -8,7 +9,9 @@ function App() {
       <Route exact path="/">
         <Landing/>
       </Route>
-      
+      <Route path="/signup">
+        <Signup/>
+      </Route>
     </Router>
   );
 }

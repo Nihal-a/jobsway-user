@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '../navbar/Navbar'
 import { Icon } from '@iconify/react';
 import './Home.css'
+import PrimaryButton from '../Buttons/primary/PrimaryButton';
 
 
 function Home() {

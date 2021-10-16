@@ -1,7 +1,11 @@
-export default  (state = [],action) => {
+import { AUTH } from "../constants/actionTypes"
+
+export default  (state = {authData : null},action) => {
     switch (action.type) {
-        case 'FETCH__ALL':
-            return state
+        case AUTH:
+            console.log("actions",action);
+            localStorage.setItem('profile',JSON.stringify({...action?.data}))
+            return {...state,authData:action?.data}
         case 'CREATE__USER':
             return state
         default:

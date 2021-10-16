@@ -3,7 +3,7 @@ import { Link,useHistory } from "react-router-dom";
 import {LinkedInLoginButton,GoogleLoginButton} from "react-social-login-buttons";
 import "./style.css";
 import { useDispatch } from "react-redux";
-
+import { signup } from "../../actions/auth";
 const initialState = {firstName:'',lastName:'',email:'',password:'',confirmPassword:''}
 
 function Signupform() {
@@ -15,6 +15,7 @@ function Signupform() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        console.log(formData);
         dispatch(signup(formData,history))
     }
     const handleChange = (e) => {

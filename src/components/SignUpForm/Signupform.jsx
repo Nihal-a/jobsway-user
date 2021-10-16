@@ -1,32 +1,49 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import {
-  LinkedInLoginButton,
-  GoogleLoginButton,
-} from "react-social-login-buttons";
+import React,{useState} from "react";
+import { Link,useHistory } from "react-router-dom";
+import {LinkedInLoginButton,GoogleLoginButton} from "react-social-login-buttons";
 import "./style.css";
+import { useDispatch } from "react-redux";
+
+const initialState = {firstName:'',lastName:'',email:'',password:'',confirmPassword:''}
 
 function Signupform() {
+
+
+    const [formData, setFormData] = useState(initialState)
+    const dispatch = useDispatch()
+    const history = useHistory()
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        dispatch(signup(formData,history))
+    }
+    const handleChange = (e) => {
+        e.preventDefault()
+        setFormData({...formData,[e.target.name] : e.target.value})
+    }
   return (
     <div className="signup-wrapper">
-      <form action="">
+      <form action="" onSubmit={handleSubmit}>
         <h3 className="welcome ">Welcome to JobsWay.</h3>
         <div className="inp-wrap d-flex" style={{ marginTop: "1rem" }}>
-          <input placeholder="First Name" className="input" type="text" />
-          <input placeholder="Last Name" className="input" type="text" />
+          <input onChange={handleChange} required name="firstName" placeholder="First Name" className="input" type="text" />
+          <input onChange={handleChange} required name="lastName" placeholder="Last Name" className="input" type="text" />
         </div>
-        <input placeholder="Email" className="input" type="email" />
-        <input placeholder="Password" className="input" type="password" />
-        <input
+        <input onChange={handleChange} required name="email" placeholder="Email" className="input" type="email" />
+        <input onChange={handleChange} required name="password" placeholder="Password" className="input" type="password" />
+        <input 
+          onChange={handleChange}
+          name="confirmPassword"  
           placeholder="Confirm Password"
           className="input"
           type="password"
           style={{ marginBottom: "2rem" }}
+          required
         />
-      </form>
       <button className="primary" type="submit">
         Sign Up
       </button>
+      </form>
       <br />
       <p>Or</p>
       <div className="" style={{ width: "270px" }}>

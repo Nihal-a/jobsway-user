@@ -1,19 +1,16 @@
 import React from "react";
 import "./navbar.css";
+import { Link } from "react-router-dom";
 
 function Navbar({ hide }) {
   return (
     <div className="navbar">
       <div className="container nav-wrapper">
-        <h3 className="logo">JobsWay.</h3>
+        <Link to="/" className="logo" >JobsWay.</Link>
         {!hide ? (
           <div className="">
-            <a href="" className="login-btn">
-              Log In
-            </a>
-            <a href="" className="reg-btn">
-              Register Now
-            </a>
+           <Link to="signin" className="login-btn">Log In</Link>
+           <Link to="signup" className="reg-btn">Register Now</Link>
           </div>
         ) : (
           <div />
@@ -24,3 +21,4 @@ function Navbar({ hide }) {
 }
 
 export default Navbar;
+

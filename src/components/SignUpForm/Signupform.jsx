@@ -16,8 +16,8 @@ function Signupform() {
     const location = useLocation()
 
     useEffect(() => {
-      console.log("data",location);
-    }, [formData])
+      location.state = undefined
+    })
 
     const handleSubmit = (e) => {
         e.preventDefault()

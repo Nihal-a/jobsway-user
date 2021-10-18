@@ -1,22 +1,29 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React,{useState} from "react";
+import { Link,useHistory } from "react-router-dom";
 import {
   LinkedInLoginButton,
   GoogleLoginButton,
 } from "react-social-login-buttons";
+import {useDispatch} from "react-redux"
+import { signin } from "../../actions/auth";
+
 
 const initialState = {email:'',password:''}
 
 function SigninForm() {
 
-  // const [formData, setFormData] = useState(initialState)
+  const [formData, setFormData] = useState(initialState)
+  const dispatch = useDispatch()
+  const history = useHistory()
+  
 
-  const handleSubmit = () => {
-    
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    dispatch(signin(formData,history))
   }
   const handleChange = (e) => {
     e.preventDefault()
-    // setFormData({...setFormData})
+    setFormData({...formData,[e.target.name] : e.target.value})
   }
   return (
     <div>
@@ -25,10 +32,10 @@ function SigninForm() {
           <h3 className="welcome ">Sign In to JobsWay.</h3>
           <input onChange={handleChange} name="email" placeholder="Email or Phone" className="input" type="email" />
           <input onChange={handleChange} name="password" placeholder="Password" className="input" type="password" />
-        </form>
         <button className="primary mt-4" type="submit">
           Sign In
         </button>
+        </form>
         <br />
         <p>Or</p>
         <div className="" style={{ width: "270px" }}>

@@ -1,13 +1,13 @@
-import { AUTH } from "../constants/actionTypes"
+import { SIGNIN,SIGNUP } from "../constants/actionTypes"
 
 export default  (state = {authData : null},action) => {
     switch (action.type) {
-        case AUTH:
-            console.log("Data === ",action.data);
-            // localStorage.setItem('profile',JSON.stringify({...action?.data}))
-            // return {...state,authData:action?.data}
-        case 'CREATE__USER':
-            return state
+        case SIGNUP:
+            localStorage.setItem('profile',JSON.stringify({...action?.data}))
+            return {...state,authData:action?.data}
+        case SIGNIN:
+            localStorage.setItem('profile',JSON.stringify({...action?.data}))
+            return {...state,authData:action?.data}
         default:
             return state
     }

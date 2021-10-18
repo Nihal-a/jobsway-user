@@ -1,5 +1,5 @@
-import React,{useState} from "react";
-import { Link,useHistory } from "react-router-dom";
+import React,{useState,useEffect} from "react";
+import { Link,useHistory,useLocation} from "react-router-dom";
 import {LinkedInLoginButton,GoogleLoginButton} from "react-social-login-buttons";
 import "./style.css";
 import { useDispatch } from "react-redux";
@@ -10,13 +10,20 @@ function Signupform() {
 
 
     const [formData, setFormData] = useState(initialState)
+    const [passwordErr, setPasswordErr] = useState('')
     const dispatch = useDispatch()
     const history = useHistory()
+    const location = useLocation()
+
+    useEffect(() => {
+      console.log("data",location);
+    }, [formData])
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(formData);
-        dispatch(signup(formData,history))
+        setPasswordErr('')
+        if(formData.password !== formData.confirmPassword) setPasswordErr('Passwords does not match.')
+        else dispatch(signup(formData,history))
     }
     const handleChange = (e) => {
         e.preventDefault()
@@ -24,8 +31,11 @@ function Signupform() {
     }
   return (
     <div className="signup-wrapper">
+
       <form action="" onSubmit={handleSubmit}>
         <h3 className="welcome ">Welcome to JobsWay.</h3>
+        {passwordErr ? <p className="text-red-800">{passwordErr}</p> : null}
+        {location.state !== undefined ? <p className="text-red-800">User already exists</p> : null}
         <div className="inp-wrap d-flex" style={{ marginTop: "1rem" }}>
           <input onChange={handleChange} required name="firstName" placeholder="First Name" className="input" type="text" />
           <input onChange={handleChange} required name="lastName" placeholder="Last Name" className="input" type="text" />
@@ -40,7 +50,7 @@ function Signupform() {
           type="password"
           style={{ marginBottom: "2rem" }}
           required
-        />
+          />
       <button className="primary" type="submit">
         Sign Up
       </button>

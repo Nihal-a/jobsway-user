@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import { Link,useHistory } from "react-router-dom";
 import {
   LinkedInLoginButton,
@@ -6,6 +6,7 @@ import {
 } from "react-social-login-buttons";
 import {useDispatch} from "react-redux"
 import { signin } from "../../actions/auth";
+import { useLocation } from "react-router";
 
 
 const initialState = {email:'',password:''}
@@ -15,7 +16,12 @@ function SigninForm() {
   const [formData, setFormData] = useState(initialState)
   const dispatch = useDispatch()
   const history = useHistory()
+  const location = useLocation()
   
+
+  useEffect(() => {
+    location.state = undefined
+  },[location])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -30,6 +36,7 @@ function SigninForm() {
       <div className="signup-wrapper">
         <form action="" onSubmit={handleSubmit}>
           <h3 className="welcome ">Sign In to JobsWay.</h3>
+          {location.state !== undefined ? <p className="text-red-800">Invalid Username or Password</p> : null}
           <input onChange={handleChange} name="email" placeholder="Email or Phone" className="input" type="email" />
           <input onChange={handleChange} name="password" placeholder="Password" className="input" type="password" />
         <button className="primary mt-4" type="submit">

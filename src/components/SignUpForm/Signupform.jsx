@@ -61,7 +61,7 @@ function Signupform() {
         <GoogleLoginButton />
         <LinkedInLoginButton />
         <p className="mt-4">
-          Already in jobsWay?{" "}
+          Already in jobsWay?
           <Link to="/signin" style={{ color: "#008FAE" }}>
             Sign In
           </Link>

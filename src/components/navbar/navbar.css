@@ -6,19 +6,10 @@
     border-bottom: 1px solid #f1f1f1;
 }
 .logo{
-    font-size: 29px;
+    font-size: 24px;
     color: #212121 !important;
     font-weight: 700;
     letter-spacing: 0;
-}
-.nav-wrapper{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.nav-wrapper a{
-    text-decoration: none;
-    color: #fff;
 }
 .login-btn{
     font-size: 20px;
@@ -33,3 +24,6 @@
     background-color: #008FAE;
     border-radius: 5px;
 }
+.dropdown:hover .dropdown-menu {
+    display: block;
+  }

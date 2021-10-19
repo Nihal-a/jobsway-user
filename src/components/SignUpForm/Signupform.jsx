@@ -17,7 +17,7 @@ function Signupform() {
 
     useEffect(() => {
       location.state = undefined
-    })
+    },[location])
 
     const handleSubmit = (e) => {
         e.preventDefault()

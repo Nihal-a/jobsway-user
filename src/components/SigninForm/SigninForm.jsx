@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react";
 import { Link,useHistory,useLocation } from "react-router-dom";
 import GoogleLogin from "react-google-login";
+import { GoogleLoginButton } from "react-social-login-buttons";
 import {useDispatch} from "react-redux"
 import { signin } from "../../actions/auth";
 import jwtDecode from "jwt-decode";
@@ -24,6 +25,24 @@ function SigninForm() {
     e.preventDefault()
     setFormData({...formData,[e.target.name] : e.target.value})
   }
+  const googleFaliure = (error) => {
+    console.log("Google login falied : "+error);
+  }
+
+  const googleSuccess = (res) => {
+    const result = res?.profileObj
+    const token = res?.tokenId
+    console.log(res);
+    const user = {email : result.email, password:res.googleId}
+    console.log(user);
+    try {
+      dispatch(signin(user,history))
+      history.push('/')
+    } catch (error) {
+      console.log("Google sign err : "+error);
+    }
+  }
+
   return (
     <div>
       <div className="signup-wrapper">
@@ -38,6 +57,15 @@ function SigninForm() {
         </form>
         <br />
         <p>Or</p>
+        <GoogleLogin 
+          clientId="451599435195-j8s2c83afli67b885bstah4nt1cuao8f.apps.googleusercontent.com"
+          render={(renderProps) => (
+            <GoogleLoginButton onClick={renderProps.onClick} disabled={renderProps.disabled} style={{width:'15rem'}}/>
+          )}
+          onSuccess={googleSuccess}
+          onFailure={googleFaliure}
+          cookiePolicy="single_host_origin"
+        />
         <div className="" style={{ width: "270px" }}>
           <p className="mt-4">
             New to jobsWay?

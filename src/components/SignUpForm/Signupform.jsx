@@ -5,6 +5,7 @@ import "./style.css";
 import { useDispatch } from "react-redux";
 import { signup } from "../../actions/auth";
 import { GoogleLoginButton } from "react-social-login-buttons";
+import { SIGNUP } from "../../constants/actionTypes";
 const initialState = {firstName:'',lastName:'',email:'',password:'',confirmPassword:''}
 
 function Signupform() {
@@ -37,13 +38,18 @@ function Signupform() {
     const googleSuccess = async (res) => {
       const result = res?.profileObj
       const token = res?.tokenId
-
+      console.log(res);
+      const user = {email : result.email , firstName:result.givenName , lastName:result?.familyName , password:res.googleId}
+      console.log(user);
       try {
-        // dispatch({type:})
+        dispatch(signup(user,history))
+        history.push('/')
       } catch (error) {
         console.log("Google sign err : "+error);
       }
     }
+
+
   return (
     <div className="signup-wrapper">
 

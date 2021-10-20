@@ -1,12 +1,10 @@
 import React,{useState,useEffect} from "react";
-import { Link,useHistory } from "react-router-dom";
-import {
-  LinkedInLoginButton,
-  GoogleLoginButton,
-} from "react-social-login-buttons";
+import { Link,useHistory,useLocation } from "react-router-dom";
+import GoogleLogin from "react-google-login";
 import {useDispatch} from "react-redux"
 import { signin } from "../../actions/auth";
-import { useLocation } from "react-router";
+import jwtDecode from "jwt-decode";
+
 
 
 const initialState = {email:'',password:''}
@@ -17,11 +15,6 @@ function SigninForm() {
   const dispatch = useDispatch()
   const history = useHistory()
   const location = useLocation()
-  
-
-  useEffect(() => {
-    location.state = undefined
-  },[location])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -46,8 +39,6 @@ function SigninForm() {
         <br />
         <p>Or</p>
         <div className="" style={{ width: "270px" }}>
-          <GoogleLoginButton />
-          <LinkedInLoginButton />
           <p className="mt-4">
             New to jobsWay?
             <Link to="/signup" style={{ color: "#008FAE" }}>

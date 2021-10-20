@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from "react";
 import "./navbar.css";
-import { Link,useHistory } from "react-router-dom";
+import { Link,useHistory,useLocation } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import { Icon } from '@iconify/react';
 import { useDispatch } from "react-redux";
@@ -11,6 +11,7 @@ function Navbar({ hide }) {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const history = useHistory()
   const dispatch = useDispatch()
+  const location = useLocation()
 
   useEffect(() => {
     const token  = user?.token;
@@ -20,7 +21,7 @@ function Navbar({ hide }) {
         if (decodedToken.exp * 1000 < new Date().getTime()) logout();
     }
     setUser(JSON.parse(localStorage.getItem('profile')));
-  }, [])
+  }, [location])
 
   const logout = (e) => {
     e.preventDefault()

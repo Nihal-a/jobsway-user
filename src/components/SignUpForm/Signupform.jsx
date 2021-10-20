@@ -1,9 +1,10 @@
 import React,{useState,useEffect} from "react";
 import { Link,useHistory,useLocation} from "react-router-dom";
-import {LinkedInLoginButton,GoogleLoginButton} from "react-social-login-buttons";
+import {GoogleLogin} from "react-google-login";
 import "./style.css";
 import { useDispatch } from "react-redux";
 import { signup } from "../../actions/auth";
+import { GoogleLoginButton } from "react-social-login-buttons";
 const initialState = {firstName:'',lastName:'',email:'',password:'',confirmPassword:''}
 
 function Signupform() {
@@ -28,6 +29,20 @@ function Signupform() {
     const handleChange = (e) => {
         e.preventDefault()
         setFormData({...formData,[e.target.name] : e.target.value})
+    }
+
+    const googleFaliure = (err) => {
+      console.log("Google sigin error : ",err);
+    }
+    const googleSuccess = async (res) => {
+      const result = res?.profileObj
+      const token = res?.tokenId
+
+      try {
+        // dispatch({type:})
+      } catch (error) {
+        console.log("Google sign err : "+error);
+      }
     }
   return (
     <div className="signup-wrapper">
@@ -58,8 +73,15 @@ function Signupform() {
       <br />
       <p>Or</p>
       <div className="" style={{ width: "270px" }}>
-        <GoogleLoginButton />
-        <LinkedInLoginButton />
+        <GoogleLogin 
+          clientId="451599435195-j8s2c83afli67b885bstah4nt1cuao8f.apps.googleusercontent.com"
+          render={(renderProps) => (
+            <GoogleLoginButton onClick={renderProps.onClick} disabled={renderProps.disabled}/>
+          )}
+          onSuccess={googleSuccess}
+          onFailure={googleFaliure}
+          cookiePolicy="single_host_origin"
+        />
         <p className="mt-4">
           Already in jobsWay?
           <Link to="/signin" style={{ color: "#008FAE" }}>

@@ -57,7 +57,7 @@ function Signupform() {
     <div className="signup-wrapper">
 
       <form action="" onSubmit={handleSubmit}>
-        <h3 className="welcome ">Welcome to JobsWay.</h3>
+        <h3 className="welcome pt-20">Welcome to JobsWay.</h3>
         {passwordErr ? <p className="text-red-800">{passwordErr}</p> : null}
         {location.state !== undefined ? <p className="text-red-800">User already exists</p> : null}
         <div className="inp-wrap d-flex" style={{ marginTop: "1rem" }}>
@@ -72,7 +72,7 @@ function Signupform() {
           placeholder="Confirm Password"
           className="input"
           type="password"
-          style={{ marginBottom: "2rem" }}
+          style={{ marginBottom: "1rem" }}
           required
           />
       <button className="primary" type="submit">
@@ -95,7 +95,7 @@ function Signupform() {
           onFailure={googleFaliure}
           cookiePolicy="single_host_origin"
         />
-        <p className="mt-4">
+        <p className="mt-1 pb-4">
           Already in jobsWay?
           <Link to="/signin" style={{ color: "#008FAE" }}>
             Sign In

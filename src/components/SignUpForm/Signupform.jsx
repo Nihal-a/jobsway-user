@@ -6,6 +6,9 @@ import { useDispatch } from "react-redux";
 import { signup } from "../../actions/auth";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { SIGNUP } from "../../constants/actionTypes";
+import { Icon } from '@iconify/react';
+
+
 const initialState = {firstName:'',lastName:'',email:'',password:'',confirmPassword:''}
 
 function Signupform() {
@@ -79,6 +82,10 @@ function Signupform() {
       <br />
       <p>Or</p>
       <div className="" style={{ width: "270px" }}>
+        <div className="bg-white w-full py-3 rounded-md mb-1 flex items-center justify-start p-4 border cursor-pointer hover:bg-secondary">
+        <Icon icon="bi:phone-fill" className="m-0 p-0 text-2xl"/>
+          <p className="ml-2 text-lg">Sign Up with Phone</p>
+          </div>
         <GoogleLogin 
           clientId="451599435195-j8s2c83afli67b885bstah4nt1cuao8f.apps.googleusercontent.com"
           render={(renderProps) => (

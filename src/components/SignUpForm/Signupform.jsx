@@ -79,7 +79,6 @@ function Signupform() {
         Sign Up
       </button>
       </form>
-      <br />
       <p>Or</p>
       <div className="" style={{ width: "270px" }}>
         <div className="bg-white w-full py-3 rounded-md mb-1 flex items-center justify-start p-4 border cursor-pointer hover:bg-secondary">

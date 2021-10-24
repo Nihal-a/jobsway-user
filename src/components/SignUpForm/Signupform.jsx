@@ -9,12 +9,13 @@ import { SIGNUP } from "../../constants/actionTypes";
 import { Icon } from '@iconify/react';
 
 
-const initialState = {firstName:'',lastName:'',email:'',password:'',confirmPassword:''}
+const initialState = {firstName:'',lastName:'',email:'',password:'',confirmPassword:'',type:''}
 
 function Signupform() {
 
 
     const [formData, setFormData] = useState(initialState)
+    const [withPhone, setWithPhone] = useState(false)
     const [passwordErr, setPasswordErr] = useState('')
     const dispatch = useDispatch()
     const history = useHistory()
@@ -22,13 +23,19 @@ function Signupform() {
 
     useEffect(() => {
       location.state = undefined
-    },[location])
+    },[withPhone])
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        setPasswordErr('')
-        if(formData.password !== formData.confirmPassword) setPasswordErr('Passwords does not match.')
-        else dispatch(signup(formData,history))
+        if(withPhone == true){ 
+          const data = {...formData,type:true}
+          console.log("this sis it ",data);
+          dispatch(signup(data,history))
+        }else{
+          setPasswordErr('')
+          if(formData.password !== formData.confirmPassword) setPasswordErr('Passwords does not match.')
+          else dispatch(signup(formData,history))
+        }
     }
     const handleChange = (e) => {
         e.preventDefault()
@@ -64,9 +71,10 @@ function Signupform() {
           <input onChange={handleChange} required name="firstName" placeholder="First Name" className="input" type="text" />
           <input onChange={handleChange} required name="lastName" placeholder="Last Name" className="input" type="text" />
         </div>
-        <input onChange={handleChange} required name="email" placeholder="Email" className="input" type="email" />
+        {!withPhone && <input onChange={handleChange} required name="email" placeholder="Email" className="input" type="email" />}
+        {withPhone && <input onChange={handleChange} required name="phone" placeholder="Phone No." className="input" type="tel" />}
         <input onChange={handleChange} required name="password" placeholder="Password" className="input" type="password" />
-        <input 
+        {!withPhone && <input 
           onChange={handleChange}
           name="confirmPassword"  
           placeholder="Confirm Password"
@@ -74,16 +82,17 @@ function Signupform() {
           type="password"
           style={{ marginBottom: "1rem" }}
           required
-          />
-      <button className="primary" type="submit">
+          />}
+      <button className="primary mt-2" type="submit">
         Sign Up
       </button>
       </form>
       <p>Or</p>
       <div className="" style={{ width: "270px" }}>
-        <div className="bg-white w-full py-3 rounded-md mb-1 flex items-center justify-start p-4 border cursor-pointer hover:bg-secondary">
-        <Icon icon="bi:phone-fill" className="m-0 p-0 text-2xl"/>
-          <p className="ml-2 text-lg">Sign Up with Phone</p>
+        <div className="bg-white w-full py-3 rounded-md mb-1 flex items-center justify-start p-4 border cursor-pointer hover:bg-secondary" onClick={() =>  setWithPhone(!withPhone)}>
+        {!withPhone ? <> <Icon icon="bi:phone-fill" className="m-0 p-0 text-2xl"/>
+          <p className="ml-2 text-lg">Sign Up with Phone</p> </> : <><Icon icon="clarity:email-solid" className="m-0 p-0 text-2xl"/>
+          <p className="ml-2 text-lg">Sign Up with Email</p></>}
           </div>
         <GoogleLogin 
           clientId="451599435195-j8s2c83afli67b885bstah4nt1cuao8f.apps.googleusercontent.com"

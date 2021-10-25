@@ -33,6 +33,7 @@ function Signupform() {
           dispatch(signup(data,history))
         }else{
           setPasswordErr('')
+          if(formData.password.length < 8 )return setPasswordErr('Password must need minimum of 8 charecters.')
           if(formData.password !== formData.confirmPassword) setPasswordErr('Passwords does not match.')
           else dispatch(signup(formData,history))
         }
@@ -65,8 +66,8 @@ function Signupform() {
 
       <form action="" onSubmit={handleSubmit}>
         <h3 className="welcome pt-20">Welcome to JobsWay.</h3>
-        {passwordErr ? <p className="text-red-800">{passwordErr}</p> : null}
-        {location.state !== undefined ? <p className="text-red-800">User already exists</p> : null}
+        {passwordErr ? <p className="text-red-800" style={{color:"red"}}>{passwordErr}</p> : null}
+        {location.state !== undefined ? <p className="text-red-800" style={{color:"red"}}>User already exists</p> : null}
         <div className="inp-wrap d-flex" style={{ marginTop: "1rem" }}>
           <input onChange={handleChange} required name="firstName" placeholder="First Name" className="input" type="text" />
           <input onChange={handleChange} required name="lastName" placeholder="Last Name" className="input" type="text" />

@@ -29,4 +29,17 @@ export const signin = (formData,history) => async (dispatch) => {
          console.log({error:error.message});
     }
 }
+export const otp = (formData,history) => async (dispatch) => {
+    try {
+        const {data} = await api.signup(formData)
+        if(data.user){
+            history.push('/verifyotp',{Allow : true})
+        }else{
+            history.push('/signin', {Err: 'User already Exists , Try Login !'})
+        }
+        
+    } catch (error) {
+         console.log({error:error.message});
+    }
+}
 

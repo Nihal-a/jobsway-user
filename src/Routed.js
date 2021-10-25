@@ -7,12 +7,17 @@ import Signin from "./pages/Signin";
 import { useDispatch } from "react-redux";
 import jwtDecode from "jwt-decode";
 import { LOGOUT } from "./constants/actionTypes";
+import VerifyOtp from "./pages/VerifyOtp";
 
 function Routed() {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const history = useHistory()
   const dispatch = useDispatch()
   const location = useLocation()
+
+  useEffect(() => {
+
+  },[location])
 
   useEffect(() => {
     const token  = user?.token;
@@ -41,6 +46,10 @@ function Routed() {
             </Route>
             <Route path="/signin">
                 {user ? <Redirect to="/" /> : <Signin />}
+            </Route>
+            <Route path="/verifyotp">
+                {/* {location.state ? <VerifyOtp /> :  <Redirect to="/" />} */}
+                <VerifyOtp />
             </Route>
         </Switch>
     )

@@ -18,6 +18,7 @@ function Signupform() {
   const [withPhone, setWithPhone] = useState(false)
   const [passwordErr, setPasswordErr] = useState('')
   const [captchaErr, setCaptchaErr] = useState('')
+  const [PhoneErr, setPhoneErr] = useState('')
   const dispatch = useDispatch()
   const history = useHistory()
   const location = useLocation()
@@ -34,7 +35,7 @@ function Signupform() {
     e.preventDefault()
     if (withPhone == true) {
       if(validateCaptcha(formData.captcha,false) !== true) return setCaptchaErr('Captcha verification failed')
-      localStorage.setItem('phone', formData.phone)
+      if(formData.phone.length !== 10) return setPhoneErr('Enter a valid phone number.')
       dispatch(sendotp(formData,history))
     } else {
       setPasswordErr('')
@@ -75,6 +76,7 @@ function Signupform() {
         <h3 className="welcome pt-20">Welcome to JobsWay.</h3>
         {passwordErr ? <p className="text-red-800" style={{ color: "red" }}>{passwordErr}</p> : null}
         {captchaErr ? <p className="text-red-800" style={{ color: "red" }}>{captchaErr}</p> : null}
+        {PhoneErr ? <p className="text-red-800" style={{ color: "red" }}>{PhoneErr}</p> : null}
         {location.state !== undefined ? <p className="text-red-800" style={{ color: "red" }}>User already exists</p> : null}
         <div className="inp-wrap d-flex" style={{ marginTop: "1rem" }}>
           <input onChange={handleChange} required name="firstName" placeholder="First Name" className="input" type="text" />

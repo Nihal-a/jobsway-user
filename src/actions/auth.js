@@ -30,11 +30,10 @@ export const signin = (formData,history) => async (dispatch) => {
     }
 }
 export const sendotp = (formData,history) => async (dispatch) => {
-    console.log("Formmmm",formData);
     try {
         const {data} = await api.sendotp(formData)
         if(data.status == 'send'){
-            history.push('/verifyotp',{Allow : true})
+            history.push('/verifyotp',{Allow : true ,formData :formData})
         }else{
             history.push('/signup', {Err: 'User already Exists , Try Login !'})
         }
@@ -42,16 +41,22 @@ export const sendotp = (formData,history) => async (dispatch) => {
          console.log({error:error.message});
     }
 }
-export const verifyotp = (formData,history) => async (dispatch) => {
-    console.log("Formmmm",formData);
+export const verifyotp = (otpDetails,history) => async (dispatch) => {
+    console.log("CAlled verify otp");
     try {
-        const {data} = await api.verifyotp(formData)
-        if(data.status == 'send'){
-            history.push('/verifyotp',{Allow : true})
+        const {data} = await api.verifyotp(otpDetails)
+        console.log("this is the data : ",data);
+        if(data.user){
+            dispatch({type:SIGNIN,data})
+            history.push('/')
         }else{
-            history.push('/signup', {Err: 'User already Exists , Try Login !'})
+    console.log("error verify otp");
+
+            history.push('/verifyotp', {Allow : true ,Err: 'Invalid Otp'})
         }
     } catch (error) {
+    console.log("CAlled verify otp");
+
          console.log({error:error.message});
     }
 }

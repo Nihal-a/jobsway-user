@@ -37,8 +37,8 @@ function Navbar({ hide }) {
       <div className="">
         {!hide ? (
         <div className="">
-         <Link to="signin" className="mr-5">Log In</Link>
-         <Link to="signup" className="bg-primary py-2 px-4 rounded-md" style={{color:'white'}}>Register Now</Link>
+         <Link to="signin" className="mr-5 text-md">Log In</Link>
+         <Link to="signup" className="text-primary text-md">Register Now</Link>
         </div>
       ) : (
         <div />

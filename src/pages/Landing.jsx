@@ -5,8 +5,11 @@ import Home from "../components/landing/Home";
 function Landing() {
   return (
     <div>
+
+      <div className="h-screen w-screen ">
       <Navbar />
       <Home />
+      </div>
     </div>
   );
 }

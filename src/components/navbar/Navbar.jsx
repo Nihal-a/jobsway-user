@@ -4,6 +4,7 @@ import jwtDecode from "jwt-decode";
 import { Icon } from '@iconify/react';
 import { useDispatch } from "react-redux";
 import { LOGOUT } from "../../constants/actionTypes";
+import './navbar.css'
 
 function Navbar({ hide }) {
 

@@ -49,7 +49,7 @@ function Routed() {
             </Route>
             <Route path="/verifyotp">
                 {/* {location.state ? <VerifyOtp /> :  <Redirect to="/" />} */}
-                <VerifyOtp />
+                <VerifyOtp/>
             </Route>
         </Switch>
     )

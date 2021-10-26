@@ -3,7 +3,7 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
 import "./style.css";
 import { useDispatch } from "react-redux";
-import { signup,otp } from "../../actions/auth";
+import { signup,sendotp } from "../../actions/auth";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { Icon } from '@iconify/react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha'
@@ -34,8 +34,8 @@ function Signupform() {
     e.preventDefault()
     if (withPhone == true) {
       if(validateCaptcha(formData.captcha,false) !== true) return setCaptchaErr('Captcha verification failed')
-      formData.type = true
-      dispatch(otp(formData, history))
+      localStorage.setItem('phone', formData.phone)
+      dispatch(sendotp(formData,history))
     } else {
       setPasswordErr('')
       if (formData.password.length < 8) return setPasswordErr('Password must need minimum of 8 charecters.')

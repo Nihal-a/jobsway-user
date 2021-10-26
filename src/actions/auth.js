@@ -29,15 +29,28 @@ export const signin = (formData,history) => async (dispatch) => {
          console.log({error:error.message});
     }
 }
-export const otp = (formData,history) => async (dispatch) => {
+export const sendotp = (formData,history) => async (dispatch) => {
+    console.log("Formmmm",formData);
     try {
-        const {data} = await api.signup(formData)
-        if(data.user){
+        const {data} = await api.sendotp(formData)
+        if(data.status == 'send'){
             history.push('/verifyotp',{Allow : true})
         }else{
-            history.push('/signin', {Err: 'User already Exists , Try Login !'})
+            history.push('/signup', {Err: 'User already Exists , Try Login !'})
         }
-        
+    } catch (error) {
+         console.log({error:error.message});
+    }
+}
+export const verifyotp = (formData,history) => async (dispatch) => {
+    console.log("Formmmm",formData);
+    try {
+        const {data} = await api.verifyotp(formData)
+        if(data.status == 'send'){
+            history.push('/verifyotp',{Allow : true})
+        }else{
+            history.push('/signup', {Err: 'User already Exists , Try Login !'})
+        }
     } catch (error) {
          console.log({error:error.message});
     }

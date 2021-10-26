@@ -1,5 +1,4 @@
-import React,{useEffect,useState} from "react";
-import "./navbar.css";
+import React,{useEffect,useState} from "react";    
 import { Link,useHistory,useLocation } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import { Icon } from '@iconify/react';
@@ -37,8 +36,8 @@ function Navbar({ hide }) {
       <div className="">
         {!hide ? (
         <div className="">
-         <Link to="signin" className="login-btn text-white">Log In</Link>
-         <Link to="signup" className="reg-btn text-white">Register Now</Link>
+         <Link to="signin" className="mr-5">Log In</Link>
+         <Link to="signup" className="bg-primary py-2 px-4 rounded-md" style={{color:'white'}}>Register Now</Link>
         </div>
       ) : (
         <div />
@@ -74,9 +73,9 @@ function Navbar({ hide }) {
   }
 
   return (
-    <div className="navbar">
+    <div className="bg-secondary h-16 flex ">
       <div className="md:container md:mx-auto flex justify-between items-center">
-        <Link to="/" className="logo" >JobsWay.</Link>
+        <Link to="/" className="text-3xl font-bold" >Jobs<span className="text-primary">Way.</span></Link>
         {user ? <NavItems/> : <AuthButtons />}
       </div>
     </div>

@@ -42,21 +42,18 @@ export const sendotp = (formData,history) => async (dispatch) => {
     }
 }
 export const verifyotp = (otpDetails,history) => async (dispatch) => {
-    console.log("CAlled verify otp");
     try {
         const {data} = await api.verifyotp(otpDetails)
-        console.log("this is the data : ",data);
-        if(data.user){
+        console.log("DAta",data);
+        if(data.Err){
+            history.push('/verifyotp', {Allow : true ,Err: 'Invalid Otp',formData:data.user})
+            
+        }else{
+            console.log("error verify otp");
             dispatch({type:SIGNIN,data})
             history.push('/')
-        }else{
-    console.log("error verify otp");
-
-            history.push('/verifyotp', {Allow : true ,Err: 'Invalid Otp'})
         }
     } catch (error) {
-    console.log("CAlled verify otp");
-
          console.log({error:error.message});
     }
 }

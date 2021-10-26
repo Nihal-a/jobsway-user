@@ -6,7 +6,15 @@ import PrimaryButton from "../Buttons/primary/PrimaryButton";
 
 function Home() {
   return (
-    <div className="hero-area">
+    <div className="">
+      
+    </div>
+  );
+}
+
+export default Home;
+
+{/* <div className="hero-area">
       <div className="home-content">
         <h2 className="hero-txt">
           Get the <span className="span-clr">Right Job</span> <br /> You Deserve
@@ -24,8 +32,4 @@ function Home() {
         </div>
       </div>
       <div className="img-area"></div>
-    </div>
-  );
-}
-
-export default Home;
+    </div> */}

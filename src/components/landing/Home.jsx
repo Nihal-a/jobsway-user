@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function Home() {
   return (
-    <div className="container mx-auto flex items-center mt-28">
+    <div className="container mx-auto flex items-center mt-48">
       <div className="w-1/2  flex flex-col items-center justify-center">
         <div className="">
         <h1 className="text-6xl font-bold mb-4">Get the <span className="text-primary">Right Job</span> <br />You Deserves.</h1>

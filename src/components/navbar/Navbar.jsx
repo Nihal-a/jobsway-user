@@ -74,7 +74,7 @@ function Navbar({ hide }) {
   }
 
   return (
-    <div className="bg-secondary h-16 flex ">
+    <div className="bg-secondary h-20 flex sticky top-0 shadow-md ">
       <div className="md:container md:mx-auto flex justify-between items-center">
         <Link to="/" className="text-3xl font-bold" >Jobs<span className="text-primary">Way.</span></Link>
         {user ? <NavItems/> : <AuthButtons />}

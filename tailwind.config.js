@@ -20,7 +20,7 @@ module.exports = {
         ...theme('colors'),
         'primary': '#008FAE',
         'secondary': '#F6F6F6',
-        'black': '#F2F2F2',
+        'black': '#2c2c2c',
         'dark': '#c6c6c6',
     }),
     variants: {

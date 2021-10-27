@@ -5,6 +5,7 @@ import CategorySection from "../components/category/CategorySection";
 import Whyjobsway from "../components/features/Whyjobsway";
 import FeaturedJobs from "../components/featuredJobs/FeaturedJobs";
 import PostJob from "../components/postJob/PostJob";
+import Footer from "../components/footer/Footer";
 
 function Landing() {
   return (
@@ -18,6 +19,7 @@ function Landing() {
       <Whyjobsway />
       <FeaturedJobs />
       <PostJob />
+      <Footer />
     </div>
   );
 }

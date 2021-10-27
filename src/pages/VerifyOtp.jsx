@@ -37,7 +37,7 @@ function VerifyOtp() {
             <Navbar hide={true} />
             <div className="flex items-center flex-col justify-center text-center h-screen">
                 <h4 className="text-5xl font-semibold mb-4">Enter your Verification Code.</h4>
-                <h6 className="text-xl text-secondary mb-4 font-light">We have sent a verification code to <span className="font-semibold">{`+91 ${location.state.formData.phone}`}</span></h6>
+                <h6 className="text-xl text-dark mb-4 font-light">We have sent a verification code to <span className="font-semibold">{`+91 ${location.state.formData.phone}`}</span></h6>
                 {location.state.Err && <p className="text-red-800 text-lg mb-3" style={{color:'red'}} >{location.state.Err}</p>}
                 <form action="" className="flex flex-col items-center" onSubmit={handleSubmit}>
                     <OtpInput
@@ -48,11 +48,12 @@ function VerifyOtp() {
                         otpType="number"
                         disabled={false}
                         inputStyles={inputStyle}
+                        autocomplete="off"
                     />
                     <button className="bg-green-600 px-10 py-3 mt-10 mb-5 rounded-md text-white hover:bg-green-700" type="submit" style={{ color: 'white' }}>Submit OTP</button>
                 </form>
-                <Link className="mt-3 hover:underline text-secondary">Haven't received yet? Resend OTP.</Link>
-                <Link className="mt-1 hover:underline text-secondary">Wrong phone number ? Change number.</Link>
+                <Link className="mt-3 hover:underline text-dark">Haven't received yet? Resend OTP.</Link>
+                <Link className="mt-1 hover:underline text-dark">Wrong phone number ? Change number.</Link>
             </div>
         </>
     )

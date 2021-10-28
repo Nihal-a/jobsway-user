@@ -10,8 +10,9 @@
     flex-direction: column;
     width: 450px;
     margin: auto;
-    height: 80vh;
+    height: 90vh;
     text-align: center;
+    margin-top: 4rem;
 }
 .inp-wrap{
     width: 100%;

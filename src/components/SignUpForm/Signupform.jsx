@@ -3,7 +3,7 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
 import "./style.css";
 import { useDispatch } from "react-redux";
-import { signup,sendotp } from "../../actions/auth";
+import { signup,sendotp,googlesign} from "../../actions/auth";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { Icon } from '@iconify/react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha'
@@ -59,9 +59,8 @@ function Signupform() {
     const token = res?.tokenId
     console.log(res);
     const user = { email: result.email, firstName: result.givenName, lastName: result?.familyName, password: res.googleId }
-    console.log(user);
     try {
-      dispatch(signup(user, history))
+      dispatch(googlesign(user,history))
       history.push('/')
     } catch (error) {
       console.log("Google sign err : " + error);
@@ -71,7 +70,6 @@ function Signupform() {
 
   return (
     <div className="signup-wrapper">
-
       <form action="" onSubmit={handleSubmit}>
         <h3 className="welcome pt-20">Welcome to JobsWay.</h3>
         {passwordErr ? <p className="text-red-800" style={{ color: "red" }}>{passwordErr}</p> : null}

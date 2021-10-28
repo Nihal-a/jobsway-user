@@ -9,10 +9,9 @@ export const signup = (formData,history) => async (dispatch) => {
             history.push('/')
         }else{
             history.push('/signup', {Err: 'User already exists.'})
-        }
-        
+        } 
     } catch (error) {
-         console.log({error:error.message});
+         console.log(error );
     }
 }
 export const signin = (formData,history) => async (dispatch) => {
@@ -57,4 +56,14 @@ export const verifyotp = (otpDetails,history) => async (dispatch) => {
          console.log({error:error.message});
     }
 }
+export const googlesign = (userDetails,history) => async (dispatch) => {
+    try {
+        const {data} = await api.googlesign(userDetails)
+        dispatch({type:SIGNIN,data})
+        history.push('/')
+    } catch (error) {
+        console.log({err:error.message});
+    }
+}
+
 

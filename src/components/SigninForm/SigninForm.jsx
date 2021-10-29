@@ -5,6 +5,7 @@ import { GoogleLoginButton } from "react-social-login-buttons";
 import {useDispatch} from "react-redux"
 import { signin } from "../../actions/auth";
 import jwtDecode from "jwt-decode";
+import { Icon } from "@iconify/react";
 
 
 
@@ -13,6 +14,7 @@ const initialState = {email:'',password:''}
 function SigninForm() {
 
   const [formData, setFormData] = useState(initialState)
+  const [withPhone, setWithPhone] = useState(false)
   const dispatch = useDispatch()
   const history = useHistory()
   const location = useLocation()
@@ -49,7 +51,7 @@ function SigninForm() {
         <form action="" onSubmit={handleSubmit}>
           <h3 className="welcome ">Sign In to JobsWay.</h3>
           {location.state !== undefined ? <p className="text-red-800">Invalid Username or Password</p> : null}
-          <input onChange={handleChange} name="email" placeholder="Email or Phone" className="input" type="email" />
+          <input onChange={handleChange} name="email" placeholder="Email" className="input" type="email" />
           <input onChange={handleChange} name="password" placeholder="Password" className="input" type="password" />
         <button className="primary mt-4" type="submit">
           Sign In
@@ -58,7 +60,7 @@ function SigninForm() {
         <br />
         <p>Or</p>
         <GoogleLogin 
-          clientId="451599435195-j8s2c83afli67b885bstah4nt1cuao8f.apps.googleusercontent.com"
+          clientId={process.env.GOOGLE_CLIENT_ID}
           render={(renderProps) => (
             <GoogleLoginButton onClick={renderProps.onClick} disabled={renderProps.disabled} style={{width:'15rem'}}/>
           )}

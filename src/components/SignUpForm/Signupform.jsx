@@ -107,7 +107,7 @@ function Signupform() {
             <p className="ml-2 text-lg">Sign Up with Email</p></>}
         </div>
         <GoogleLogin
-          clientId="451599435195-j8s2c83afli67b885bstah4nt1cuao8f.apps.googleusercontent.com"
+          clientId={process.env.GOOGLE_CLIENT_ID}
           render={(renderProps) => (
             <GoogleLoginButton onClick={renderProps.onClick} disabled={renderProps.disabled} />
           )}

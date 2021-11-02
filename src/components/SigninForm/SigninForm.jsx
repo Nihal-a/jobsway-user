@@ -60,7 +60,7 @@ function SigninForm() {
         <br />
         <p>Or</p>
         <GoogleLogin 
-          clientId={process.env.GOOGLE_CLIENT_ID}
+          clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
           render={(renderProps) => (
             <GoogleLoginButton onClick={renderProps.onClick} disabled={renderProps.disabled} style={{width:'15rem'}}/>
           )}

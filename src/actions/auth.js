@@ -43,12 +43,10 @@ export const sendotp = (formData,history) => async (dispatch) => {
 export const verifyotp = (otpDetails,history) => async (dispatch) => {
     try {
         const {data} = await api.verifyotp(otpDetails)
-        console.log("DAta",data);
         if(data.Err){
             history.push('/verifyotp', {Allow : true ,Err: 'Invalid Otp',formData:data.user})
             
         }else{
-            console.log("error verify otp");
             dispatch({type:SIGNIN,data})
             history.push('/')
         }

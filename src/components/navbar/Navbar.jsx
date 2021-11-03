@@ -24,7 +24,7 @@ function Navbar({ hide }) {
   }, [location])
 
   const logout = (e) => {
-    e.preventDefault()
+    e.preventDefault( )
     dispatch({type : LOGOUT});
     
     history.push('/');

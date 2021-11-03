@@ -30,7 +30,6 @@ function Routed() {
   }, [location])
 
   const logout = (e) => {
-    e.preventDefault()
     dispatch({type : LOGOUT});
     
     history.push('/');

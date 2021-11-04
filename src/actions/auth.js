@@ -4,14 +4,13 @@ import * as api from '../api/index'
 export const signup = (formData,history) => async (dispatch) => {
     try {
         const {data} = await api.signup(formData)
-        if(data.user){
             dispatch({type:SIGNUP,data})
             history.push('/')
-        }else{
-            history.push('/signup', {Err: 'User already exists.'})
-        } 
     } catch (error) {
-         console.log(error );
+        var errors =  error.response.data.errors
+        console.log(errors);
+        history.push('/signup', {Err: errors})
+
     }
 }
 export const signin = (formData,history) => async (dispatch) => {

@@ -29,7 +29,9 @@ function Signupform() {
 
   useEffect(() => {
     location.state = undefined
-  }, [location])
+    setPasswordErr('')
+    setCaptchaErr('')
+  }, [location,formData])
 
   const handleSubmit = (e) => {
     e.preventDefault()

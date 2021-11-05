@@ -22,9 +22,10 @@ export const signin = (formData,history) => async (dispatch) => {
         }else{
             history.push('/signin', {Err: 'Invalid Email or Password.'})
         }
-        
     } catch (error) {
-         console.log({error:error.message});
+        var errors =  error.response.data.errors
+        console.log(errors);
+        history.push('/signin', {Err: errors})
     }
 }
 export const sendotp = (formData,history) => async (dispatch) => {

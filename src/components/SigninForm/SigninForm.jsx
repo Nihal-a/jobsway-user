@@ -3,9 +3,10 @@ import { Link,useHistory,useLocation } from "react-router-dom";
 import GoogleLogin from "react-google-login";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import {useDispatch} from "react-redux"
-import { signin } from "../../actions/auth";
+import { googlesign, signin } from "../../actions/auth";
 import jwtDecode from "jwt-decode";
 import { Icon } from "@iconify/react";
+
 
 
 
@@ -18,6 +19,10 @@ function SigninForm() {
   const dispatch = useDispatch()
   const history = useHistory()
   const location = useLocation()
+
+  useEffect(() => {
+    location.state = undefined
+  }, [formData])
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -34,11 +39,9 @@ function SigninForm() {
   const googleSuccess = (res) => {
     const result = res?.profileObj
     const token = res?.tokenId
-    console.log(res);
-    const user = {email : result.email, password:res.googleId}
-    console.log(user);
+    const user = { email: result.email, firstName: result.givenName, lastName: result?.familyName, password: res.googleId }
     try {
-      dispatch(signin(user,history))
+      dispatch(googlesign(user,history))
       history.push('/')
     } catch (error) {
       console.log("Google sign err : "+error);
@@ -50,7 +53,7 @@ function SigninForm() {
       <div className="signup-wrapper">
         <form action="" onSubmit={handleSubmit}>
           <h3 className="welcome ">Sign In to JobsWay.</h3>
-          {location.state !== undefined ? <p className="text-red-800">Invalid Username or Password</p> : null}
+          {location?.state?.Err && <p className="text-red-800" style={{ color: "red" }}>{location.state.Err}</p> }
           <input onChange={handleChange} name="email" placeholder="Email" className="input" type="email" />
           <input onChange={handleChange} name="password" placeholder="Password" className="input" type="password" />
         <button className="primary mt-4" type="submit">

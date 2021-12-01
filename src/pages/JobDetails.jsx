@@ -1,8 +1,8 @@
 import { Icon } from '@iconify/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Navbar from '../navbar/Navbar'
-import googleLogo from '../../assets/images/googleLogo.png'
+import Navbar from '../components/navbar/Navbar'
+import googleLogo from '../assets/images/googleLogo.png'
 
 const JobDetails = () => {
     return (
@@ -77,7 +77,7 @@ const JobDetails = () => {
                             </div>
                         </div>
                     </div>
-                <div className="mt-10 flex flex-col w-full cursor-pointer">
+                <Link to="/company-details" className="mt-10 flex flex-col w-full ">
                         <h6 className="font-semibold text-lg">Company : </h6>
                         <div className="p-10">
                             <div className="w-full h-80 shadow-xl rounded-2xl flex flex-col items-center justify-center">
@@ -88,7 +88,7 @@ const JobDetails = () => {
                     </div>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 </div>
             </div>
         </div>

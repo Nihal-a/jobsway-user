@@ -9,7 +9,8 @@ import jwtDecode from "jwt-decode";
 import { LOGOUT } from "./constants/actionTypes";
 import VerifyOtp from "./pages/VerifyOtp";
 import FindJobs from "./pages/FindJobs";
-import JobDetails from "./components/jobDetails/JobDetails";
+import JobDetails from "./pages/JobDetails";
+import CompanyDetails from "./pages/CompanyDetails";
 
 function Routed() {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -56,6 +57,9 @@ function Routed() {
             </Route>
             <Route path="/jobdetails">
                 {user ?  <JobDetails /> :  <Redirect to="/" />}
+            </Route>
+            <Route path="/company-details">
+                {user ?  <CompanyDetails /> :  <Redirect to="/" />}
             </Route>
         </Switch>
     )

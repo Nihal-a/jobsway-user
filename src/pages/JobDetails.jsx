@@ -53,7 +53,7 @@ const JobDetails = () => {
                         </div>
                     </div>
                     <div className="flex items-center justify-center mt-4">
-                        <Link className="text-white py-2 px-28 rounded-lg" style={{backgroundColor:'#0060A5'}}>Apply Now</Link>
+                        <Link to="/apply-job" className="text-white py-2 px-28 rounded-lg" style={{backgroundColor:'#0060A5'}}>Apply Now</Link>
                     </div>
                 </div>
                 <div className="w-1/2">

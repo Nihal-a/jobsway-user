@@ -27,7 +27,7 @@ module.exports = {
         'secondary': '#F6F6F6',
         'black': '#2c2c2c',
         'dark': '#c6c6c6',
-      'white': '#fff'
+        'white': '#fff'
 
     }),
     variants: {

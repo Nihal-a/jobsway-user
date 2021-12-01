@@ -3,6 +3,7 @@ import Navbar from '../components/navbar/Navbar'
 import { Icon } from '@iconify/react';
 import googleLogo from '../assets/images/googleLogo.png'
 import { Link } from 'react-router-dom';
+import JobCard from '../components/JobCard/JobCard';
 
 const CompanyDetails = () => {
     return (
@@ -11,7 +12,7 @@ const CompanyDetails = () => {
 
             <div className="mt-28 flex container mx-auto">
                 <div className="w-1/2 p-8 ">
-                    <div className="w-full p-5 flex flex-col items-center shadow-2xl">
+                    <div className="w-full p-5 flex flex-col items-center shadow-2xl ">
                         <img src={googleLogo} alt="" className="w-20 h-20 rounded-md shadow-xl"/>
                         <h5 className="font-semibold text-xl mt-3">Google</h5>
                         <h6 className="text-dark text-md mt-3">Information Technology</h6>
@@ -59,7 +60,13 @@ const CompanyDetails = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-1/2"></div>
+                <div className="w-1/2">
+                    <h5 className="p-6 text-xl">Jobs by <span className="font-semibold text-primary">Google : </span></h5>
+                    <div className="">
+                        <JobCard />
+                        <JobCard />
+                    </div>
+                </div>
             </div>
         </div>
     )

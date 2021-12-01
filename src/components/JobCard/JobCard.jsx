@@ -5,7 +5,7 @@ import { Icon } from '@iconify/react';
 
 function JobCard() {
     return (
-        <div className="w-full h-62 rounded-md p-4" style={{ backgroundColor: '#2c2c2c' }}>
+        <div className="w-full h-62 rounded-md p-4 mt-2" style={{ backgroundColor: '#2c2c2c' }}>
             <div className="flex justify-between">
                 <Link className="flex items-center">
                     <img src={googleLogo} alt="company logo" className="w-14 h-14 rounded-md" />

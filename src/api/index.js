@@ -11,7 +11,9 @@ export const verifyotp = (formData) => API.post('/verifyotp',formData)
 export const googlesign = (formData) => API.post('/googlesign',formData) 
 
 //Jobs
+export const getAllJobs = () => API.get('/getjobs')
 export const getFeaturedJobs = () => API.get('/getfeaturedjobs')
+
 
 //Company
 export const getCompanyDetails = (id) => API.get(`/getcompany/${id}`)

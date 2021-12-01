@@ -1,12 +1,25 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Navbar from '../components/navbar/Navbar'
 import { Icon } from '@iconify/react';
 import JobCard from '../components/JobCard/JobCard';
 import SmallCompanyCard from '../components/company/SmallCompanyCard';
 import PostJob from '../components/postJob/PostJob';
 import Footer from '../components/footer/Footer';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { getAllJobs } from '../actions/jobs';
 
 const FindJobs = () => {
+
+    const dispatch = useDispatch()
+    const jobs = useSelector(state => state.job)
+    
+    useEffect(() => {
+        dispatch(getAllJobs())
+    }, [])
+
+    console.log(jobs);
+
     return (
         <div>
             <Navbar />
@@ -27,14 +40,9 @@ const FindJobs = () => {
             <div className="h-auto w-screen ">
             <div className="container mx-auto pb-8 mt-12">
                 <div className="grid grid-cols-2 gap-4">
-                    <JobCard />
-                    <JobCard />
-                    <JobCard />
-                    <JobCard />
-                    <JobCard />
-                    <JobCard />
-                    <JobCard />
-                    <JobCard />
+                    {jobs.map((job) => (
+                        <JobCard job={job} />
+                    ))}
                 </div>
             </div>
         </div>

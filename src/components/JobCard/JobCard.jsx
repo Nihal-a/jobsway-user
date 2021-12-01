@@ -10,10 +10,12 @@ import { getCompanyDetails } from '../../actions/company';
 
 function JobCard({job}) {
 
-    const postedDate = moment(job.createdAt , "YYYYMMDDhmmssa").startOf('hour').fromNow()
+    console.log(job);
+
     const dispatch = useDispatch()
     const company = useSelector((state) => state.company)
-
+    const postedDate = moment(job.createdAt , "YYYYMMDDhmmssa").startOf('hour').fromNow()
+    
     useEffect(() => {
         dispatch(getCompanyDetails(job.companyId))
     }, [])

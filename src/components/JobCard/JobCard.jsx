@@ -30,7 +30,7 @@ function JobCard() {
             </div>
             <div className="flex justify-between mt-2 ml-2">
                 <p className="text-white">4 - 8 year of Experience</p>
-                <Link className="bg-white text-primary py-2 px-4 rounded-md font-semibold">Know More</Link>
+                <Link to="/jobdetails" className="bg-white text-primary py-2 px-4 rounded-md font-semibold">Know More</Link>
             </div>
         </div>
     )

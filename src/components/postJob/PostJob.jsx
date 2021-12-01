@@ -8,7 +8,7 @@ function PostJob() {
                 <h4 className="text-3xl font-semibold text-white">Does your company needs great employees?</h4>
                 <p className="text-lg text-white mt-5 ">Post the job and hire the right one for your company.</p>
             </div>
-            <a href="http://localhost:3001/" className="text-primary bg-white py-3 px-20 rounded-md text-lg font-semibold">Post a Job</a>
+            <a href="http://localhost:3002/" className="text-primary bg-white py-3 px-20 rounded-md text-lg font-semibold">Post a Job</a>
         </div>
     )
 }

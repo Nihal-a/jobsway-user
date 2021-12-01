@@ -50,7 +50,7 @@ function Navbar({ hide }) {
   const NavItems = () => {
     return (
       <div className="flex items-center">
-        <Link className="pr-4 text-black ">Find Jobs</Link>
+        <Link to="/findjob" className="pr-4 text-black ">Find Jobs</Link>
         <Link className="pr-5 text-black ">Create Resume</Link>
         <Link className="profile-menu flex flex-col items-center">
         <div className="">

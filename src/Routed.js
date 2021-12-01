@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import jwtDecode from "jwt-decode";
 import { LOGOUT } from "./constants/actionTypes";
 import VerifyOtp from "./pages/VerifyOtp";
+import FindJobs from "./pages/FindJobs";
 
 function Routed() {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -48,6 +49,9 @@ function Routed() {
             </Route>
             <Route path="/verifyotp">
                 {location.state ? <VerifyOtp /> :  <Redirect to="/" />}
+            </Route>
+            <Route path="/findjob">
+                {user ?  <FindJobs /> :  <Redirect to="/" />}
             </Route>
         </Switch>
     )

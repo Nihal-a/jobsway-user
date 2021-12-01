@@ -9,6 +9,11 @@ module.exports = {
   },
   plugins: [],
   theme: {
+    placeholderColor: {
+      'primary': '#3490dc',
+      'secondary': '#ffed4a',
+      'danger': '#e3342f',
+    },
     textColor: theme => theme('colors'),
     textColor: {
       'primary': '#008FAE',

@@ -2,6 +2,7 @@ import { Icon } from '@iconify/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from '../navbar/Navbar'
+import googleLogo from '../../assets/images/googleLogo.png'
 
 const JobDetails = () => {
     return (
@@ -56,7 +57,38 @@ const JobDetails = () => {
                     </div>
                 </div>
                 <div className="w-1/2">
-
+                <div className="mt-10 flex flex-col w-full">
+                        <h6 className="font-semibold">Job Overview : </h6>
+                        <div className="w-full text-xl h-auto pl-3 flex mt-2 justify-around ">
+                            <div className="flex flex-col  w-full justify-between">
+                                <p className="mt-2">Expirence</p>
+                                <p className="mt-2">Posted Date</p>
+                                <p className="mt-2">No. of Applicants</p>
+                            </div>
+                            <div className="flex flex-col w-1/4 justify-between">
+                                <span>:</span>
+                                <span>:</span>
+                                <span>:</span>
+                            </div>
+                            <div className="flex flex-col  w-full justify-between">
+                                <p>4-8 Years</p>
+                                <p>22-10-2022</p>
+                                <p>17</p>
+                            </div>
+                        </div>
+                    </div>
+                <div className="mt-10 flex flex-col w-full cursor-pointer">
+                        <h6 className="font-semibold text-lg">Company : </h6>
+                        <div className="p-10">
+                            <div className="w-full h-80 shadow-xl rounded-2xl flex flex-col items-center justify-center">
+                                <img src={googleLogo} alt="" className="shadow-lg rounded-lg" />
+                                <h5 className="mt-4 font-semibold text-2xl">Google</h5>
+                                <div className="text-sm mt-2 flex items-center">
+                        <Icon icon="akar-icons:location" className="text-primary"/><p className="text-primary ml-1">Bengluru,India</p>
+                    </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

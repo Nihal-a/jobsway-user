@@ -5,17 +5,16 @@ import { Icon } from '@iconify/react';
 import moment from 'moment';
 import { useDispatch,useSelector } from 'react-redux';
 import { getCompanyDetails } from '../../actions/company';
+import ReactPaginate from 'react-paginate'
 
 
 
 function JobCard({job}) {
 
-    console.log(job);
-
     const dispatch = useDispatch()
     const company = useSelector((state) => state.company)
     const postedDate = moment(job.createdAt , "YYYYMMDDhmmssa").startOf('hour').fromNow()
-    
+
     useEffect(() => {
         dispatch(getCompanyDetails(job.companyId))
     }, [])

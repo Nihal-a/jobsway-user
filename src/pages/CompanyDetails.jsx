@@ -7,19 +7,24 @@ import JobCard from '../components/JobCard/JobCard';
 import { useDispatch } from 'react-redux';
 import { getCompanyDetails } from '../actions/company';
 import { useSelector } from 'react-redux';
+import { getCompanyJobs } from '../actions/jobs';
 
 const CompanyDetails = () => {
 
     const dispatch = useDispatch()
     const location = useLocation()
     const {company} = useSelector(state => state.company)
+    const job = useSelector(state => state)
 
-
+    
     useEffect(() => {
         dispatch(getCompanyDetails(location?.state.id))
     }, [])
+    
+    
+    console.log(job);
 
-
+    
 
     return (
         <div>

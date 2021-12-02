@@ -51,19 +51,19 @@ function Routed() {
                 {user ? <Redirect to="/" /> : <Signin />}
             </Route>
             <Route path="/verifyotp">
-                {location.state ? <VerifyOtp /> :  <Redirect to="/" />}
+                {location.state ? <VerifyOtp /> :  <Redirect to="/signin" />}
             </Route>
             <Route path="/findjob">
-                {user ?  <FindJobs /> :  <Redirect to="/" />}
+                {user ?  <FindJobs /> :  <Redirect to="/signin" />}
             </Route>
             <Route path="/jobdetails/:id">
-                {user ?  <JobDetails /> :  <Redirect to="/" />}
+                {user ?  <JobDetails /> :  <Redirect to="/signin" />}
             </Route>
             <Route path="/company-details">
-                {user ?  <CompanyDetails /> :  <Redirect to="/" />}
+                {user ?  <CompanyDetails /> :  <Redirect to="/signin" />}
             </Route>
             <Route path="/apply-job">
-                {user ?  <ApplyJob /> :  <Redirect to="/" />}
+                {user ?  <ApplyJob /> :  <Redirect to="/signin" />}
             </Route>
         </Switch>
     )

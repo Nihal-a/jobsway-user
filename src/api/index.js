@@ -13,6 +13,7 @@ export const googlesign = (formData) => API.post('/googlesign',formData)
 //Jobs
 export const getAllJobs = () => API.get('/getjobs')
 export const getFeaturedJobs = () => API.get('/getfeaturedjobs')
+export const getCompanyJobs = (id) => API.get(`/company-jobs/${id}`)
 
 
 //Company

@@ -1,4 +1,4 @@
-import { ALLJOBS, FEATUREDJOBS } from '../constants/actionTypes'
+import { ALLJOBS, COMPANYJOBS, FEATUREDJOBS } from '../constants/actionTypes'
 import * as api from '../api/index'
 
 export const getFeaturedJobs = () => async (dispatch) => {
@@ -19,3 +19,11 @@ export const getAllJobs = () => async (dispatch) => {
     }
 }
 
+export const getCompanyJobs = () => async (dispatch) => {
+    try {
+        const {data} = await api.getCompanyJobs()
+        dispatch({type:COMPANYJOBS,data})    
+    } catch (error) {
+        alert('There is an error')
+    }
+}

@@ -46,7 +46,7 @@ function JobCard({job}) {
             </div>
             <div className="flex justify-between mt-2 ml-2">
                 <p className="text-white">{job?.minExp} - {job?.maxExp} year of Experience</p>
-                <Link to="/jobdetails" className="bg-white text-primary py-2 px-4 rounded-md font-semibold">Know More</Link>
+                <Link to={{pathname:`/jobdetails/${job?._id}` , state : {jobDetails : job}}} className="bg-white text-primary py-2 px-4 rounded-md font-semibold">Know More</Link>
             </div>
         </div>
     )

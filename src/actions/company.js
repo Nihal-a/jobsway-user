@@ -13,7 +13,6 @@ export const getAllCompanies = () => async (dispatch) => {
 export const getCompanyDetails = (id) => async (dispatch) => {
     try {
         const {data} = await api.getCompanyDetails(id)
-        console.log(data);
         dispatch({type:COMPANYDETAIL,data})    
     } catch (error) {
         console.log(error);

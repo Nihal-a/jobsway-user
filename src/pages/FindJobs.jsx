@@ -14,7 +14,7 @@ import { getAllCompanies } from '../actions/company';
 const FindJobs = () => {
 
     const dispatch = useDispatch()
-    const {allCompanies} = useSelector(state => state.company)
+    const company = useSelector(state => state.company)
     const jobs = useSelector(state => state.job)
     const [pageNumber, setPageNumber] = useState(0)
 
@@ -76,9 +76,9 @@ const FindJobs = () => {
         <div className="container mx-auto">
             <h5 className="font-semibold text-2xl my-3">Top Companies.</h5>
             <div className="w-full h-20 flex justify-center mt-4">
-               {allCompanies.map((company) => (
+               {/* {company?.allCompanies.map((company) => (
                    <SmallCompanyCard company={company}/>
-               ))}
+               ))} */}
             </div>
         </div>
         <div className="mt-60">

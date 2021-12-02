@@ -1,55 +1,72 @@
 import { Icon } from '@iconify/react'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useParams , useLocation} from 'react-router-dom'
 import Navbar from '../components/navbar/Navbar'
 import googleLogo from '../assets/images/googleLogo.png'
+import { useDispatch } from 'react-redux'
+import { getCompanyDetails } from '../actions/company'
+import { useSelector } from 'react-redux'
+import moment from 'moment'
 
 const JobDetails = () => {
+
+    const {id} = useParams()
+    const dispatch = useDispatch()
+    const location = useLocation()
+    const jobDetails = location?.state.jobDetails
+    const {company} = useSelector(state => state.company)
+    
+    
+    useEffect(() => {
+        dispatch(getCompanyDetails(jobDetails.companyId))
+    },[])
+
+    
+    const postedDate = moment(jobDetails.createdAt , "YYYYMMDDhmmssa").format('l');
+    
+    console.log(company);
+
     return (
         <div>
             <Navbar />
             <div className="container mx-auto mt-28 flex ">
                 <div className="flex flex-col w-1/2">
                     <div className="">
-                        <h3 className="text-4xl font-semibold">Sr.Web Devoloper</h3>
+                        <h3 className="text-4xl font-semibold">{jobDetails?.jobTitle}</h3>
                         <div className="flex items-center">
                         <span className="flex items-center mt-2">
                             <Icon icon="bx:bx-rupee" height="28" color="#00B512" />
-                            <h6 className="text-2xl font-semibold" style={{color:'#00B512'}}>30000 - 50000</h6>
+                            <h6 className="text-2xl font-semibold" style={{color:'#00B512'}}>{jobDetails?.minSalary} - {jobDetails?.maxSalary}</h6>
                         </span>
-                        <p className="mt-2 ml-8">Full-Time</p>
+                        <p className="mt-2 ml-8">{jobDetails?.timeSchedule}</p>
                         </div>
                     </div>
                     <div className=" mt-10">
                         <h6 className="font-semibold">Qualifications : </h6>
                         <div className="pl-4 mt-2">
-                            <li>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used .</li>
-                            <li>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used .</li>
-                            <li>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used .</li>
+                            {jobDetails?.qualification.map((qualif) => (
+                                <li>{qualif.qualification}</li>
+                            ))}
                         </div>
                     </div>
                     <div className="mt-10 flex items-center">
                         <h6 className="font-semibold">Education : </h6>
-                        <h4 className="text-lg ml-4"> Bachelor of Computer Application</h4>
+                        <h4 className="text-lg ml-4"> {jobDetails?.education}</h4>
                     </div>
                     <div className="mt-10 flex items-start">
                         <h6 className="font-semibold">Languages : </h6>
                         <div className="w-full max-w-xs h-auto pl-3 flex-wrap flex">
-                            <span className="text-lg font-medium mx-2">English</span>
-                            <span className="text-lg font-medium mx-2">Arabic</span>
-                            <span className="text-lg font-medium mx-2">Malayalam</span>
-                            <span className="text-lg font-medium mx-2">Arabic</span>
-                            <span className="text-lg font-medium mx-2">Malayalam</span>
+                            {jobDetails?.language.map((lang) => (
+                                <span className="text-lg font-medium mx-2">{lang}</span>
+                            ))}
                         </div>
                     </div>
                     <div className="mt-10 flex items-start">
                         <h6 className="font-semibold">Skills : </h6>
                         <div className="w-full max-w-xs h-auto pl-3 flex-wrap flex">
-                            <span className="text-md font-semibold text-white bg-primary px-5 py-2  m-1 rounded-lg">HTML</span>
-                            <span className="text-md font-semibold text-white bg-primary px-5 py-2  m-1 rounded-lg">CSS</span>
-                            <span className="text-md font-semibold text-white bg-primary px-5 py-2  m-1 rounded-lg">JS</span>
-                            <span className="text-md font-semibold text-white bg-primary px-5 py-2  m-1 rounded-lg">REACT</span>
-                            <span className="text-md font-semibold text-white bg-primary px-5 py-2  m-1 rounded-lg">MONGO DB</span>
+                            {jobDetails?.skills.map((skill) => (
+                            <span className="text-md font-semibold text-white bg-primary px-5 py-2  m-1 rounded-lg">{skill}</span>
+                            ))}
                         </div>
                     </div>
                     <div className="flex items-center justify-center mt-4">
@@ -71,9 +88,9 @@ const JobDetails = () => {
                                 <span>:</span>
                             </div>
                             <div className="flex flex-col  w-full justify-between">
-                                <p>4-8 Years</p>
-                                <p>22-10-2022</p>
-                                <p>17</p>
+                                <p>{jobDetails?.minExp}-8 Years</p>
+                                <p>{postedDate}</p>
+                                <p>0</p>
                             </div>
                         </div>
                     </div>
@@ -81,10 +98,10 @@ const JobDetails = () => {
                         <h6 className="font-semibold text-lg">Company : </h6>
                         <div className="p-10">
                             <div className="w-full h-80 shadow-xl rounded-2xl flex flex-col items-center justify-center">
-                                <img src={googleLogo} alt="" className="shadow-lg rounded-lg" />
-                                <h5 className="mt-4 font-semibold text-2xl">Google</h5>
+                                <img src={company?.imgUrl} alt="" className="shadow-lg rounde w-20 rounded-lg" />
+                                <h5 className="mt-4 font-semibold text-2xl">{company?.companyName}</h5>
                                 <div className="text-sm mt-2 flex items-center">
-                        <Icon icon="akar-icons:location" className="text-primary"/><p className="text-primary ml-1">Bengluru,India</p>
+                        <Icon icon="akar-icons:location" className="text-primary"/><p className="text-primary ml-1">{company?.location}</p>
                     </div>
                             </div>
                         </div>

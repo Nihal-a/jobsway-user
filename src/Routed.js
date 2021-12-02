@@ -56,7 +56,7 @@ function Routed() {
             <Route path="/findjob">
                 {user ?  <FindJobs /> :  <Redirect to="/" />}
             </Route>
-            <Route path="/jobdetails">
+            <Route path="/jobdetails/:id">
                 {user ?  <JobDetails /> :  <Redirect to="/" />}
             </Route>
             <Route path="/company-details">

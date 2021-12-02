@@ -8,4 +8,5 @@ export const ALLJOBS = 'ALLJOBS';
 export const FEATUREDJOBS = 'FEATUREDJOBS';
 
 //company
+export const ALLCOMPANIES = 'ALLCOMPANIES';
 export const COMPANYDETAIL = 'COMPANYDETAIL';

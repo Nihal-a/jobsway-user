@@ -17,4 +17,5 @@ export const getFeaturedJobs = () => API.get('/getfeaturedjobs')
 
 //Company
 export const getCompanyDetails = (id) => API.get(`/getcompany/${id}`)
+export const getAllCompanies = () => API.get(`/companies`)
 

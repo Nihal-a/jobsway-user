@@ -1,9 +1,11 @@
-import {  COMPANYDETAIL} from "../constants/actionTypes"
+import {  ALLCOMPANIES, COMPANYDETAIL} from "../constants/actionTypes"
 
-export default  (companise = [],action) => {
+export default  (companise = {},action) => {
     switch (action.type) {
+        case ALLCOMPANIES:
+            return {...companise , allCompanies : action.data}
         case COMPANYDETAIL:
-            return action.data
+            return {...companise , company : action.data}
         default:
             return companise
     }

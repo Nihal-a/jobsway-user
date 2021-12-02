@@ -9,12 +9,16 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { getAllJobs } from '../actions/jobs';
 import ReactPaginate from 'react-paginate';
+import { getAllCompanies } from '../actions/company';
 
 const FindJobs = () => {
 
     const dispatch = useDispatch()
+    const {allCompanies} = useSelector(state => state.company)
     const jobs = useSelector(state => state.job)
     const [pageNumber, setPageNumber] = useState(0)
+
+
 
     const jobsPerPage = 8;
     const pagesVisited = pageNumber * jobsPerPage
@@ -25,10 +29,9 @@ const FindJobs = () => {
     }
     
     useEffect(() => {
+        dispatch(getAllCompanies())
         dispatch(getAllJobs())
     }, [])
-
-
 
     return (
         <div>
@@ -72,12 +75,10 @@ const FindJobs = () => {
         </div>
         <div className="container mx-auto">
             <h5 className="font-semibold text-2xl my-3">Top Companies.</h5>
-            <div className="w-full h-20 flex justify-around mt-4">
-                <SmallCompanyCard />
-                <SmallCompanyCard />
-                <SmallCompanyCard />
-                <SmallCompanyCard />
-                <SmallCompanyCard />
+            <div className="w-full h-20 flex justify-center mt-4">
+               {allCompanies.map((company) => (
+                   <SmallCompanyCard company={company}/>
+               ))}
             </div>
         </div>
         <div className="mt-60">

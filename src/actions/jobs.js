@@ -27,3 +27,12 @@ export const getCompanyJobs = () => async (dispatch) => {
         alert('There is an error')
     }
 }
+
+export const applyForJob = (formData) => async (dispatch) => {
+    try {
+        const {data} = await api.applyForJob(formData)
+        dispatch({type:COMPANYJOBS,data})    
+    } catch (error) {
+        alert('There is an error')
+    }
+}

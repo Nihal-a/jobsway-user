@@ -1,4 +1,4 @@
-import { ALLJOBS, COMPANYJOBS, FEATUREDJOBS } from '../constants/actionTypes'
+import { ALLJOBS, APPLYJOBS, COMPANYJOBS, FEATUREDJOBS } from '../constants/actionTypes'
 import * as api from '../api/index'
 
 export const getFeaturedJobs = () => async (dispatch) => {
@@ -28,11 +28,13 @@ export const getCompanyJobs = () => async (dispatch) => {
     }
 }
 
-export const applyForJob = (formData) => async (dispatch) => {
+export const applyForJob = (formData , jobDetails , history) => async (dispatch) => {
     try {
         const {data} = await api.applyForJob(formData)
-        dispatch({type:COMPANYJOBS,data})    
+        dispatch({type:APPLYJOBS,data})    
+        history.push('/findjob')
     } catch (error) {
-        alert('There is an error')
+        var errors = error.response.data.errors
+        history.push('/apply-job',{job : jobDetails, Err: errors})
     }
 }

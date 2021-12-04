@@ -7,6 +7,7 @@ export const LOGOUT = 'LOGOUT';
 export const ALLJOBS = 'ALLJOBS';
 export const FEATUREDJOBS = 'FEATUREDJOBS';
 export const COMPANYJOBS = 'COMPANYJOBS';
+export const APPLYJOBS = 'APPLYJOBS';
 
 //company
 export const ALLCOMPANIES = 'ALLCOMPANIES';

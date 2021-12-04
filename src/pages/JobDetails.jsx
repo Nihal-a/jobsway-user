@@ -15,16 +15,24 @@ const JobDetails = () => {
     const location = useLocation()
     const jobDetails = location?.state.jobDetails
     const {company} = useSelector(state => state.company)
-    
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    const [status, setStatus] = useState(false)
     
     useEffect(() => {
         dispatch(getCompanyDetails(jobDetails.companyId))
+        if(jobDetails.applications){
+            jobDetails?.applications.map((application) => {
+                if(application.userId == user.user._id) {
+                    setStatus(true)
+                }   
+            })
+        }
     },[])
-
+    
     
     const postedDate = moment(jobDetails.createdAt , "YYYYMMDDhmmssa").format('l');
     
-    console.log(company);
+
 
     return (
         <div>
@@ -70,7 +78,7 @@ const JobDetails = () => {
                         </div>
                     </div>
                     <div className="flex items-center justify-center mt-4">
-                        <Link to={{pathname:"/apply-job" , state:{job : jobDetails}}} className="text-white py-2 px-28 rounded-lg" style={{backgroundColor:'#0060A5'}}>Apply Now</Link>
+                        {status ? <button className="text-success text-sm py-2 px-28 rounded-lg cursor-not-allowed" disabled style={{backgroundColor:'#dddddd'}} >You have Already Applied to this Job.</button> : <Link to={{pathname:"/apply-job" , state:{job : jobDetails}}} className="text-white py-2 px-28 rounded-lg" style={{backgroundColor:'#0060A5'}} >Apply Now</Link>}
                     </div>
                 </div>
                 <div className="w-1/2">

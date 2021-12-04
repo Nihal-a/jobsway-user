@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import Navbar from '../components/navbar/Navbar'
 import noImage from "../assets/images/noImage.jpg";
-import { Link , useLocation } from 'react-router-dom';
+import { Link , useLocation ,useHistory} from 'react-router-dom';
 import Axios  from 'axios';
 import { useDispatch } from 'react-redux';
 import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 import { applyForJob } from '../actions/jobs';
+import swal from 'sweetalert';
+
 
 const initialState = {firstName:'',email : '' , location : '' , lastName : '' , phone : '' , experience : '' , portfolio : ''}
 
@@ -13,11 +15,20 @@ const ApplyJob = () => {
     
     const [formData, setFormData] = useState(initialState)
     const [image, setImage] = useState(noImage);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState()
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const location = useLocation()
+    const history = useHistory()
 
   const dispatch = useDispatch()
+
+
+    useEffect(() => {
+        location.state.Err = undefined
+    }, [formData])
+  
+
+    console.log("This is location state : ",location?.state);
 
     const handleImageChange = (e) => {
         const reader = new FileReader();
@@ -27,7 +38,7 @@ const ApplyJob = () => {
           }
         };
         reader.readAsDataURL(e.target.files[0]);
-      };
+    };
 
     const handleChange = (e) => {
         e.preventDefault()
@@ -35,13 +46,12 @@ const ApplyJob = () => {
     }
 
     if(loading) {
-        return <LoadingSpinner />
+        <LoadingSpinner />
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
         setLoading(true)
-        
         const imageData = new FormData();
         imageData.append("file", image);
         imageData.append("upload_preset", process.env.REACT_APP_CLOUDINARY_NAME);
@@ -53,7 +63,8 @@ const ApplyJob = () => {
             formData.userId = user?.user._id
             formData.jobId = location.state?.job._id
             setLoading(false)
-            dispatch(applyForJob(formData))
+            console.log(e.target.files);
+            // dispatch(applyForJob(formData , location.state?.job ,  history))
           })
           .catch((err) => {
             setLoading(false)
@@ -62,12 +73,19 @@ const ApplyJob = () => {
     }
 
 
+
     return (
         <div>
             <Navbar />
 
-            <form className="container mx-auto mt-40 " onSubmit={handleSubmit}>
+            <form className="container mx-auto mt-40 " onSubmit={handleSubmit} >
                 <h2 className="text-3xl font-semibold">Applying for <span className="text-primary">{location.state?.job.jobTitle}</span></h2>
+                {location?.state?.Err && <h4 className="text-md">Errors : </h4>}
+                {location?.state.Err && location?.state?.Err.map((error) => (
+                  <>
+                      <p className="text-red-800" style={{ color: "red" }}>{error.msg}</p>
+                  </>
+                ))}
                 <div className="mt-3 flex">
                     <div className="flex flex-col w-1/3 p-2 mt-3">
                         <input onChange={handleChange} type="text" name="firstName" id="" placeholder="First Name" className="bg-secondary p-4 m-2 mt-5 rounded-md" />
@@ -75,7 +93,7 @@ const ApplyJob = () => {
                         <input onChange={handleChange} type="text" name="location" id="" placeholder="Location" className="bg-secondary p-4 m-2 mt-5 rounded-md" />
                         <div className="">
                             <label className="ml-3 mt-2 m-1" htmlFor="upload">Upload Resume : </label>
-                        <input required type="file" name="upload" id="" className="bg-secondary p-4 ml-2 rounded-md" accept="application/pdf,application/vnd.ms-excel"/>
+                        <input type="file" name="upload" id="" className="bg-secondary p-4 ml-2 rounded-md" accept="application/pdf,application/vnd.ms-excel"/>
                         <p className="text-xs m-3">Don’t have one? No worries <Link className="text-primary underline"> Create a JobsWay Resume</Link></p>
                         </div>
                     </div>
@@ -97,6 +115,7 @@ const ApplyJob = () => {
                             className="absolute inset-0 text-md pointer opacity-0 w-28 h-16 bg-primary"
                             accept="image/*"
                             onChange={handleImageChange}
+                            name="photo"
                             />
                         </div>
                         </div>

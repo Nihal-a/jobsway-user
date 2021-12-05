@@ -34,19 +34,24 @@ const ApplyJob = () => {
 
   const dispatch = useDispatch();
 
+  
+  
   useEffect(() => {
     location.state.Err = undefined;
   }, [formData]);
+
+  
+  if(loading) {
+    return <LoadingSpinner />
+  }
+
 
   const handleChange = (e) => {
     e.preventDefault();
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  if(loading) {
-    <LoadingSpinner />;
-  }
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -57,8 +62,7 @@ const ApplyJob = () => {
       image,
       pdf
     }
-    setLoading(false);
-    dispatch(applyForJob(dataObj, location.state?.job ,  history ))
+    dispatch(applyForJob(dataObj, location.state?.job ,  history ,setLoading))
   };
 
   const handlePdfChange = (e) => {

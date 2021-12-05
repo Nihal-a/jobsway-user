@@ -34,7 +34,7 @@ class ImageInput extends Component {
         const scope = this
         reader.onload = function () {
           scope.props.setImage(reader.result)
-          scope.state.src = null
+          scope.setState({src : null})
         };
         reader.onerror = function (error) {
             console.log('Error: ', error);
@@ -108,25 +108,25 @@ class ImageInput extends Component {
             <div >
                 <label htmlFor="profile_pic"></label>
 
-                <div className="bg-black relative overflow-hidden h-14 mt-3 flex items-center p-4 rounded-md cursor-pointer">
-                <span className="text-sm text-white font-light cursor-pointer">
+                <div className="bg-black relative overflow-hidden  mt-3 flex items-center p-4 rounded-md cursor-pointer">
+                <span className="text-sm text-white font-light cursor-pointer w-full text-center">
                   Upload Photo
                 </span>
                 <input
                   type="file"
-                  className="absolute inset-0 text-md pointer opacity-0 w-20 h-10 bg-primary"
+                  className="absolute inset-0 text-md pointer opacity-0 w-20 h-10 bg-primary cursor-pointer"
                   accept="image/*"
                   name="photo"
                   type='file' id='profile_pic'
                 value={profile_pic} 
                 onChange={this.handleFile}
+
                 />
               </div>
 
-                <input  />
-
                 {src && (
-                    <div className="">
+                   <div className="h-screen absolute w-screen bg-black bg-opacity-70 top-0 left-0 flex items-center justify-center">
+                        <div className="flex flex-col items-center">
                         <ReactCrop
                       src={src}
                       crop={crop}
@@ -134,8 +134,9 @@ class ImageInput extends Component {
                       onComplete={this.onCropComplete}
                       onChange={this.onCropChange}
                      /> 
-                        <button onClick={this.handleSubmit}>save</button>
+                        <button onClick={this.handleSubmit} className="p-3 bg-secondary m-3 rounded-lg">save</button>
                     </div>
+                   </div>
                 )}
             </div>
         )

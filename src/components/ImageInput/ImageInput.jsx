@@ -125,7 +125,7 @@ class ImageInput extends Component {
               </div>
 
                 {src && (
-                   <div className="h-screen absolute w-screen bg-black bg-opacity-70 top-0 left-0 flex items-center justify-center">
+                   <div className="h-screen absolute w-screen bg-black bg-opacity-80 top-0 left-0 flex items-center justify-center">
                         <div className="flex flex-col items-center">
                         <ReactCrop
                       src={src}

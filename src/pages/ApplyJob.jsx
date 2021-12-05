@@ -2,18 +2,14 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../components/navbar/Navbar";
 import noImage from "../assets/images/noImage.jpg";
 import { Link, useLocation, useHistory } from "react-router-dom";
-import Axios from "axios";
 import { useDispatch } from "react-redux";
 import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 import { applyForJob } from "../actions/jobs";
-import swal from "sweetalert";
-import rswal from '@sweetalert/with-react'
-import { Document, Page } from "react-pdf";
 import samplePdf from "../assets/pdf/sample.pdf";
-import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 import ImageInput from "../components/ImageInput/ImageInput";
-
+import PdfViewer from "../components/pdfVeiwer/PdfViewer";
+import rswal from '@sweetalert/with-react'
 
 const initialState = {
   firstName: "",
@@ -32,6 +28,7 @@ const ApplyJob = () => {
   const location = useLocation();
   const history = useHistory();
   const [image, setImage] = useState('');
+  const [pdf, setPdf] = useState('')
 
 
 
@@ -40,15 +37,6 @@ const ApplyJob = () => {
   useEffect(() => {
     location.state.Err = undefined;
   }, [formData]);
-
-
-
-  const handleImageChange = (e) => {
-    e.preventDefault()
-    
-  }
-
-  console.log("This is location state : ", location?.state);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -66,11 +54,29 @@ const ApplyJob = () => {
     formData.jobId = location.state?.job._id;
     let dataObj = {
       formData,
-      image
+      image,
+      pdf
     }
     setLoading(false);
     dispatch(applyForJob(dataObj, location.state?.job ,  history ))
   };
+
+  const handlePdfChange = (e) => {
+    e.preventDefault()
+
+    const fileReader = new FileReader()
+    fileReader.onloadend = () => {
+      setPdf(fileReader.result)
+    } 
+    fileReader.readAsDataURL(e.target.files[0])
+  }
+
+  const handleViewPdf = (e) => {
+    e.preventDefault()
+    rswal(
+      <PdfViewer pdf={pdf}/>
+    )
+  }
 
   return (
     <div>
@@ -85,7 +91,7 @@ const ApplyJob = () => {
         {location?.state.Err &&
           location?.state?.Err.map((error) => (
             <>
-              <p className="text-red-800" style={{ color: "red" }}>
+              <p className="text-red-800 text-sm" style={{ color: "red" }}>
                 {error.msg}
               </p>
             </>
@@ -125,7 +131,9 @@ const ApplyJob = () => {
               id=""
               className="bg-secondary p-4 ml-2 rounded-md"
               accept="application/pdf,application/vnd.ms-excel"
+              onChange={handlePdfChange}
             />
+            {pdf && <button className="underline mt-1" onClick={handleViewPdf}>View Pdf</button>}
             <p className="text-xs m-3">
               Don’t have one? No worries{" "}
               <Link className="text-primary underline">
@@ -172,24 +180,6 @@ const ApplyJob = () => {
           {/* Photo upload area */}
           <div className="w-1/3">
             <div className="w-full h-40 mt-4 flex items-center flex-col mt-24">
-              {/* <img
-                src={image}
-                alt="no image"
-                className="w-56 h-56 rounded-md"
-              />
-
-              <div className="bg-black relative overflow-hidden h-14 mt-3 flex items-center p-4 rounded-md cursor-pointer">
-                <span className="text-sm text-white font-light cursor-pointer">
-                  Upload Photo
-                </span>
-                <input
-                  type="file"
-                  className="absolute inset-0 text-md pointer opacity-0 w-28 h-16 bg-primary"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  name="photo"
-                />
-              </div> */}
 
               <img src={image ? image : noImage} alt="no image" />
 

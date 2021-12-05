@@ -49,11 +49,6 @@ const ApplyJob = () => {
   }
 
 
-
-
-
-
-
   console.log("This is location state : ", location?.state);
 
 //   const handleImageChange = (e) => {
@@ -78,27 +73,14 @@ const ApplyJob = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    const imageData = new FormData();
-    imageData.append("file", image);
-    imageData.append("upload_preset", process.env.REACT_APP_CLOUDINARY_NAME);
-
-    Axios.post(
-      `${process.env.REACT_APP_CLOUDINARY_BASE_URL}/image/upload`,
-      imageData
-    )
-
-      .then(({ data }) => {
-        formData.imgUrl = data.url;
-        formData.userId = user?.user._id;
-        formData.jobId = location.state?.job._id;
-        setLoading(false);
-        console.log(e.target.files);
-        // dispatch(applyForJob(formData , location.state?.job ,  history))
-      })
-      .catch((err) => {
-        setLoading(false);
-        console.log("Image upload Err :", err);
-      });
+    formData.userId = user?.user._id;
+    formData.jobId = location.state?.job._id;
+    let dataObj = {
+      formData,
+      image
+    }
+    setLoading(false);
+    dispatch(applyForJob(dataObj, location.state?.job ,  history ))
   };
 
   return (

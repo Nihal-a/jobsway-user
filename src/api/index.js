@@ -14,7 +14,7 @@ export const googlesign = (formData) => API.post('/googlesign',formData)
 export const getAllJobs = () => API.get('/getjobs')
 export const getFeaturedJobs = () => API.get('/getfeaturedjobs')
 export const getCompanyJobs = (id) => API.get(`/company-jobs/${id}`)
-export const applyForJob = (formData) => API.post('/applyjob',formData)
+export const applyForJob = (dataObj) => API.post('/applyjob',dataObj)
 
 
 //Company

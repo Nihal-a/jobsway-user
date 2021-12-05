@@ -28,9 +28,9 @@ export const getCompanyJobs = () => async (dispatch) => {
     }
 }
 
-export const applyForJob = (formData , jobDetails , history) => async (dispatch) => {
+export const applyForJob = (dataObj, jobDetails , history) => async (dispatch) => {
     try {
-        const {data} = await api.applyForJob(formData)
+        const {data} = await api.applyForJob(dataObj)
         dispatch({type:APPLYJOBS,data})    
         history.push('/findjob')
     } catch (error) {

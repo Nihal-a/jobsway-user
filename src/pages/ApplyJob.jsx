@@ -27,18 +27,18 @@ const initialState = {
 
 const ApplyJob = () => {
   const [formData, setFormData] = useState(initialState);
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const location = useLocation();
   const history = useHistory();
-  const [image, setImage] = useState(noImage);
+  const [image, setImage] = useState('');
 
 
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // location.state.Err = undefined;
+    location.state.Err = undefined;
   }, [formData]);
 
 
@@ -48,25 +48,14 @@ const ApplyJob = () => {
     
   }
 
-
   console.log("This is location state : ", location?.state);
-
-//   const handleImageChange = (e) => {
-//     const reader = new FileReader();
-//     reader.onload = () => {
-//       if (reader.readyState === 2) {
-//         setImage(reader.result);
-//       }
-//     };
-//     reader.readAsDataURL(e.target.files[0]);
-//   };
 
   const handleChange = (e) => {
     e.preventDefault();
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  if (loading) {
+  if(loading) {
     <LoadingSpinner />;
   }
 
@@ -202,7 +191,7 @@ const ApplyJob = () => {
                 />
               </div> */}
 
-              <img src={image} alt="no image" />
+              <img src={image ? image : noImage} alt="no image" />
 
               <ImageInput setImage={setImage}/>
             </div>

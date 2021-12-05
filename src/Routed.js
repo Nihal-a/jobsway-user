@@ -12,6 +12,7 @@ import FindJobs from "./pages/FindJobs";
 import JobDetails from "./pages/JobDetails";
 import CompanyDetails from "./pages/CompanyDetails";
 import ApplyJob from "./pages/ApplyJob";
+import MyJobs from "./pages/MyJobs";
 
 function Routed() {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -64,6 +65,9 @@ function Routed() {
             </Route>
             <Route path="/apply-job">
                 {user ?  <ApplyJob /> :  <Redirect to="/signin" />}
+            </Route>
+            <Route path="/my-jobs">
+                {user ?  <MyJobs /> :  <Redirect to="/signin" />}
             </Route>
         </Switch>
     )

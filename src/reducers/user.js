@@ -1,4 +1,4 @@
-import { SIGNIN,SIGNUP,LOGOUT} from "../constants/actionTypes"
+import { SIGNIN,SIGNUP,LOGOUT, APPLYJOBS} from "../constants/actionTypes"
 
 export default  (state = {authData : null},action) => {
     switch (action.type) {
@@ -11,6 +11,9 @@ export default  (state = {authData : null},action) => {
         case LOGOUT:
             localStorage.clear()
             return { ...state, authData: null, loading: false, errors: null };
+        case APPLYJOBS : 
+            localStorage.setItem('profile',JSON.stringify({...action?.data?.userData}))
+            return {...state , authData:action?.data?.userData}
         default:
             return state
     }

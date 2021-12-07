@@ -1,4 +1,4 @@
-import {  ALLJOBS, APPLYJOBS, COMPANYJOBS, FEATUREDJOBS} from "../constants/actionTypes"
+import {  ALLAPPLIEDJOBS, ALLJOBS, APPLYJOBS, COMPANYJOBS, FEATUREDJOBS} from "../constants/actionTypes"
 
 export default  (job = [],action) => {
     switch (action.type) {
@@ -10,6 +10,8 @@ export default  (job = [],action) => {
             return action.data
         case APPLYJOBS:
             return job.map((jobs) => jobs._id == action.data.job._id ? action.data.job : job)
+        case ALLAPPLIEDJOBS:
+            return action.data
         default:
             return job
     }

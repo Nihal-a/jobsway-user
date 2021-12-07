@@ -1,4 +1,4 @@
-import { ALLJOBS, APPLYJOBS, COMPANYJOBS, FEATUREDJOBS } from '../constants/actionTypes'
+import { ALLAPPLIEDJOBS, ALLJOBS, APPLYJOBS, COMPANYJOBS, FEATUREDJOBS } from '../constants/actionTypes'
 import * as api from '../api/index'
 import toast from 'react-hot-toast'
 
@@ -41,5 +41,15 @@ export const applyForJob = (dataObj, jobDetails , history , setLoading) => async
         setLoading(false)
         var errors = error.response.data.errors
         history.push('/apply-job',{job : jobDetails, Err: errors})
+    }
+}
+
+export const getUserAppliedJobs = (id) => async (dispatch) => {
+    try {
+        const {data} = await api.getUserAppliedJobs(id)
+        dispatch({type:ALLAPPLIEDJOBS,data})            
+    } catch (error) {
+        var errors = error.response.data.errors
+        console.log(error);
     }
 }

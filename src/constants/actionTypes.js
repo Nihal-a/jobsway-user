@@ -8,6 +8,7 @@ export const ALLJOBS = 'ALLJOBS';
 export const FEATUREDJOBS = 'FEATUREDJOBS';
 export const COMPANYJOBS = 'COMPANYJOBS';
 export const APPLYJOBS = 'APPLYJOBS';
+export const ALLAPPLIEDJOBS = 'ALLAPPLIEDJOBS';
 
 //company
 export const ALLCOMPANIES = 'ALLCOMPANIES';

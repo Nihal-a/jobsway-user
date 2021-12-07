@@ -54,15 +54,14 @@ function Navbar({ hide }) {
       <div className="flex items-center">
         <Link to="/findjob" className="pr-4 text-black ">Find Jobs</Link>
         <Link className="pr-5 text-black ">Create Resume</Link>
-        <Link className="profile-menu flex flex-col items-center">
         <div className="">
         <div className="dropdown inline-block relative z-50">
-          <button className="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
+          <div className="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
             <span className="mr-1">{user?.user.name}</span>
             <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
               <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
             </svg>
-          </button>
+          </div>
           <ul className="dropdown-menu absolute hidden text-gray-700 pt-1">
             <li className><Link to="" className="bg-gray-200 hover:bg-gray-400 py-3 px-2 block whitespace-no-wrap flex items-center justify-start text-lg w-40" href="#"><Icon className="mr-3 text-2xl" icon="ant-design:profile-outlined" /><span>Profile</span></Link></li>
             <li className><Link to="/my-jobs" className="bg-gray-200 hover:bg-gray-400 py-3 px-2 block whitespace-no-wrap flex items-center justify-start text-lg" href="#"><Icon className="mr-3 text-2xl" icon="akar-icons:heart" /><span>My Jobs</span></Link></li>
@@ -70,7 +69,6 @@ function Navbar({ hide }) {
           </ul>
         </div>
       </div>
-        </Link>
       </div>
     )
   }

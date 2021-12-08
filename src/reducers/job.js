@@ -11,7 +11,8 @@ export default  (job = [],action) => {
         case APPLYJOBS:
             return job.map((jobs) => jobs._id == action.data.job._id ? action.data.job : job)
         case ALLAPPLIEDJOBS:
-            return action.data
+            const appliedJobs = action.data
+            return job.push(appliedJobs)
         default:
             return job
     }

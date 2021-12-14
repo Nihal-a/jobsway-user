@@ -3,7 +3,7 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
 import "./style.css";
 import { useDispatch } from "react-redux";
-import { signup,sendotp,googlesign} from "../../actions/auth";
+import { signup,googlesign} from "../../actions/auth";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { Icon } from '@iconify/react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha'
@@ -15,7 +15,6 @@ function Signupform() {
 
 
   const [formData, setFormData] = useState(initialState)
-  const [withPhone, setWithPhone] = useState(false)
   const [captchaErr, setCaptchaErr] = useState('')
   const [passwordErr, setPasswordErr] = useState('')
   const [PhoneErr, setPhoneErr] = useState('')
@@ -24,8 +23,8 @@ function Signupform() {
   const location = useLocation()
 
   useEffect(() => {
-    withPhone && loadCaptchaEnginge(6)
-  }, [withPhone])
+    loadCaptchaEnginge(6)
+  }, [])
 
   useEffect(() => {
     location.state = undefined
@@ -35,15 +34,8 @@ function Signupform() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (withPhone == true) {
-      if(validateCaptcha(formData.captcha,false) !== true) return setCaptchaErr('Captcha verification failed')
-      if(formData.phone.length !== 10) return setPhoneErr('Enter a valid phone number.')
-      dispatch(sendotp(formData,history))
-    } else {
-      setPasswordErr('')
-      if (formData.password !== formData.confirmPassword) setPasswordErr('Passwords does not match.')
-      else dispatch(signup(formData, history))
-    }
+    if(validateCaptcha(formData.captcha,false) !== true) return setCaptchaErr('Captcha verification failed')
+    dispatch(signup(formData,history))
   }
   const handleChange = (e) => {
     e.preventDefault()
@@ -68,47 +60,37 @@ function Signupform() {
     }
   }
 
+  console.log(location?.state);
+
 
   return (
     <div className="signup-wrapper">
       <form action="" onSubmit={handleSubmit}>
-        <h3 className="welcome pt-20">Welcome to JobsWay.</h3>
+        <h3 className="welcome ">Welcome to JobsWay.</h3>
         {captchaErr ? <p className="text-red-800" style={{ color: "red" }}>{captchaErr}</p> : null}
         {PhoneErr ? <p className="text-red-800" style={{ color: "red" }}>{PhoneErr}</p> : null}
         {passwordErr ? <p className="text-red-800" style={{ color: "red" }}>{passwordErr}</p> : null}
-        {location?.state?.Err.map((error) => (
-          <p className="text-red-800" style={{ color: "red" }}>{error.msg}</p>
-        ))}
+        {
+          location?.state?.status ? <>{ location?.state?.Err.map((error) => (
+            <p className="text-red-800" style={{ color: "red" }}>{error.msg}</p>
+          ))}</> : <><p className="text-red-800" style={{ color: "red" }}>{location?.state?.Err}</p></>
+        }
         <div className="inp-wrap d-flex" style={{ marginTop: "1rem" }}>
           <input onChange={handleChange}  name="firstName" placeholder="First Name" className="input" type="text" />
           <input onChange={handleChange}  name="lastName" placeholder="Last Name" className="input" type="text" />
         </div>
-        {!withPhone && <input onChange={handleChange}  name="email" placeholder="Email" className="input" type="email" />}
-        {withPhone && <input onChange={handleChange}  name="phone" placeholder="Phone No." className="input" type="tel" />}
+        <input onChange={handleChange}  name="phone" placeholder="Phone No." className="input" type="tel" />
+        <input onChange={handleChange}  name="email" placeholder="Email (Optional)" className="input" type="email" />
         <input onChange={handleChange}  name="password" placeholder="Password" className="input" type="password" />
-        {withPhone && <div className="p-3 rounded-md m-1 h-30 flex flex-col items-center justify-center"><LoadCanvasTemplate/>
-        </div>}
-        {withPhone && <input onChange={handleChange}  name="captcha" placeholder="Enter the captcha" className="input" type="text" />}
-        {!withPhone && <input
-          onChange={handleChange}
-          name="confirmPassword"
-          placeholder="Confirm Password"
-          className="input"
-          type="password"
-          style={{ marginBottom: "1rem" }}
-          
-        />}
+        <div className="p-3 rounded-md m-1 h-30 flex flex-col items-center justify-center"><LoadCanvasTemplate/>
+        </div>
+        <input onChange={handleChange}  name="captcha" placeholder="Enter the captcha" className="input" type="text" />
         <button className="primary mt-2" type="submit">
           Sign Up
         </button>
       </form>
-      <p>Or</p>
+      <p className="mt-1">Or</p>
       <div className="" style={{ width: "270px" }}>
-        <div className="bg-white w-full py-3 rounded-md mb-1 flex items-center justify-start p-4 border cursor-pointer hover:bg-secondary" onClick={() => setWithPhone(!withPhone)}>
-          {!withPhone ? <> <Icon icon="bi:phone-fill" className="m-0 p-0 text-2xl" />
-            <p className="ml-2 text-lg">Sign Up with Phone</p> </> : <><Icon icon="clarity:email-solid" className="m-0 p-0 text-2xl" />
-            <p className="ml-2 text-lg">Sign Up with Email</p></>}
-        </div>
         <GoogleLogin
           clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
           render={(renderProps) => (

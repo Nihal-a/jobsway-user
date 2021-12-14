@@ -17,7 +17,7 @@ function VerifyOtp() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const otpDetails = {user : location.state.formData,otp,phone:location.state.formData.phone}
+        const otpDetails = {userDetails : location.state.formData,otp,phone:location.state.formData.phone}
         dispatch(verifyotp(otpDetails,history))
     }
 

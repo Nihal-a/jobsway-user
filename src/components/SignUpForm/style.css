@@ -31,9 +31,9 @@
     margin-top: .5rem;
 }
 .input::placeholder{
-    color: #c9c9c9;
+    color: #8d8d8d;
     font-size: 14px;
-    font-weight: 100;
+    font-weight: 300;
 }
 .primary{
     background-color: #008FAE;

@@ -6,16 +6,17 @@ import {useDispatch} from "react-redux"
 import { googlesign, signin } from "../../actions/auth";
 import jwtDecode from "jwt-decode";
 import { Icon } from "@iconify/react";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 
 
 
-const initialState = {email:'',password:''}
+const initialState = {phone:'',password:''}
 
 function SigninForm() {
 
   const [formData, setFormData] = useState(initialState)
-  const [withPhone, setWithPhone] = useState(false)
+  const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
   const history = useHistory()
   const location = useLocation()
@@ -24,9 +25,12 @@ function SigninForm() {
     location.state = undefined
   }, [formData])
 
+ 
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(signin(formData,history))
+    setLoading(true)
+    dispatch(signin(formData,history,setLoading))
   }
   const handleChange = (e) => {
     e.preventDefault()
@@ -38,7 +42,6 @@ function SigninForm() {
 
   const googleSuccess = (res) => {
     const result = res?.profileObj
-    const token = res?.tokenId
     const user = { email: result.email, firstName: result.givenName, lastName: result?.familyName, password: res.googleId }
     try {
       dispatch(googlesign(user,history))
@@ -48,13 +51,17 @@ function SigninForm() {
     }
   }
 
+
+  if(loading) {
+    return  <LoadingSpinner />
+  }
   return (
     <div>
       <div className="signup-wrapper">
         <form action="" onSubmit={handleSubmit}>
           <h3 className="welcome ">Sign In to JobsWay.</h3>
           {location?.state?.Err && <p className="text-red-800" style={{ color: "red" }}>{location.state.Err}</p> }
-          <input onChange={handleChange} name="email" placeholder="Email" className="input" type="email" />
+          <input onChange={handleChange} name="phone" placeholder="Phone" className="input" type="tel" />
           <input onChange={handleChange} name="password" placeholder="Password" className="input" type="password" />
         <button className="primary mt-4" type="submit">
           Sign In

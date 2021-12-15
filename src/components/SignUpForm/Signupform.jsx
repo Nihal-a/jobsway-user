@@ -7,6 +7,7 @@ import { signup,googlesign} from "../../actions/auth";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { Icon } from '@iconify/react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha'
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '', type: '',captcha:''}
@@ -21,6 +22,7 @@ function Signupform() {
   const dispatch = useDispatch()
   const history = useHistory()
   const location = useLocation()
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     loadCaptchaEnginge(6)
@@ -35,7 +37,7 @@ function Signupform() {
   const handleSubmit = (e) => {
     e.preventDefault()
     if(validateCaptcha(formData.captcha,false) !== true) return setCaptchaErr('Captcha verification failed')
-    dispatch(signup(formData,history))
+    dispatch(signup(formData,history,setLoading))
   }
   const handleChange = (e) => {
     e.preventDefault()
@@ -60,7 +62,9 @@ function Signupform() {
     }
   }
 
-  console.log(location?.state);
+  if(loading){
+    return <LoadingSpinner />
+  }
 
 
   return (

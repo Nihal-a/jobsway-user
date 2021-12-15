@@ -3,11 +3,13 @@ import * as api from '../api/index'
 
 
 
-export const signup = (formData , history) => async (dispatch) => {
+export const signup = (formData , history, setLoading) => async (dispatch) => {
     try {
         const {data} = await api.signup(formData)
+        setLoading(false)
         history.push('/verifyotp' , {Allow : true , formData : formData})
     } catch (error) {
+        setLoading(false)
         const status = Array.isArray(error.response.data.errors)
         const errors = error.response.data.errors
         history.push('/signup', {Err: errors , status : status})
@@ -42,16 +44,14 @@ export const signup = (formData , history) => async (dispatch) => {
 
 //     }
 // }
-export const signin = (formData,history) => async (dispatch) => {
+export const signin = (formData,history,setLoading) => async (dispatch) => {
     try {
         const {data} = await api.signin(formData)
-        if(data.user){
-            dispatch({type:SIGNIN,data})
-            history.push('/')
-        }else{
-            history.push('/signin', {Err: 'Invalid Email or Password.'})
-        }
+        dispatch({type:SIGNIN,data})
+        setLoading(false)
+        history.push('/')
     } catch (error) {
+        setLoading(false)
         var errors =  error.response.data.errors
         console.log(errors);
         history.push('/signin', {Err: errors})

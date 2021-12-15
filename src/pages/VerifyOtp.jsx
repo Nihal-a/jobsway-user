@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import OtpInput from 'otp-input-react';
 import { Link } from 'react-router-dom'
 import Navbar from '../components/navbar/Navbar';
-import { verifyotp } from '../actions/auth';
+import { signup, verifyotp } from '../actions/auth';
 import { useLocation,useHistory} from 'react-router';
 import { useDispatch } from 'react-redux';
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 
 
 
@@ -14,22 +15,34 @@ function VerifyOtp() {
     const location = useLocation()
     const dispatch = useDispatch()
     const history = useHistory()
+    const [loading, setLoading] = useState(false)
 
     const handleSubmit = (e) => {
         e.preventDefault()
         const otpDetails = {userDetails : location.state.formData,otp,phone:location.state.formData.phone}
-        dispatch(verifyotp(otpDetails,history))
+        setLoading(true)
+        dispatch(verifyotp(otpDetails,history,setLoading))
     }
 
     useEffect(() => {
 
     }, [location])
 
+    if(loading){
+        return <LoadingSpinner />
+    }
+
     const inputStyle = {
         backgroundColor : '#f2f2f2',
         width : '90px',
         height : '100px',
         fontSize : '60px'
+    }
+
+    const handleResend = (e) => {
+        e.preventDefault()
+        setLoading(true)
+        dispatch(signup(location.state.formData,history,setLoading))
     }
 
     return (
@@ -52,8 +65,7 @@ function VerifyOtp() {
                     />
                     <button className="bg-green-600 px-10 py-3 mt-10 mb-5 rounded-md text-white hover:bg-green-700" type="submit" style={{ color: 'white' }}>Submit OTP</button>
                 </form>
-                <Link className="mt-3 hover:underline text-dark">Haven't received yet? Resend OTP.</Link>
-                <Link className="mt-1 hover:underline text-dark">Wrong phone number ? Change number.</Link>
+                <Link onClick={handleResend} className="mt-3 hover:underline text-dark">Haven't received yet? Resend OTP.</Link>
             </div>
         </>
     )

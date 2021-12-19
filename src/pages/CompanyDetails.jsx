@@ -33,7 +33,7 @@ const CompanyDetails = () => {
             <div className="mt-28 flex container mx-auto">
                 <div className="w-1/2 p-8 ">
                     <div className="w-full p-5 flex flex-col items-center shadow-2xl ">
-                        <img src={company?.imgUrl} alt="" className="w-20 h-20 rounded-md shadow-xl"/>
+                        <img src={company?.logoUrl} alt="" className="w-20 h-20 rounded-md shadow-xl"/>
                         <h5 className="font-semibold text-xl mt-3">{company?.companyName}</h5>
                         <h6 className="text-dark text-md mt-3">{company?.industry}</h6>
                         <div className="text-xl flex items-center justify-between w-full p-6">

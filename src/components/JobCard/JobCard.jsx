@@ -24,7 +24,7 @@ function JobCard({job}) {
         <div className="w-full h-62 rounded-md p-4 mt-2" style={{ backgroundColor: '#2c2c2c' }}>
             <div className="flex justify-between">
                 <Link className="flex items-center">
-                    <img src={company?.imgUrl} alt="company logo" className="w-14 h-14 rounded-md" />
+                    <img src={company?.logoUrl} alt="company logo" className="w-14 h-14 rounded-md" />
                     <div className="ml-3">
                     <h6 className=" text-2xl font-semibold text-white">{company?.companyName}</h6>
                     <div className="text-sm text-secondary flex items-center">

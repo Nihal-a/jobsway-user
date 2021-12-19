@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../components/navbar/Navbar";
 import noImage from "../assets/images/noImage.jpg";
 import { Link, useLocation, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch , useSelector} from "react-redux";
 import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 import { applyForJob } from "../actions/jobs";
 import samplePdf from "../assets/pdf/sample.pdf";
@@ -10,6 +10,7 @@ import 'react-image-crop/dist/ReactCrop.css'
 import ImageInput from "../components/ImageInput/ImageInput";
 import PdfViewer from "../components/pdfVeiwer/PdfViewer";
 import rswal from '@sweetalert/with-react'
+
 
 const initialState = {
   firstName: "",
@@ -29,8 +30,6 @@ const ApplyJob = () => {
   const history = useHistory();
   const [image, setImage] = useState('');
   const [pdf, setPdf] = useState('')
-
-
 
   const dispatch = useDispatch();
 
@@ -82,6 +81,9 @@ const ApplyJob = () => {
     )
   }
 
+  const name = user?.user.name.split(' ')
+
+
   return (
     <div>
       <Navbar />
@@ -109,6 +111,8 @@ const ApplyJob = () => {
               id=""
               placeholder="First Name"
               className="bg-secondary p-4 m-2 mt-5 rounded-md"
+              value={name[0]}
+              disabled
             />
             <input
               onChange={handleChange}
@@ -117,6 +121,8 @@ const ApplyJob = () => {
               id=""
               placeholder="Email"
               className="bg-secondary p-4 m-2 mt-5 rounded-md"
+              value={user?.user.email}
+              disabled
             />
             <input
               onChange={handleChange}
@@ -154,6 +160,8 @@ const ApplyJob = () => {
               id=""
               placeholder="Last Name"
               className="bg-secondary p-4 m-2 mt-5 rounded-md"
+              value={name[1]}
+              disabled
             />
             <input
               onChange={handleChange}
@@ -162,6 +170,7 @@ const ApplyJob = () => {
               id=""
               placeholder="Phone"
               className="bg-secondary p-4 m-2 mt-5 rounded-md"
+              value={user?.user.phone}
             />
             <input
               onChange={handleChange}
@@ -170,6 +179,7 @@ const ApplyJob = () => {
               id=""
               placeholder="Years of Exp."
               className="bg-secondary p-4 m-2 mt-5 rounded-md"
+              min={0}
             />
             <input
               onChange={handleChange}

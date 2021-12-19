@@ -106,7 +106,7 @@ const JobDetails = () => {
                         <h6 className="font-semibold text-lg">Company : </h6>
                         <div className="p-10">
                             <div className="w-full h-80 shadow-xl rounded-2xl flex flex-col items-center justify-center">
-                                <img src={company?.imgUrl} alt="" className="shadow-lg rounde w-20 rounded-lg" />
+                                <img src={company?.logoUrl} alt="" className="shadow-lg rounde w-20 rounded-lg" />
                                 <h5 className="mt-4 font-semibold text-2xl">{company?.companyName}</h5>
                                 <div className="text-sm mt-2 flex items-center">
                             <Icon icon="akar-icons:location" className="text-primary"/><p className="text-primary ml-1">{company?.location}</p>

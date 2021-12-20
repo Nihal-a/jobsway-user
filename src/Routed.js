@@ -14,6 +14,7 @@ import CompanyDetails from "./pages/CompanyDetails";
 import ApplyJob from "./pages/ApplyJob";
 import MyJobs from "./pages/MyJobs";
 import ForgotPassword from "./pages/ForgotPassword";
+import ForgotOtpVerify from "./pages/ForgotOtpVerify";
 
 function Routed() {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -55,6 +56,9 @@ function Routed() {
             </Route>
             <Route path="/forgot-password">
                 {user ? <Redirect to="/" /> : <ForgotPassword />}
+            </Route>
+            <Route path="/forgot-otp-verify">
+                {user ? <Redirect to="/" /> : <ForgotOtpVerify />}
             </Route>
 
 

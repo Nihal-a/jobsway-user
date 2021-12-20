@@ -112,7 +112,6 @@ const ApplyJob = () => {
               placeholder="First Name"
               className="bg-secondary p-4 m-2 mt-5 rounded-md"
               value={name[0]}
-              disabled
             />
             <input
               onChange={handleChange}
@@ -122,7 +121,6 @@ const ApplyJob = () => {
               placeholder="Email"
               className="bg-secondary p-4 m-2 mt-5 rounded-md"
               value={user?.user.email}
-              disabled
             />
             <input
               onChange={handleChange}
@@ -146,7 +144,7 @@ const ApplyJob = () => {
             {pdf && <button className="underline mt-1" onClick={handleViewPdf}>View Pdf</button>}
             <p className="text-xs m-3">
               Don’t have one? No worries{" "}
-              <Link className="text-primary underline">
+              <Link to={'/create-resume'} className="text-primary underline">
                 {" "}
                 Create a JobsWay Resume
               </Link>
@@ -161,7 +159,6 @@ const ApplyJob = () => {
               placeholder="Last Name"
               className="bg-secondary p-4 m-2 mt-5 rounded-md"
               value={name[1]}
-              disabled
             />
             <input
               onChange={handleChange}

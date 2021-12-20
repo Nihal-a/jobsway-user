@@ -63,6 +63,9 @@ function SigninForm() {
           {location?.state?.Err && <p className="text-red-800" style={{ color: "red" }}>{location.state.Err}</p> }
           <input onChange={handleChange} name="phone" placeholder="Phone" className="input" type="tel" />
           <input onChange={handleChange} name="password" placeholder="Password" className="input" type="password" />
+          <div className="text-right mt-2">
+            <Link to="/forgot-password" className="font-light underline text-sm">Forgot Password</Link>
+          </div>
         <button className="primary mt-4" type="submit">
           Sign In
         </button>

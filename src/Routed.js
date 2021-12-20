@@ -13,6 +13,7 @@ import JobDetails from "./pages/JobDetails";
 import CompanyDetails from "./pages/CompanyDetails";
 import ApplyJob from "./pages/ApplyJob";
 import MyJobs from "./pages/MyJobs";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function Routed() {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -44,13 +45,21 @@ function Routed() {
 
     return (
         <Switch>
-            <Route exact path="/" component={Landing} />
+
+            //Auth 
             <Route path="/signup">
                 {user ? <Redirect to="/" /> : <Signup />}
             </Route>
             <Route path="/signin">
                 {user ? <Redirect to="/" /> : <Signin />}
             </Route>
+            <Route path="/forgot-password">
+                {user ? <Redirect to="/" /> : <ForgotPassword />}
+            </Route>
+
+
+            <Route exact path="/" component={Landing} />
+
             <Route path="/verifyotp">
                 {location.state ? <VerifyOtp /> :  <Redirect to="/signin" />}
             </Route>

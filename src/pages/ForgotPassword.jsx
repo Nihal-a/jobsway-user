@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { forgotPassword } from "../actions/auth";
 import Footer from "../components/footer/Footer";
+import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
 import Navbar from "../components/navbar/Navbar";
 
 const initialState = { phone : '' }
@@ -13,6 +14,7 @@ const ForgotPassword = () => {
     const [formData, setFormData] = useState(initialState)
     const dispatch = useDispatch()
     const history = useHistory()
+    const [loading, setLoading] = useState(false)
 
   const handleChange = (e) => {
     e.preventDefault()
@@ -20,8 +22,14 @@ const ForgotPassword = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(forgotPassword(formData , history))
+    setLoading(true)
+    dispatch(forgotPassword(formData , history , setLoading))
   };
+
+
+  if(loading) {
+    return <LoadingSpinner />
+  }
 
   return (
     <div className="">

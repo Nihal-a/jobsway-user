@@ -50,11 +50,13 @@ export const googlesign = (userDetails,history) => async (dispatch) => {
     }
 }
 
-export const forgotPassword = (formData,history) => async (dispatch) => {
+export const forgotPassword = (formData,history,setLoading) => async (dispatch) => {
     try {
         const {data} = await api.forgotPassword(formData)
+        setLoading(false)
         history.push('/forgot-otp-verify' , { phone : data.phone})
     } catch (error) {
+        setLoading(false)
         console.log({err:error.message});
     }
 }
@@ -67,6 +69,6 @@ export const verifyForgotOtp = (formData,history,setLoading) => async (dispatch)
         history.push('/')
     } catch (error) {
         setLoading(false)
-        console.log({err:error.message});
+        history.push('/forgot-otp-verify', {Allow : true ,Err: error.response.data.Err,phone:error.response.data.phone})  
     }
 }

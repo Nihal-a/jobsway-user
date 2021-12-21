@@ -17,17 +17,20 @@ const [formData, setFormData] = useState(initialState)
     const dispatch = useDispatch()
     const history = useHistory()
     const [loading, setLoading] = useState(false)
+    const [err, setErr] = useState(null)
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        if(formData.password.length == 0) return setErr("Enter a Password") 
         const otpDetails = {otp,phone:location.state.phone,newPassword : formData.password}
         setLoading(true)
         dispatch(verifyForgotOtp(otpDetails,history,setLoading))
     }
 
     useEffect(() => {
+        setErr(null)
+    }, [location , formData])
 
-    }, [location])
 
     if(loading){
         return <LoadingSpinner />
@@ -40,11 +43,11 @@ const [formData, setFormData] = useState(initialState)
         fontSize : '60px'
     }
 
-    const handleResend = (e) => {
-        e.preventDefault()
-        setLoading(true)
-        dispatch(signup(location.state.formData,history,setLoading))
-    }
+    // const handleResend = (e) => {
+    //     e.preventDefault()
+    //     setLoading(true)
+    //     dispatch(signup(location.state.formData,history,setLoading))
+    // }
 
 
     const handleChange = (e) => {
@@ -60,7 +63,7 @@ const [formData, setFormData] = useState(initialState)
             <div className="flex items-center flex-col justify-center text-center h-screen">
                 <h4 className="text-5xl font-semibold mb-4">Enter your Verification Code.</h4>
                 <h6 className="text-xl text-dark mb-4 font-light">We have sent a verification code to <span className="font-semibold">{`+91 ${location.state.phone}`}</span></h6>
-                {location.state.Err && <p className="text-red-800 text-lg mb-3" style={{color:'red'}} >{location.state.Err}</p>}
+                {location.state.Err && <p className="text-red-800 text-lg mb-3" style={{color:'red'}} >{location.state.Err || err}</p>}
                 <form action="" className="flex flex-col items-center" onSubmit={handleSubmit}>
                     <OtpInput
                         value={otp}

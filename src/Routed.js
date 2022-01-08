@@ -15,6 +15,7 @@ import ApplyJob from "./pages/ApplyJob";
 import MyJobs from "./pages/MyJobs";
 import ForgotPassword from "./pages/ForgotPassword";
 import ForgotOtpVerify from "./pages/ForgotOtpVerify";
+import MyProfile from "./pages/MyProfile";
 
 function Routed() {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -81,6 +82,9 @@ function Routed() {
             </Route>
             <Route path="/my-jobs">
                 {user ?  <MyJobs /> :  <Redirect to="/signin" />}
+            </Route>
+            <Route path="/my-profile">
+                {user ?  <MyProfile /> :  <Redirect to="/signin" />}
             </Route>
         </Switch>
     )

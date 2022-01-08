@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API = axios.create({ baseURL:'http://localhost:4002/api/v1/user/'})
+const API = axios.create({ baseURL:'https://jobsway-user.herokuapp.com/api/v1/user'})
 
 
 //Auth

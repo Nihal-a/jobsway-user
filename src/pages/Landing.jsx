@@ -14,12 +14,13 @@ import { useDispatch } from "react-redux";
 
 
 function Landing() {
-  const user = useSelector(state => state.user)
+  const user = useSelector(state => state.user.authData)
   const dispatch = useDispatch()
 
   
   useEffect(() => {
-  }, [])
+    console.log("this is user" , user);
+  }, [user])
   
   return (
     <div>

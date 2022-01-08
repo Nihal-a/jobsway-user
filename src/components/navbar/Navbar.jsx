@@ -63,7 +63,7 @@ function Navbar({ hide }) {
             </svg>
           </div>
           <ul className="dropdown-menu absolute hidden text-gray-700 pt-1">
-            <li className><Link to="" className="bg-gray-200 hover:bg-gray-400 py-3 px-2 block whitespace-no-wrap flex items-center justify-start text-lg w-40" href="#"><Icon className="mr-3 text-2xl" icon="ant-design:profile-outlined" /><span>Profile</span></Link></li>
+            <li className><Link to="/my-profile" className="bg-gray-200 hover:bg-gray-400 py-3 px-2 block whitespace-no-wrap flex items-center justify-start text-lg w-40" href="#"><Icon className="mr-3 text-2xl" icon="ant-design:profile-outlined" /><span>Profile</span></Link></li>
             <li className><Link to="/my-jobs" className="bg-gray-200 hover:bg-gray-400 py-3 px-2 block whitespace-no-wrap flex items-center justify-start text-lg" href="#"><Icon className="mr-3 text-2xl" icon="akar-icons:heart" /><span>My Jobs</span></Link></li>
             <li className onClick={logout}><a className="hover:bg-black-200 py-3 px-2 block whitespace-no-wrap flex items-center justify-start text-lg text-white" href="#" style={{backgroundColor:"#008FAE"}}><Icon className="mr-1 text-2xl" icon="uil:signout" /><span>Sign Out</span></a></li>
           </ul>

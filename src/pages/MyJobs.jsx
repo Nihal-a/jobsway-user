@@ -13,9 +13,9 @@ const MyJobs = () => {
     const jobs = useSelector(state => state.job)
 
     useEffect(() => {
-        dispatch(getUserAppliedJobs(user?.user._id))
     }, [])
-
+    
+    dispatch(getUserAppliedJobs(user?.user._id))
    
     jobs.map((job) => {
         console.log("This is : ",job);

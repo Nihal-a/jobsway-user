@@ -23,6 +23,7 @@ const CompanyDetails = () => {
     
     
     console.log(job);
+    
 
     
 

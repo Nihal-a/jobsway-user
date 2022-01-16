@@ -1,6 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+
+
 function CategorySection() {
+
+
     return (
         <div className="w-screen container mx-auto flex flex-col h-screen justify-evenly">
             <h4 className="text-4xl font-semibold text-center">Explore By <span className="text-primary">Category.</span></h4>

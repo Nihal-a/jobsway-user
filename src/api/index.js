@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const API = axios.create({ baseURL:'https://jobsway-user.herokuapp.com/api/v1/user'})
+// const API = axios.create({ baseURL:process.env.REACT_APP_PRODUCTION_BASE_URL })
+const API = axios.create({ baseURL:process.env.REACT_APP_DEV_BASE_URL })
 
 
 //Auth
@@ -15,7 +16,7 @@ export const ForgotverifyOtp = (formData) => API.post('/forgot-otp-verify',formD
 export const getAllJobs = () => API.get('/getjobs')
 export const getFeaturedJobs = () => API.get('/getfeaturedjobs')
 export const getCompanyJobs = (id) => API.get(`/company-jobs/${id}`)
-export const applyForJob = (dataObj) => API.post('/applyjob',dataObj)
+export const applyForJob = (dataObj,id) => API.post(`/applyjob/${id}`,dataObj , {headers : { "Content-Type": "multipart/form-data" } })
 export const getUserAppliedJobs = (id) => API.get(`/user-applied-jobs/${id}`)
 
 

@@ -10,6 +10,9 @@ import 'react-image-crop/dist/ReactCrop.css'
 import ImageInput from "../components/ImageInput/ImageInput";
 import PdfViewer from "../components/pdfVeiwer/PdfViewer";
 import rswal from '@sweetalert/with-react'
+import axios from "axios";
+import toast from "react-hot-toast";
+import { APPLYJOBS } from "../constants/actionTypes";
 
 
 const initialState = {
@@ -30,6 +33,7 @@ const ApplyJob = () => {
   const history = useHistory();
   const [image, setImage] = useState('');
   const [pdf, setPdf] = useState('')
+  const [viewpdf, setViewPdf] = useState('')
 
   const dispatch = useDispatch();
 
@@ -54,22 +58,49 @@ const ApplyJob = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    formData.userId = user?.user._id;
-    formData.jobId = location.state?.job._id;
-    let dataObj = {
-      formData,
-      image,
-      pdf
-    }
-    dispatch(applyForJob(dataObj, location.state?.job ,  history ,setLoading))
+    var fileData = new FormData()
+
+    fileData.append('firstName' , formData.firstName || name[0])
+    fileData.append('email' , formData.email || user?.user.email)
+    fileData.append('location' , formData.location)
+    fileData.append('lastName' , formData.lastName || name[1])
+    fileData.append('phone' , formData.phone || user?.user.phone)
+    fileData.append('experience' , formData.experience)
+    fileData.append('portfolio' , formData.portfolio)
+    fileData.append('image' , image)
+    fileData.append('userId' , user?.user._id)
+    fileData.append('jobId' , location.state?.job._id)
+    fileData.append('pdf' , pdf)
+
+    axios({
+      method : "post" ,
+      url : `${process.env.REACT_APP_DEV_BASE_URL}/applyjob/${location.state?.job._id}` ,
+      data : fileData ,
+      headers :  { "Content-Type": "multipart/form-data" },
+    }).then(({data}) => {
+
+      setLoading(false)
+      dispatch({type:APPLYJOBS,data})    
+      history.push('/my-jobs')
+      toast.success('Applied Job Successfully')
+    }).catch((error) => {
+      setLoading(false)
+      console.log(error.response);
+      var errors = error.response.data.msg
+      toast.error(errors)
+    })
+
+
   };
 
   const handlePdfChange = (e) => {
     e.preventDefault()
 
+    setPdf(e.target.files[0])
+
     const fileReader = new FileReader()
     fileReader.onloadend = () => {
-      setPdf(fileReader.result)
+      setViewPdf(fileReader.result)
     } 
     fileReader.readAsDataURL(e.target.files[0])
   }
@@ -77,7 +108,7 @@ const ApplyJob = () => {
   const handleViewPdf = (e) => {
     e.preventDefault()
     rswal(
-      <PdfViewer pdf={pdf}/>
+      <PdfViewer pdf={viewpdf}/>
     )
   }
 

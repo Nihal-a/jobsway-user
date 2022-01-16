@@ -2,7 +2,7 @@
   "name": "jobsway-user",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:4002/",
+  "proxy": "https://jobsway-user.herokuapp.com/api/v1/user/",
   "dependencies": {
     "@craco/craco": "^6.3.0",
     "@react-pdf-viewer/core": "^2.11.0",

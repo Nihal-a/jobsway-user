@@ -31,12 +31,11 @@ export const getCompanyJobs = () => async (dispatch) => {
 
 export const applyForJob = (dataObj, jobDetails , history , setLoading) => async (dispatch) => {
     try {
-        const {data} = await api.applyForJob(dataObj)
+        const {data} = await api.applyForJob(dataObj , jobDetails._id)
         setLoading(false)
         dispatch({type:APPLYJOBS,data})    
         history.push('/my-jobs')
         toast.success('Applied Job Successfully')
-        
     } catch (error) {
         setLoading(false)
         var errors = error.response.data.errors
@@ -53,3 +52,5 @@ export const getUserAppliedJobs = (id) => async (dispatch) => {
         console.log(error);
     }
 }
+
+

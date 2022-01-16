@@ -17,9 +17,14 @@ const JobDetails = () => {
     const {company} = useSelector(state => state.company)
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const [status, setStatus] = useState(false)
+    const [premiumStatus, setPremiumStatus] = useState(false)
     
     useEffect(() => {
         dispatch(getCompanyDetails(jobDetails.companyId))
+        console.log(user);
+        if(user?.user.count >= 3 && user?.user.premium == false) {
+            setPremiumStatus(true)
+        }
         if(jobDetails.applications){
             jobDetails?.applications.map((application) => {
                 if(application.userId == user.user._id) {
@@ -30,7 +35,7 @@ const JobDetails = () => {
     },[])
     
     
-    const postedDate = moment(jobDetails.createdAt , "YYYYMMDDhmmssa").format('l');
+    const postedDate = moment(jobDetails.createdAt , "YYYYMMDDhmmssa").format('l')
     
 
 
@@ -53,7 +58,7 @@ const JobDetails = () => {
                         <h6 className="font-semibold">Qualifications : </h6>
                         <div className="pl-4 mt-2">
                             {jobDetails?.qualification.map((qualif) => (
-                                <li>{qualif.qualification}</li>
+                                <li>{qualif}</li>
                             ))}
                         </div>
                     </div>
@@ -78,7 +83,7 @@ const JobDetails = () => {
                         </div>
                     </div>
                     <div className="flex items-center justify-center mt-4">
-                        {status ? <button className="text-success text-sm py-2 px-28 rounded-lg cursor-not-allowed" disabled style={{backgroundColor:'#dddddd'}} >You have Already Applied to this Job.</button> : <Link to={{pathname:"/apply-job" , state:{job : jobDetails}}} className="text-white py-2 px-28 rounded-lg" style={{backgroundColor:'#0060A5'}} >Apply Now</Link>}
+                        { premiumStatus ? <><button className="text-warning text-sm py-2 px-28 rounded-lg cursor-not-allowed" disabled style={{backgroundColor:'#dddddd'}} >Upgrade to Premium to <br /> Apply for more Jobs.</button> </> : <>{status ? <button className="text-success text-sm py-2 px-28 rounded-lg cursor-not-allowed" disabled style={{backgroundColor:'#dddddd'}} >You have Already Applied to this Job.</button> : <Link to={{pathname:"/apply-job" , state:{job : jobDetails}}} className="text-white py-2 px-28 rounded-lg" style={{backgroundColor:'#0060A5'}} >Apply Now</Link>}</>}
                     </div>
                 </div>
                 <div className="w-1/2">
@@ -88,17 +93,14 @@ const JobDetails = () => {
                             <div className="flex flex-col  w-full justify-between">
                                 <p className="mt-2">Expirence</p>
                                 <p className="mt-2">Posted Date</p>
-                                <p className="mt-2">No. of Applicants</p>
                             </div>
                             <div className="flex flex-col w-1/4 justify-between">
                                 <span>:</span>
                                 <span>:</span>
-                                <span>:</span>
                             </div>
                             <div className="flex flex-col  w-full justify-between">
-                                <p>{jobDetails?.minExp}-8 Years</p>
+                                <p>{jobDetails?.minExp}-{jobDetails?.maxExp} Years</p>
                                 <p>{postedDate}</p>
-                                <p>0</p>
                             </div>
                         </div>
                     </div>

@@ -19,7 +19,7 @@ function Landing() {
 
   
   useEffect(() => {
-    console.log("this is user" , user);
+
   }, [user])
   
   return (
@@ -33,7 +33,6 @@ function Landing() {
       <FeaturedJobs  />
       <PostJob />
       <Footer /></>}
-      
     </div>
   );
 }

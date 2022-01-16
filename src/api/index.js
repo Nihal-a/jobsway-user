@@ -17,7 +17,7 @@ export const getAllJobs = () => API.get('/getjobs')
 export const getFeaturedJobs = () => API.get('/getfeaturedjobs')
 export const getCompanyJobs = (id) => API.get(`/company-jobs/${id}`)
 export const applyForJob = (dataObj,id) => API.post(`/applyjob/${id}`,dataObj , {headers : { "Content-Type": "multipart/form-data" } })
-export const getUserAppliedJobs = (id) => API.get(`/user-applied-jobs/${id}`)
+export const getUserAppliedJobs = (id) => API.get(`/applied/jobs/details/${id}`)
 
 
 //Company

@@ -12,7 +12,6 @@ import ReactPaginate from 'react-paginate'
 function JobCard({job}) {
 
     const dispatch = useDispatch()
-    const {company} = useSelector((state) => state.company)
     const postedDate = moment(job.createdAt , "YYYYMMDDhmmssa").startOf('hour').fromNow()
 
     useEffect(() => {
@@ -24,9 +23,9 @@ function JobCard({job}) {
         <div className="w-full h-62 rounded-md p-4 mt-2" style={{ backgroundColor: '#2c2c2c' }}>
             <div className="flex justify-between">
                 <Link className="flex items-center">
-                    <img src={company?.logoUrl} alt="company logo" className="w-14 h-14 rounded-md" />
+                    <img src={job?.companyDetails[0].logoUrl} alt="company logo" className="w-14 h-14 rounded-md" />
                     <div className="ml-3">
-                    <h6 className=" text-2xl font-semibold text-white">{company?.companyName}</h6>
+                    <h6 className=" text-2xl font-semibold text-white">{job?.companyDetails[0].companyName}</h6>
                     <div className="text-sm text-secondary flex items-center">
                         <Icon icon="akar-icons:location" className="text-dark"/><p className="text-dark font-light ml-1">{job?.jobLocation}</p>
                     </div>

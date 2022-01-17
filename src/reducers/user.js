@@ -14,6 +14,8 @@ export default  (state = {authData : null , appliedJobs : [] , jobDetailsByid : 
         case APPLYJOBS : 
             localStorage.setItem('profile',JSON.stringify({...action?.data?.userData}))
             return {...state , authData:action?.data?.userData}
+        case ALLAPPLIEDJOBS : 
+            return {...state , appliedJobs :action?.data}
         case JOBDETAILS : 
             return {...state ,  jobDetailsByid :action?.data}
         default:

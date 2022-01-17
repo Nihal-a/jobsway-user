@@ -1,4 +1,4 @@
-import { ALLAPPLIEDJOBS, ALLJOBS, APPLYJOBS, COMPANYJOBS, FEATUREDJOBS } from '../constants/actionTypes'
+import { ALLAPPLIEDJOBS, ALLJOBS, APPLYJOBS, COMPANYJOBS, FEATUREDJOBS, JOBDETAILS } from '../constants/actionTypes'
 import * as api from '../api/index'
 import toast from 'react-hot-toast'
 
@@ -50,6 +50,16 @@ export const getUserAppliedJobs = (id) => async (dispatch) => {
     } catch (error) {
         var errors = error.response.data.errors
         console.log(error);
+    }
+}
+
+export const getJobDetailsById = (jobId) => async (dispatch) => {
+    try {
+        const {data} =await api.getJobDetailsById(jobId)
+        dispatch({type:JOBDETAILS,data})            
+    } catch (error) {
+        var errors = error.response
+        console.log(errors);
     }
 }
 

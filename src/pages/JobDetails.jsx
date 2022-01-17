@@ -7,21 +7,27 @@ import { useDispatch } from 'react-redux'
 import { getCompanyDetails } from '../actions/company'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
+import { getJobDetailsById } from '../actions/jobs'
 
 const JobDetails = () => {
 
     const {id} = useParams()
     const dispatch = useDispatch()
     const location = useLocation()
-    const jobDetails = location?.state.jobDetails
     const {company} = useSelector(state => state.company)
+    const {jobDetailsByid} = useSelector(state => state.user)
+    const jobDetails = jobDetailsByid
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const [status, setStatus] = useState(false)
     const [premiumStatus, setPremiumStatus] = useState(false)
     
+
+    console.log(jobDetailsByid);
+
     useEffect(() => {
         dispatch(getCompanyDetails(jobDetails.companyId))
-        console.log(user);
+        dispatch(getJobDetailsById(id))
+
         if(user?.user.count >= 3 && user?.user.premium == false) {
             setPremiumStatus(true)
         }

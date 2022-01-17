@@ -9,6 +9,7 @@ export const FEATUREDJOBS = 'FEATUREDJOBS';
 export const COMPANYJOBS = 'COMPANYJOBS';
 export const APPLYJOBS = 'APPLYJOBS';
 export const ALLAPPLIEDJOBS = 'ALLAPPLIEDJOBS';
+export const JOBDETAILS = 'JOB_DETAILS';
 
 //company
 export const ALLCOMPANIES = 'ALLCOMPANIES';

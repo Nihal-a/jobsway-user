@@ -4,6 +4,7 @@ import { Icon } from '@iconify/react'
 import { useDispatch } from 'react-redux'
 import { getUserAppliedJobs } from '../actions/jobs'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const MyJobs = () => {
 
@@ -28,15 +29,15 @@ const MyJobs = () => {
             
                             <div className="">
 
-                            { appliedJobs ? appliedJobs.map((appliedJob) => (
+                            { !appliedJobs.length == 0 ? appliedJobs.map((appliedJob) => (
 
-                                    <div className="bg-black w-full h-24 my-4 rounded-lg p-4 flex items-center justify-between">
+                                    <Link to={`/jobdetails/${appliedJob?.appliedJobs?.id}`} className="bg-black w-full h-24 my-4 rounded-lg p-4 flex items-center justify-between">
                                     <div className="flex items-center">
                                         <img src={appliedJob?.companyDetails[0].logoUrl} alt="" className="w-16 h-16 rounded-md" />
                                         <div className="ml-3 text-white">
                                             <h4>{appliedJob?.companyDetails[0].companyName}</h4>
                                             <div className="text-sm text-secondary flex items-center">
-                                    <Icon icon="akar-icons:location" className="text-dark"/><p className="text-dark font-light ml-1">{appliedJob?.jobDetails.jobLocation}</p>
+                                    <Icon icon="akar-icons:location" className="text-dark"/><p className="text-dark font-light ml-1">{appliedJob?.jobDetails[0].jobLocation}</p>
                                     </div>
                                         </div>
                                     </div>
@@ -47,9 +48,9 @@ const MyJobs = () => {
                                         {/* <div className="py-2 px-4 ml-3 font-semibold rounded-md" style={{backgroundColor:'#03C852', color : '#016717'}}>APPROVED</div>
                                         <div className="py-2 px-4 ml-3 font-semibold rounded-md" style={{backgroundColor:'#FF4E4E', color : '#680000'}}>REJECTED</div> */}
                                     </div>
-                                    </div>
+                                    </Link>
 
-                            )) : null }
+                            )) : <><p className='text-center mt-4 text-danger'>Currently , You have not applied For any jobs.</p></> }
                 </div>
 
                 

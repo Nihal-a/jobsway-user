@@ -10,40 +10,40 @@ import moment from 'moment'
 import { getJobDetailsById } from '../actions/jobs'
 
 const JobDetails = () => {
-
+    
     const {id} = useParams()
     const dispatch = useDispatch()
     const location = useLocation()
-    const {company} = useSelector(state => state.company)
-    const {jobDetailsByid} = useSelector(state => state.user)
-    const jobDetails = jobDetailsByid
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const [status, setStatus] = useState(false)
     const [premiumStatus, setPremiumStatus] = useState(false)
+    const {jobDetailsByid : jobDetails} = useSelector(state => state.user)
     
-
-    console.log(jobDetailsByid);
+    useEffect(() => {        
+        dispatch(getJobDetailsById(id))
+    }, [])
 
     useEffect(() => {
-        dispatch(getCompanyDetails(jobDetails.companyId))
-        dispatch(getJobDetailsById(id))
-
         if(user?.user.count >= 3 && user?.user.premium == false) {
             setPremiumStatus(true)
         }
-        if(jobDetails.applications){
+         if(jobDetails.applications){
             jobDetails?.applications.map((application) => {
                 if(application.userId == user.user._id) {
                     setStatus(true)
                 }   
-            })
+        })
         }
-    },[])
+    }, [user])
     
-    
-    const postedDate = moment(jobDetails.createdAt , "YYYYMMDDhmmssa").format('l')
     
 
+    
+    const postedDate = moment(jobDetails.createdAt , "YYYYMMDDhmmssa").format('l')
+
+   
+
+   
 
     return (
         <div>
@@ -70,7 +70,7 @@ const JobDetails = () => {
                     </div>
                     <div className="mt-10 flex items-center">
                         <h6 className="font-semibold">Education : </h6>
-                        <h4 className="text-lg ml-4"> {jobDetails?.education}</h4>
+                        <h4 className="text-lg ml-4">{jobDetails?.education}</h4>
                     </div>
                     <div className="mt-10 flex items-start">
                         <h6 className="font-semibold">Languages : </h6>
@@ -110,14 +110,14 @@ const JobDetails = () => {
                             </div>
                         </div>
                     </div>
-                <Link to={{pathname:"/company-details" , state : { id : company?._id}}} className="mt-10 flex flex-col w-full ">
+                <Link to={{pathname:"/company-details" , state : { id : jobDetails?.companyDetails[0]?.companyId}}} className="mt-10 flex flex-col w-full ">
                         <h6 className="font-semibold text-lg">Company : </h6>
                         <div className="p-10">
                             <div className="w-full h-80 shadow-xl rounded-2xl flex flex-col items-center justify-center">
-                                <img src={company?.logoUrl} alt="" className="shadow-lg rounde w-20 rounded-lg" />
-                                <h5 className="mt-4 font-semibold text-2xl">{company?.companyName}</h5>
+                                <img src={jobDetails?.companyDetails[0]?.logoUrl} alt="" className="shadow-lg rounde w-20 rounded-lg" />
+                                <h5 className="mt-4 font-semibold text-2xl">{jobDetails?.companyDetails[0]?.companyName}</h5>
                                 <div className="text-sm mt-2 flex items-center">
-                            <Icon icon="akar-icons:location" className="text-primary"/><p className="text-primary ml-1">{company?.location}</p>
+                            <Icon icon="akar-icons:location" className="text-primary"/><p className="text-primary ml-1">{jobDetails?.companyDetails[0]?.location}</p>
                     </div>
                             </div>
                         </div>

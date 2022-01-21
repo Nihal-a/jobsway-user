@@ -13,8 +13,6 @@ function FeaturedJobs() {
         dispatch(getFeaturedJobs())
     }, [])
 
-    console.log("hello",featuredjobs);
-
     return (
         <div className="h-auto w-screen ">
             <h4 className="text-4xl font-semibold text-center py-8"><span className="text-primary">Featured</span> Jobs.</h4>

@@ -7,16 +7,17 @@ export const getAllCompanies = () => async (dispatch) => {
         dispatch({type:ALLCOMPANIES,data})    
     } catch (error) {
         console.log(error);
-        alert('There is an error in comp')
+        alert('There is an error in company')
     }
 }
 export const getCompanyDetails = (id) => async (dispatch) => {
     try {
         const {data} = await api.getCompanyDetails(id)
+        console.log("this data" , data);
         dispatch({type:COMPANYDETAIL,data})    
     } catch (error) {
-        console.log(error);
-        alert('There is an error in como')
+        console.log(error.response);
+        alert('There is an error in comoooooo')
     }
 }
 

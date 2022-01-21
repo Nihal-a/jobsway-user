@@ -8,6 +8,7 @@ import { getCompanyDetails } from '../actions/company'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
 import { getJobDetailsById } from '../actions/jobs'
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner'
 
 const JobDetails = () => {
     
@@ -17,29 +18,41 @@ const JobDetails = () => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const [status, setStatus] = useState(false)
     const [premiumStatus, setPremiumStatus] = useState(false)
+    const [laoding, setLaoding] = useState(false);
     const {jobDetailsByid : jobDetails} = useSelector(state => state.user)
     
-    useEffect(() => {        
-        dispatch(getJobDetailsById(id))
-    }, [])
 
+    useEffect(() => {
+        dispatch(getJobDetailsById(id))
+    }, []);
+    
+    
+    
+    console.log(jobDetails);
+    
     useEffect(() => {
         if(user?.user.count >= 3 && user?.user.premium == false) {
             setPremiumStatus(true)
         }
-         if(jobDetails.applications){
+    
+        if(jobDetails?.applications.length != 0){
             jobDetails?.applications.map((application) => {
                 if(application.userId == user.user._id) {
                     setStatus(true)
                 }   
-        })
+            })
         }
-    }, [user])
+    }, [jobDetails]);
     
+    
+    
+    if(laoding){
+        return <LoadingSpinner />
+    }
     
 
     
-    const postedDate = moment(jobDetails.createdAt , "YYYYMMDDhmmssa").format('l')
+    const postedDate = moment(jobDetails?.createdAt , "YYYYMMDDhmmssa").format('l')
 
    
 
@@ -110,7 +123,7 @@ const JobDetails = () => {
                             </div>
                         </div>
                     </div>
-                <Link to={{pathname:"/company-details" , state : { id : jobDetails?.companyDetails[0]?.companyId}}} className="mt-10 flex flex-col w-full ">
+                <Link to={`/company-details/${jobDetails?.companyDetails[0]?._id}`} className="mt-10 flex flex-col w-full ">
                         <h6 className="font-semibold text-lg">Company : </h6>
                         <div className="p-10">
                             <div className="w-full h-80 shadow-xl rounded-2xl flex flex-col items-center justify-center">

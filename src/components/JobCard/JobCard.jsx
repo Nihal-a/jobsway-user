@@ -11,13 +11,8 @@ import ReactPaginate from 'react-paginate'
 
 function JobCard({job}) {
 
-    const dispatch = useDispatch()
-    const postedDate = moment(job.createdAt , "YYYYMMDDhmmssa").startOf('hour').fromNow()
 
-    useEffect(() => {
-        dispatch(getCompanyDetails(job.companyId))
-    }, [])
-    
+    console.log(job);    
 
     return (
         <div className="w-full h-62 rounded-md p-4 mt-2" style={{ backgroundColor: '#2c2c2c' }}>
@@ -31,7 +26,7 @@ function JobCard({job}) {
                     </div>
                     </div>
                 </Link>
-                <div className="text-white">{postedDate}</div>
+                <div className="text-white">{moment(job?.createdAt , "YYYYMMDDhmmssa").startOf('hour').fromNow()}</div>
             </div>
             <div className="flex flex-col">
                 <h2 className="text-3xl font-semibold text-white mt-3">{job?.jobTitle}</h2>

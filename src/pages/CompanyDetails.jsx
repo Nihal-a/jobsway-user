@@ -8,24 +8,20 @@ import { useDispatch } from 'react-redux';
 import { getCompanyDetails } from '../actions/company';
 import { useSelector } from 'react-redux';
 import { getCompanyJobs } from '../actions/jobs';
+import { useParams } from 'react-router-dom';
 
 const CompanyDetails = () => {
 
+    const {cid} = useParams() 
     const dispatch = useDispatch()
     const location = useLocation()
-    const {company} = useSelector(state => state.company)
-    const job = useSelector(state => state)
-
     
     useEffect(() => {
-        dispatch(getCompanyDetails(location?.state.id))
+        dispatch(getCompanyDetails(cid))
     }, [])
     
-    
-    console.log(job);
-    
+    const {company} = useSelector(state => state.company)
 
-    
 
     return (
         <div>
@@ -84,8 +80,9 @@ const CompanyDetails = () => {
                 <div className="w-1/2">
                     <h5 className="p-6 text-xl">Jobs by <span className="font-semibold text-primary">Google : </span></h5>
                     <div className="">
-                        {/* <JobCard />
-                        <JobCard /> */}
+                        {/* {
+                            company?.jobs != 0 && <>{company?.jobs.map((job) => <JobCard job={job} />)}</>
+                        } */}
                     </div>
                 </div>
             </div>

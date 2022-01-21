@@ -7,7 +7,8 @@ export const getFeaturedJobs = () => async (dispatch) => {
         const {data} = await api.getFeaturedJobs()
         dispatch({type:FEATUREDJOBS,data})    
     } catch (error) {
-        alert('There is an error')
+        console.log(error.response);
+        alert('There is an error in getFeaturedJobs')
     }
 }
 
@@ -16,16 +17,18 @@ export const getAllJobs = () => async (dispatch) => {
         const {data} = await api.getAllJobs()
         dispatch({type:ALLJOBS,data})    
     } catch (error) {
-        alert('There is an error')
+        console.log(error.response);
+        alert('There is an error in getAllJobs')
     }
 }
 
-export const getCompanyJobs = () => async (dispatch) => {
+export const getCompanyJobs = (id) => async (dispatch) => {
     try {
-        const {data} = await api.getCompanyJobs()
+        const {data} = await api.getCompanyJobs(id)
         dispatch({type:COMPANYJOBS,data})    
     } catch (error) {
-        alert('There is an error')
+        console.log(error.response);
+        alert('There is an error in getCompanyJobs')
     }
 }
 

@@ -4,8 +4,6 @@ import noImage from "../assets/images/noImage.jpg";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import { useDispatch , useSelector} from "react-redux";
 import LoadingSpinner from "../components/LoadingSpinner/LoadingSpinner";
-import { applyForJob } from "../actions/jobs";
-import samplePdf from "../assets/pdf/sample.pdf";
 import 'react-image-crop/dist/ReactCrop.css'
 import ImageInput from "../components/ImageInput/ImageInput";
 import PdfViewer from "../components/pdfVeiwer/PdfViewer";

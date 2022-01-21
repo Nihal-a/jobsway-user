@@ -74,7 +74,7 @@ function Routed() {
             <Route path="/jobdetails/:id">
                 {user ?  <JobDetails /> :  <Redirect to="/signin" />}
             </Route>
-            <Route path="/company-details">
+            <Route path="/company-details/:cid">
                 {user ?  <CompanyDetails /> :  <Redirect to="/signin" />}
             </Route>
             <Route path="/apply-job">

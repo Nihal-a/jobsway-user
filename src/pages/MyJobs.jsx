@@ -33,15 +33,15 @@ const MyJobs = () => {
 
                                     <Link to={`/jobdetails/${appliedJob?.appliedJobs?.id}`} className="bg-black w-full h-24 my-4 rounded-lg p-4 flex items-center justify-between">
                                     <div className="flex items-center">
-                                        <img src={appliedJob?.companyDetails[0].logoUrl} alt="" className="w-16 h-16 rounded-md" />
+                                        <img src={appliedJob?.companyDetails[0]?.logoUrl} alt="" className="w-16 h-16 rounded-md" />
                                         <div className="ml-3 text-white">
-                                            <h4>{appliedJob?.companyDetails[0].companyName}</h4>
+                                            <h4>{appliedJob?.companyDetails[0]?.companyName}</h4>
                                             <div className="text-sm text-secondary flex items-center">
-                                    <Icon icon="akar-icons:location" className="text-dark"/><p className="text-dark font-light ml-1">{appliedJob?.jobDetails[0].jobLocation}</p>
+                                    <Icon icon="akar-icons:location" className="text-dark"/><p className="text-dark font-light ml-1">{appliedJob?.jobDetails[0]?.jobLocation}</p>
                                     </div>
                                         </div>
                                     </div>
-                                    <h2 className="text-white text-3xl font-semibold">{ appliedJob?.jobDetails[0].jobTitle  }</h2>
+                                    <h2 className="text-white text-3xl font-semibold">{ appliedJob?.jobDetails[0]?.jobTitle  }</h2>
                                     <div className="flex items-center  text-white">
                                         <p>Status : </p>
                                         <div className="py-2 px-4 ml-3 font-semibold rounded-md" style={{backgroundColor:  appliedJob?.appliedJobs?.status == 'PENDING' ? '#FFE39C' : [ appliedJob?.appliedJobs?.status == 'APPROVED' ? '#03C852' : [appliedJob?.appliedJobs?.status == 'REJECTED' && '#FF4E4E' ]  ], color : appliedJob?.appliedJobs?.status == 'PENDING' ?  '#945900' : [ appliedJob?.appliedJobs?.status == 'APPROVED' ? '#016717' : [appliedJob?.appliedJobs?.status == 'REJECTED' && '#680000' ]  ]}}>{appliedJob?.appliedJobs?.status}</div>

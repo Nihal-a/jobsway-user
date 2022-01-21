@@ -29,8 +29,8 @@ const FindJobs = () => {
     }
     
     useEffect(() => {
-        dispatch(getAllCompanies())
         dispatch(getAllJobs())
+        dispatch(getAllCompanies())
     }, [])
 
     return (
@@ -76,9 +76,16 @@ const FindJobs = () => {
         <div className="container mx-auto">
             <h5 className="font-semibold text-2xl my-3">Top Companies.</h5>
             <div className="w-full h-20 flex justify-center mt-4">
-               {/* {company?.allCompanies.map((company) => (
-                   <SmallCompanyCard company={company}/>
-               ))} */}
+                {
+                    !company?.allCompanies.length == 0 ? <>
+                    {
+                        company?.allCompanies.map((company) => (
+                            <SmallCompanyCard company={company} />
+                        ))
+                    }
+
+                    </> : <p className='text-danger'>No Companies Found.</p>
+                }
             </div>
         </div>
         <div className="mt-60">

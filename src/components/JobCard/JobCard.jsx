@@ -11,9 +11,6 @@ import ReactPaginate from 'react-paginate'
 
 function JobCard({job}) {
 
-
-    console.log(job);    
-
     return (
         <div className="w-full h-62 rounded-md p-4 mt-2" style={{ backgroundColor: '#2c2c2c' }}>
             <div className="flex justify-between">

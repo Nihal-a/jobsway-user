@@ -16,10 +16,7 @@ const MyJobs = () => {
         dispatch(getUserAppliedJobs(user?.user._id))
     }, [])
     
-   
-    console.log("heayy jobs : ",appliedJobs);
-
-
+    
     return (
         <div>
             <Navbar />

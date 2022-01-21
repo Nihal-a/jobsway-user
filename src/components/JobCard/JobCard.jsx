@@ -1,13 +1,7 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import googleLogo from '../../assets/images/googleLogo.png'
 import { Icon } from '@iconify/react';
 import moment from 'moment';
-import { useDispatch,useSelector } from 'react-redux';
-import { getCompanyDetails } from '../../actions/company';
-import ReactPaginate from 'react-paginate'
-
-
 
 function JobCard({job}) {
 

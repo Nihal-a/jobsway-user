@@ -78,10 +78,12 @@ const CompanyDetails = () => {
                     </div>
                 </div>
                 <div className="w-1/2">
-                    <h5 className="p-6 text-xl">Jobs by <span className="font-semibold text-primary">Google : </span></h5>
+                    <h5 className="p-6 text-xl">Jobs by <span className="font-semibold text-primary"> {company?.companyName} </span></h5>
                     <div className="">
                         {/* {
-                            company?.jobs != 0 && <>{company?.jobs.map((job) => <JobCard job={job} />)}</>
+                            !company?.jobs == 0 ? <>{ company?.jobs.map((job) => (
+                                <JobCard job={job}/>
+                            )) }</> : <p className='text-danger'>No Jobs Found</p>
                         } */}
                     </div>
                 </div>

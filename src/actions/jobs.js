@@ -56,11 +56,20 @@ export const getUserAppliedJobs = (id) => async (dispatch) => {
     }
 }
 
-export const getJobDetailsById = (jobId) => async (dispatch) => {
+export const getJobDetailsById = (jobId , setLoading , setStatus , user) => async (dispatch) => {
     try {
         const {data} =await api.getJobDetailsById(jobId)
-        dispatch({type:JOBDETAILS,data})            
+        dispatch({type:JOBDETAILS,data})       
+        if(data?.applications.length != 0){
+            data?.applications.map((application) => {
+                if(application.userId == user.user._id) {
+                    setStatus(true)
+                }   
+            })
+        }
+        setLoading(false)
     } catch (error) {
+        setLoading(false)
         var errors = error.response
         console.log(errors);
     }

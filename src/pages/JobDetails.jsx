@@ -18,35 +18,18 @@ const JobDetails = () => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const [status, setStatus] = useState(false)
     const [premiumStatus, setPremiumStatus] = useState(false)
-    const [laoding, setLaoding] = useState(false);
+    const [loading, setLoading] = useState(true);
     const {jobDetailsByid : jobDetails} = useSelector(state => state.user)
     
 
     useEffect(() => {
-        dispatch(getJobDetailsById(id))
+        dispatch(getJobDetailsById(id , setLoading ,setStatus , user))
     }, []);
+
     
     
     
-    console.log(jobDetails);
-    
-    useEffect(() => {
-        if(user?.user.count >= 3 && user?.user.premium == false) {
-            setPremiumStatus(true)
-        }
-    
-        if(jobDetails?.applications.length != 0){
-            jobDetails?.applications.map((application) => {
-                if(application.userId == user.user._id) {
-                    setStatus(true)
-                }   
-            })
-        }
-    }, [jobDetails]);
-    
-    
-    
-    if(laoding){
+    if(loading){
         return <LoadingSpinner />
     }
     

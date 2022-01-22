@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Education from '../components/ResumeComponenets/Education';
+import Experience from '../components/ResumeComponenets/Experience';
 import Indroduction from '../components/ResumeComponenets/Indroduction';
 import Profile from '../components/ResumeComponenets/Profile';
 import ProjectDetails from '../components/ResumeComponenets/ProjectDetails';
@@ -87,9 +88,11 @@ const CreateResume = () => {
       case 1:
         return <Profile nextStep={nextStep} prevStep={prevStep}/>
       case 2:
-        return <Education nextStep={nextStep} prevStep={prevStep}/>
-      case 3:
-        return <ProjectDetails nextStep={nextStep} prevStep={prevStep}/>
+        return <Experience nextStep={nextStep} prevStep={prevStep}/>
+        case 3:
+          return <ProjectDetails nextStep={nextStep} prevStep={prevStep}/>
+          case 4:
+          return <Education nextStep={nextStep} prevStep={prevStep}/>
       default:
         break;
     }
@@ -98,18 +101,16 @@ const CreateResume = () => {
  
   return (
       <div className="">
-          <div className=''>
         <div className="md:container md:mx-auto flex justify-between items-center mt-5 ">
         <Link to="/" className="text-3xl font-bold" >Jobs<span className="text-primary">Way.</span></Link>
       </div>
       <div className="text-center mt-14">
         <h3 className='font-semibold text-xl'>{!step == 0 && 'Step - '} <span className='text-primary'>{step == 0 ? 'Introduction' : `${step}` }</span></h3>
       </div>
-      <div className="container mx-auto flex mt-2 justify-center  w-screen ">
+      <div className="container mx-auto flex mt-2 justify-center  w-screen mb-10">
         {
           stepComponent()
         }
-      </div>
       </div>
       </div>
     )

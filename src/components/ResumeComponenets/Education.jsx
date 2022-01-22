@@ -1,7 +1,7 @@
 import { Button } from '@material-tailwind/react';
 import React from 'react';
 
-const Experience = ({nextStep , prevStep}) => {
+const Education = ({nextStep , prevStep}) => {
   return <div className='w-full'>
   <h3 className='text-xl text-center'>Education Information</h3>
 <div className="bg-secondary p-10 rounded-md w-full mt-3">
@@ -93,4 +93,4 @@ const Experience = ({nextStep , prevStep}) => {
 </div>
 };
 
-export default Experience;
+export default Education;

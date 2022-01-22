@@ -83,7 +83,7 @@ const CreateResume = () => {
     setFormdata({...formData ,[e.target.name] : e.target.value})
   }
 
-  // console.log(formData);
+  console.log(formData);
 
   const stepComponent = () => {
     switch (step) {
@@ -92,13 +92,13 @@ const CreateResume = () => {
       case 1:
         return <Profile handleChange={handleChange} nextStep={nextStep} prevStep={prevStep} formData={formData} setFormdata={setFormdata}/>
       case 2:
-        return <Experience nextStep={nextStep} prevStep={prevStep}/>
+        return <Experience handleChange={handleChange} nextStep={nextStep} prevStep={prevStep} formData={formData} setFormdata={setFormdata}/>
         case 3:
-          return <ProjectDetails nextStep={nextStep} prevStep={prevStep}/>
+          return <ProjectDetails handleChange={handleChange} nextStep={nextStep} prevStep={prevStep} formData={formData} setFormdata={setFormdata}/>
           case 4:
-          return <Education nextStep={nextStep} prevStep={prevStep}/>
+          return <Education handleChange={handleChange} nextStep={nextStep} prevStep={prevStep} formData={formData} setFormdata={setFormdata}/>
           case 5:
-          return <ExtraDetails nextStep={nextStep} prevStep={prevStep}/>
+          return <ExtraDetails handleChange={handleChange} nextStep={nextStep} prevStep={prevStep} formData={formData} setFormdata={setFormdata}/>
       default:
         break;
     }

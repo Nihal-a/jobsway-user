@@ -13,10 +13,10 @@ const Profile = ({nextStep , prevStep , handleChange , formData}) => {
 
 const handleNext = (e) => {
     e.preventDefault()
-    if(formData.fullName.trim().length == "") return setErr({name : 'Enter your name.'})
-    if(formData.jobTitle.trim().length == "")  return setErr({jobTitle : 'Enter your JobTitle.'})
-    if(formData.email.trim().length == "")  return setErr({email : 'Enter your Email Address.'})
-    if(formData.phone.trim().length == "")  return setErr({phone : 'Enter your Phone Numebr'})
+    if(formData.fullName.trim() == "") return setErr({name : 'Enter your name.'})
+    if(formData.jobTitle.trim() == "")  return setErr({jobTitle : 'Enter your JobTitle.'})
+    if(formData.email.trim() == "")  return setErr({email : 'Enter your Email Address.'})
+    if(formData.phone.trim() == "")  return setErr({phone : 'Enter your Phone Numebr'})
     nextStep()
 }
 
@@ -55,7 +55,7 @@ const handleNext = (e) => {
             Phone *
             </label>
             {Err.phone && <p className="text-red-500 text-xs italic">{Err.phone}</p>}
-            <input value={formData.phone} name="phone" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="" />
+            <input value={formData.phone} name="phone" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="tel" placeholder="" />
         </div>
        </div>
        <div className="w-full flex">

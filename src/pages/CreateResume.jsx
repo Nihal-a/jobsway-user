@@ -10,8 +10,7 @@ import ProjectDetails from '../components/ResumeComponenets/ProjectDetails';
 const initialState = {
             jobTitle : '',
             imgUrl :  '' ,
-            firstname : '' ,
-            lastname: '',
+            fullName : '' ,
             email: '' ,
             phone: '' ,
             github: '' ,
@@ -56,38 +55,42 @@ const initialState = {
             skill5: '' ,
             skill6: '' ,
 
+            language1: '' ,
+            language2: '' ,
+            language3: '' ,
             interest1: '' ,
             interest2: '' ,
             interest3: '' ,
-            interest4: '' ,
-            interest5: '' ,
-            interest6: '' ,
 }
 
 const CreateResume = () => {
   
   const [step, setStep] = useState(0);
+  const [formData, setFormdata] = useState(initialState);
+
 
 
   const nextStep = (e) => {
-    console.log(step);
     setStep((step) => step + 1)
-    console.log(step);
   }
   
   const prevStep = (e) => {
-    console.log(step);
     setStep((step) => step - 1)
-    console.log(step);
   }
 
+  const handleChange = (e) => {
+    e.preventDefault()
+    setFormdata({...formData ,[e.target.name] : e.target.value})
+  }
+
+  // console.log(formData);
 
   const stepComponent = () => {
     switch (step) {
       case 0:
-        return  <Indroduction nextStep={nextStep} prevStep={prevStep}/>
+        return  <Indroduction nextStep={nextStep} prevStep={prevStep} />
       case 1:
-        return <Profile nextStep={nextStep} prevStep={prevStep}/>
+        return <Profile handleChange={handleChange} nextStep={nextStep} prevStep={prevStep} formData={formData} setFormdata={setFormdata}/>
       case 2:
         return <Experience nextStep={nextStep} prevStep={prevStep}/>
         case 3:

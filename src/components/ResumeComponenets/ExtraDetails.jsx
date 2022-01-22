@@ -65,7 +65,7 @@ const ExtraDetails = ({prevStep , nextStep}) => {
     
 <div className="flex items-center justify-center font-light">
 <Button color="gray" className="m-2" onClick={prevStep} >Prev</Button>
-<Button className="m-2" onClick={nextStep}  >Next</Button>
+<Button className="m-2" onClick={nextStep}  >Create My JobsWay Resume</Button>
 </div>
 </div>
 </div>

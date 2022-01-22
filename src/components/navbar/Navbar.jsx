@@ -53,7 +53,7 @@ function Navbar({ hide }) {
     return (
       <div className="flex items-center">
         <Link to="/findjob" className="pr-4 text-black ">Find Jobs</Link>
-        <Link to="/create-resume" className="pr-5 text-black ">Create Resume</Link>
+        <Link to={`/create-resume/${user?.user._id}`} className="pr-5 text-black ">Create Resume</Link>
         <div className="">
         <div className="dropdown inline-block relative z-50">
           <div className="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">

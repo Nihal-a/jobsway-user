@@ -87,7 +87,7 @@ function Routed() {
             <Route path="/my-profile">
                 {user ?  <MyProfile /> :  <Redirect to="/signin" />}
             </Route>
-            <Route path="/create-resume">
+            <Route path="/create-resume/:id">
                 {user ?  <CreateResume /> :  <Redirect to="/signin" />}
             </Route>
         </Switch>

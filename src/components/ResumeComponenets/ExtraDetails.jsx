@@ -1,7 +1,15 @@
 import { Button } from '@material-tailwind/react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const ExtraDetails = ({prevStep , nextStep}) => {
+const ExtraDetails = ({prevStep , nextStep , formData , handleChange}) => {
+
+
+    const [Err, setErr] = useState({});
+
+    useEffect(() => {
+     setErr({})
+    }, [formData]);
+
   return <div className='w-full'>
   <h3 className='text-xl text-center'>Extra Information</h3>
 <div className="bg-secondary p-10 rounded-md w-full mt-3">
@@ -10,24 +18,24 @@ const ExtraDetails = ({prevStep , nextStep}) => {
         <h4 className="m-2">Skills : </h4>
 <div className="w-full flex">
 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-   <input className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Skill 1" />
+   <input  name='skill1' value={formData.skill1}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Skill 1" />
 </div>
 <div className="w-full md:w-1/2 px-3">
-   <input className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Skill 2" />
+   <input  name='skill2' value={formData.skill2}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Skill 2" />
 </div>
 <div className="w-full md:w-1/2 px-3">
-   <input className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="number" placeholder="Skill 3" />
+   <input  name='skill3' value={formData.skill3}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="number" placeholder="Skill 3" />
 </div>
 </div>
 <div className="w-full flex">
 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-   <input className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Skill 4" />
+   <input  name='skill4' value={formData.skill4}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Skill 4" />
 </div>
 <div className="w-full md:w-1/2 px-3">
-   <input className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Skill 5" />
+   <input  name='skill5' value={formData.skill5}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Skill 5" />
 </div>
 <div className="w-full md:w-1/2 px-3">
-   <input className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="number" placeholder="Skill 6" />
+   <input  name='skill6' value={formData.skill6}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="number" placeholder="Skill 6" />
 </div>
 </div>
 </div>
@@ -36,13 +44,13 @@ const ExtraDetails = ({prevStep , nextStep}) => {
         <h4 className="m-2">Languages : </h4>
 <div className="w-full flex">
 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-   <input className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Language 1" />
+   <input  name='language1' value={formData.language1}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Language 1" />
 </div>
 <div className="w-full md:w-1/2 px-3">
-   <input className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Language 2" />
+   <input  name='language2' value={formData.language2}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Language 2" />
 </div>
 <div className="w-full md:w-1/2 px-3">
-   <input className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="number" placeholder="Language 3" />
+   <input  name='language3' value={formData.language3}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="number" placeholder="Language 3" />
 </div>
 </div>
 </div>
@@ -51,13 +59,13 @@ const ExtraDetails = ({prevStep , nextStep}) => {
         <h4 className="m-2">Interests : </h4>
 <div className="w-full flex">
 <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-   <input className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Interest 1" />
+   <input  name='interest1' value={formData.interest1}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Interest 1" />
 </div>
 <div className="w-full md:w-1/2 px-3">
-   <input className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Interest 2" />
+   <input  name='interest2' value={formData.interest2}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Interest 2" />
 </div>
 <div className="w-full md:w-1/2 px-3">
-   <input className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="number" placeholder="Interest 3" />
+   <input  name='interest3' value={formData.interest3}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="number" placeholder="Interest 3" />
 </div>
 </div>
 </div>

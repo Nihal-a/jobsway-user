@@ -14,7 +14,7 @@ const initialState = {
             email: '' ,
             phone: '' ,
             github: '' ,
-            linkedin: '' ,
+            linkedIn: '' ,
             facebook: '' ,
             instagram: '' ,
         

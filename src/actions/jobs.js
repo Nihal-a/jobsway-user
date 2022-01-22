@@ -12,11 +12,13 @@ export const getFeaturedJobs = () => async (dispatch) => {
     }
 }
 
-export const getAllJobs = () => async (dispatch) => {
+export const getAllJobs = (setLoading) => async (dispatch) => {
     try {
         const {data} = await api.getAllJobs()
         dispatch({type:ALLJOBS,data})    
+        setLoading(false)
     } catch (error) {
+        setLoading(false)
         console.log(error.response);
         alert('There is an error in getAllJobs')
     }

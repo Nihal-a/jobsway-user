@@ -5,6 +5,7 @@
   "proxy": "https://jobsway-user.herokuapp.com/api/v1/user/",
   "dependencies": {
     "@craco/craco": "^6.3.0",
+    "@material-tailwind/react": "0.3.4",
     "@react-pdf-viewer/core": "^2.11.0",
     "@sweetalert/with-react": "^0.1.1",
     "@testing-library/jest-dom": "^5.14.1",

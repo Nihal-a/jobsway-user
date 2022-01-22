@@ -24,6 +24,9 @@ const JobDetails = () => {
 
     useEffect(() => {
         dispatch(getJobDetailsById(id , setLoading ,setStatus , user))
+        if(user?.user.count >= 3 && user?.user.premium == false) {
+            setPremiumStatus(true)
+        }
     }, []);
 
     

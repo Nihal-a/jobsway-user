@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { getAllJobs } from '../actions/jobs';
 import ReactPaginate from 'react-paginate';
 import { getAllCompanies } from '../actions/company';
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 
 const FindJobs = () => {
 
@@ -17,6 +18,7 @@ const FindJobs = () => {
     const company = useSelector(state => state.company)
     const jobs = useSelector(state => state.job)
     const [pageNumber, setPageNumber] = useState(0)
+    const [loading, setLoading] = useState(true);
 
 
 
@@ -29,9 +31,13 @@ const FindJobs = () => {
     }
     
     useEffect(() => {
-        dispatch(getAllJobs())
-        dispatch(getAllCompanies())
+        dispatch(getAllJobs(setLoading))
+        dispatch(getAllCompanies(setLoading))
     }, [])
+
+    if(loading) {
+        return <LoadingSpinner />
+    }
 
     return (
         <div>

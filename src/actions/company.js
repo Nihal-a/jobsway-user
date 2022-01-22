@@ -1,11 +1,13 @@
 import { COMPANYDETAIL ,ALLCOMPANIES} from '../constants/actionTypes'
 import * as api from '../api/index'
 
-export const getAllCompanies = () => async (dispatch) => {
+export const getAllCompanies = (setLoading) => async (dispatch) => {
     try {
         const {data} = await api.getAllCompanies()
         dispatch({type:ALLCOMPANIES,data})    
+        setLoading(false)
     } catch (error) {
+        setLoading(false)
         console.log(error);
         alert('There is an error in company')
     }

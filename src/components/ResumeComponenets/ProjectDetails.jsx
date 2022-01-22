@@ -1,7 +1,15 @@
 import { Button } from '@material-tailwind/react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const ProjectDetails = ({nextStep , prevStep , handleChange , formData}) => {
+
+   const [Err, setErr] = useState({});
+
+   useEffect(() => {
+    setErr({})
+   }, [formData]);
+
+
   return <div className='w-full'>
   <h3 className='text-xl text-center'>Projects Devoloped</h3>
 <div className="bg-secondary p-10 rounded-md w-full mt-3">

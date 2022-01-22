@@ -26,6 +26,7 @@ const Experience = ({ prevStep, nextStep,formData , handleChange }) => {
                   Institute/Organisation
                 </label>
                 <input
+                value={formData.institute1}
                 onChange={handleChange}
                     name="institute1"
                   className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -43,6 +44,7 @@ const Experience = ({ prevStep, nextStep,formData , handleChange }) => {
                   Positon
                 </label>
                 <input
+                value={formData.position1}
                 onChange={handleChange}
                 name="position1"
                   className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -59,6 +61,7 @@ const Experience = ({ prevStep, nextStep,formData , handleChange }) => {
                   Duration
                 </label>
                 <input
+                value={formData.duration1}
                 onChange={handleChange}
                 name="duration1"
                   className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -77,6 +80,7 @@ const Experience = ({ prevStep, nextStep,formData , handleChange }) => {
                   Description
                 </label>
                 <textarea
+                value={formData.experienceDescription1}
                 onChange={handleChange}
                 name="experienceDescription1"
                   className="appearance-none block md:w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -100,6 +104,7 @@ const Experience = ({ prevStep, nextStep,formData , handleChange }) => {
                   Institute/Organisation
                 </label>
                 <input
+                value={formData.institute2}
                 onChange={handleChange}
                 name="institute2"
                   className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -117,6 +122,7 @@ const Experience = ({ prevStep, nextStep,formData , handleChange }) => {
                   Positon
                 </label>
                 <input
+                value={formData.position2}
                 onChange={handleChange}
                 name="position2"
                   className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -133,6 +139,7 @@ const Experience = ({ prevStep, nextStep,formData , handleChange }) => {
                   Duration
                 </label>
                 <input
+                value={formData.duration2}
                 onChange={handleChange}
                 name="duration2"
                   className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -151,6 +158,7 @@ const Experience = ({ prevStep, nextStep,formData , handleChange }) => {
                   Description
                 </label>
                 <textarea
+                value={formData.experienceDescription2}
                 onChange={handleChange}
                 name="experienceDescription2"
                   className="appearance-none block md:w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"

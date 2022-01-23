@@ -134,7 +134,7 @@ class ImageInput extends Component {
                       onComplete={this.onCropComplete}
                       onChange={this.onCropChange}
                      /> 
-                        <button onClick={this.handleSubmit} className="p-3 bg-secondary m-3 rounded-lg">save</button>
+                        <button onClick={this.handleSubmit} className="p-2 bg-secondary m-3 rounded-lg">save</button>
                     </div>
                    </div>
                 )}

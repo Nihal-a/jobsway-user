@@ -11,6 +11,7 @@ import { getAllJobs } from '../actions/jobs';
 import ReactPaginate from 'react-paginate';
 import { getAllCompanies } from '../actions/company';
 import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
+import { search } from '../actions/user';
 
 const FindJobs = () => {
 
@@ -19,7 +20,8 @@ const FindJobs = () => {
     const jobs = useSelector(state => state.job)
     const [pageNumber, setPageNumber] = useState(0)
     const [loading, setLoading] = useState(true);
-
+    const [searchValue, setSearchValue] = useState('');
+    const [Refresh, setRefresh] = useState(false);
 
 
     const jobsPerPage = 8;
@@ -33,10 +35,22 @@ const FindJobs = () => {
     useEffect(() => {
         dispatch(getAllJobs(setLoading))
         dispatch(getAllCompanies(setLoading))
-    }, [])
+    }, [Refresh])
 
     if(loading) {
         return <LoadingSpinner />
+    }
+
+    const handleSearch = (e) => {
+        e.preventDefault()
+
+        if(e.target.value.trim() == ""){
+            return setRefresh(true)
+        }
+
+        const keyword = e.target.value
+
+        dispatch(search(keyword))
     }
 
     return (
@@ -44,14 +58,11 @@ const FindJobs = () => {
             <Navbar />
             <div className="container mx-auto w-full h-20 mt-28">
                     <div className="flex justify-center w-full  p-4 items-center">
-                        <div className="m-2 w-6/12">
-                            <input placeholder="   Jobn title, Keywords  or  Company" className="text-3xl outline-0 border-0 h-12 placeholder-primary w-full" type="text" className="bg-secondary w-full h-14 rounded-lg" />
-                        </div>
-                        <div className="m-2 w-4/12">
-                            <input placeholder="   City ,State or pin code" className="text-3xl outline-0 border-0 h-12 placeholder-primary w-full" type="text" className="bg-secondary w-full h-14 rounded-lg" />
-                        </div>
+                        <form className="m-2 w-6/12">
+                            <input name='search' onChange={handleSearch} placeholder="Job title, Keywords , Company or Location" className="text-md p-3 outline-0 border-0 h-12 w-full bg-secondary w-full h-14 rounded-lg" type="text" />
+                        </form>
                         <div className="w-14 h-14 bg-primary flex items-center justify-center rounded-lg cursor-pointer">
-                        <Icon icon="akar-icons:search" className="text-white text-xl" />
+                        <button onClick={handleSearch} type='submit'><Icon icon="akar-icons:search" className="text-white text-xl" /></button>
                         </div>
                     </div>
             </div>

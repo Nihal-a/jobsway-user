@@ -28,7 +28,7 @@ function Landing() {
       <Navbar />
       <Home />
       </div>
-      <CategorySection />
+      {/* <CategorySection /> */}
       <Whyjobsway />
       <FeaturedJobs  />
       <PostJob />

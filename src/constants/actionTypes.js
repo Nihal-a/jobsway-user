@@ -3,6 +3,9 @@ export const SIGNUP = 'SIGNUP';
 export const SIGNIN = 'SIGNIN';
 export const LOGOUT = 'LOGOUT';
 
+//User
+export const ALLUSERS = 'ALL_USERS';
+
 //Jobs
 export const ALLJOBS = 'ALLJOBS';
 export const FEATUREDJOBS = 'FEATUREDJOBS';

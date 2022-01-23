@@ -17,6 +17,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import ForgotOtpVerify from "./pages/ForgotOtpVerify";
 import MyProfile from "./pages/MyProfile";
 import CreateResume from "./pages/CreateResume";
+import UpdateProfile from "./pages/UpdateProfile";
 
 function Routed() {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -84,11 +85,14 @@ function Routed() {
             <Route path="/my-jobs">
                 {user ?  <MyJobs /> :  <Redirect to="/signin" />}
             </Route>
-            <Route path="/my-profile">
+            <Route path="/my-profile/:id">
                 {user ?  <MyProfile /> :  <Redirect to="/signin" />}
             </Route>
             <Route path="/create-resume/:id">
                 {user ?  <CreateResume /> :  <Redirect to="/signin" />}
+            </Route>
+            <Route path="/update-profile/:id">
+                {user ?  <UpdateProfile /> :  <Redirect to="/signin" />}
             </Route>
         </Switch>
     )

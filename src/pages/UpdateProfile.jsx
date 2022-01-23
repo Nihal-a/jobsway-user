@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ImageInput from '../components/ImageInput/ImageInput';
 import Navbar from '../components/navbar/Navbar';
 import noImage from "../assets/images/noImage.jpg"
@@ -17,13 +17,14 @@ import { useHistory } from 'react-router-dom';
 
 const UpdateProfile = () => {
 
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
     const [formData, setformData] = useState({});
     const [image, setImage] = useState();
     const [pdf, setPdf] = useState('')
     const [viewpdf, setViewPdf] = useState('')
     const [Skills, setSkills] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [resumeUrl, setResumeUrl] = useState(false);
     const location = useLocation()
     const dispatch = useDispatch()
     const history = useHistory()
@@ -35,6 +36,13 @@ const UpdateProfile = () => {
         setformData({...formData , [e.target.name] : e.target.value})
     }
 
+    useEffect(()=>{
+        if(userDetails.resumeUrl){
+            setResumeUrl(true)
+        }
+        // userDetails.skills = userDetails.skills.join()
+    } , [])
+    
     const handlePdfChange = (e) => {
         e.preventDefault()
     
@@ -60,23 +68,24 @@ const UpdateProfile = () => {
 
       const handleSubmit = (e) => {
         e.preventDefault()
+        formData.skills =  Skills
         setLoading(true);
         var fileData = new FormData()
 
         fileData.append('name' , formData.name || userDetails.name)
         fileData.append('email' , formData.email || user?.user.email)
         fileData.append('phone' , formData.phone || user?.user.phone)
-        fileData.append('designatioin' , formData.designatioin || userDetails.designatioin)
-        fileData.append('location' , formData.location || userDetails.location)
-        fileData.append('portfolio' , formData.portfolio || userDetails.portfolio)
-        fileData.append('github' , formData.github || userDetails.github)
-        fileData.append('linkedIn' , formData.linkedIn || userDetails.linkedIn)
-        fileData.append('instagram' , formData.instagram || userDetails.instagram)
-        fileData.append('twitter' , formData.twitter || userDetails.twitter)
-        fileData.append('facebook' , formData.facebook || userDetails.facebook)
-        fileData.append('skills' , Skills || userDetails.skills)
-        fileData.append('image' , image )
-        fileData.append('pdf' , pdf)
+        fileData.append('designatioin' , formData.designatioin || userDetails.designatioin || null)
+        fileData.append('location' , formData.location || userDetails.location || null)
+        fileData.append('portfolio' , formData.portfolio || userDetails.portfolio || null)
+        fileData.append('github' , formData.github || userDetails.github || null)
+        fileData.append('linkedIn' , formData.linkedIn || userDetails.linkedIn || null)
+        fileData.append('instagram' , formData.instagram || userDetails.instagram || null)
+        fileData.append('twitter' , formData.twitter || userDetails.twitter || null)
+        fileData.append('facebook' , formData.facebook || userDetails.facebook || null)
+        fileData.append('skills' , formData.skills || userDetails.skills || null)
+        fileData.append('image' , image || null)
+        fileData.append('pdf' , pdf || null) 
 
         axios({
             method : "patch" ,
@@ -113,12 +122,20 @@ const UpdateProfile = () => {
           <div className="">
             <div className="w-full h-40 mt-4 flex items-center flex-col mt-24">
 
-              <img src={image ? image : noImage} alt="no image" className='w-40 h-40'/>
+              <img src={userDetails.imgUrl ? userDetails.imgUrl : [image ? image :   noImage] } alt="no image" className='w-40 h-40'/>
 
               <ImageInput setImage={setImage}/>
             </div>
           </div>
-          <div className="flex flex-col">
+          {resumeUrl ? <>
+            <div className="flex flex-col ">
+                {/* <a className='underline' href={userDetails.resumeUrl} target={'_blank'}>Open Resume</a> */}
+                <div className="">
+                <PdfViewer pdf={userDetails.resumeUrl} />   
+                </div>
+                <button onClick={() => setResumeUrl(false)} className='p-2 mt-3 bg-black text-white rounded'>Change Resume</button>
+            </div>
+          </> : <div className="flex flex-col">
               <label className="ml-3 mt-2 m-1" htmlFor="upload">
               Upload Resume :{" "}
             </label>
@@ -131,20 +148,21 @@ const UpdateProfile = () => {
               onChange={handlePdfChange}
             />
             {pdf && <button className="underline mt-1" onClick={handleViewPdf}>View Pdf</button>}
-              </div>
+            {userDetails.resumeUrl && <button className="underline mt-3" onClick={() => setResumeUrl(true)}>My Resume</button>}
+              </div>}
           </div>
        <div className="w-full flex">
         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label className="block uppercase tracking-wide  text-gray-700 text-xs font-medium mb-2" htmlFor="grid-first-name">
             Full Name 
             </label>
-            <input value={formData.name} name='name' onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="" />
+            <input value={userDetails.name} name='name' onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="" />
         </div>
         <div className="w-full md:w-1/2 px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-medium mb-2" htmlFor="grid-last-name">
             Job Title *
             </label>
-            <input value={formData.designation} name='designatioin' onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="" />
+            <input value={userDetails.designatioin} name='designatioin' onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="" />
         </div>
        </div>
        
@@ -156,13 +174,13 @@ const UpdateProfile = () => {
             <label className="block uppercase tracking-wide  text-gray-700 text-xs font-medium mb-2" htmlFor="grid-first-name">
             Portfolio
             </label>
-            <input value={formData.portfolio}  name="portfolio" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="url" placeholder="" />
+            <input value={userDetails.portfolio}  name="portfolio" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="url" placeholder="" />
         </div>
         <div className="w-full md:w-1/2 px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-medium mb-2" htmlFor="grid-last-name">
             Github
             </label>
-            <input value={formData.github}  name="github" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="url" placeholder="" />
+            <input value={userDetails.github}  name="github" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="url" placeholder="" />
         </div>
        </div>
        <div className="w-full flex">
@@ -170,14 +188,14 @@ const UpdateProfile = () => {
             <label className="block uppercase tracking-wide  text-gray-700 text-xs font-medium mb-2" htmlFor="grid-first-name">
             Linked In
             </label>
-            <input value={formData.linkedIn}  name='linkedIn' onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="url" placeholder="" />
+            <input value={userDetails.linkedIn}  name='linkedIn' onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="url" placeholder="" />
             {/* <p className="text-red-500 text-xs italic">Please fill out this field.</p> */}
         </div>
         <div className="w-full md:w-1/2 px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-medium mb-2" htmlFor="grid-last-name">
             Twitter
             </label>
-            <input value={formData.twitter}  name="twitter" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="url" placeholder="" />
+            <input value={userDetails.twitter}  name="twitter" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="url" placeholder="" />
         </div>
        </div>
        <div className="w-full flex">
@@ -185,14 +203,14 @@ const UpdateProfile = () => {
             <label className="block uppercase tracking-wide  text-gray-700 text-xs font-medium mb-2" htmlFor="grid-first-name">
             Facebook
             </label>
-            <input value={formData.facebook}  name='facebook' onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="url" placeholder="" />
+            <input value={userDetails.facebook}  name='facebook' onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="url" placeholder="" />
             {/* <p className="text-red-500 text-xs italic">Please fill out this field.</p> */}
         </div>
         <div className="w-full md:w-1/2 px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-medium mb-2" htmlFor="grid-last-name">
             Instagram
             </label>
-            <input value={formData.instagram}  name="instagram" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="url" placeholder="" />
+            <input value={userDetails.instagram}  name="instagram" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="url" placeholder="" />
         </div>
 
        </div>
@@ -201,13 +219,13 @@ const UpdateProfile = () => {
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-medium mb-2" htmlFor="grid-last-name">
             Location
             </label>
-            <input value={formData.location}  name="location" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="" />
+            <input value={userDetails.location}  name="location" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="" />
         </div>
         <div className="w-full md:w-1/2 px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-medium mb-2" htmlFor="grid-last-name">
             Skills
             </label>
-            <input value={formData.skill}  name="skills" onChange={handleSkillChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Separated By Coma" />
+            <input value={userDetails.skills}  name="skills" onChange={handleSkillChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Separated By Coma" />
         </div>
 
        </div>

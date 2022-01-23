@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { getUserAppliedJobs } from '../actions/jobs'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import googleLogo from "../assets/images/googleLogo.png"
 
 const MyJobs = () => {
 
@@ -22,8 +23,33 @@ const MyJobs = () => {
             <Navbar />
 
             <div className="container mx-auto max-w-screen-lg mt-28">
-                <h4 className="text-2xl font-semibold">My <span className="text-primary">Job Details :</span> </h4>
+
+                    <div className="my-4">
+                        <div className="w-72 h-64 bg-black rounded-md p-5">
+                        <div className="flex justify-between">
+                <Link className="flex items-center">
+                    <img src={googleLogo} alt="company logo" className="w-14 h-14 rounded-md" />
+                    <div className="ml-3">
+                    <h6 className=" text-md font-semibold text-white">Crossroads</h6>
+                    <div className="text-sm text-secondary flex items-center">
+                        <Icon icon="akar-icons:location" className="text-dark"/><p className="text-dark font-light ml-1">Kerala , India</p>
+                    </div>
+                    </div>
+                </Link>
+
+            </div>
+                <h4 className='text-white text-2xl font-semibold mt-3'>Complete Task.</h4>
+                <div className="text-white text-center mt-3">
+                    <p>Question : 4</p>
+                    <p>Time : 5 mint</p>
+                </div>
+                <div className="flex items-center justify-center mt-2">
+                <button className='text-white bg-primary p-2 rounded-md'>Start Task</button>
+                </div>
+                        </div>
+                    </div>
             
+                <h4 className="text-2xl font-semibold">My <span className="text-primary">Job Details :</span> </h4>
                             <div className="">
 
                             { !appliedJobs.length == 0 ? appliedJobs.map((appliedJob) => (

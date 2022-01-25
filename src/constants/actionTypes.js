@@ -5,6 +5,7 @@ export const LOGOUT = 'LOGOUT';
 
 //User
 export const ALLUSERS = 'ALL_USERS';
+export const TASKOFUSER = 'TASKOFUSER';
 
 //Jobs
 export const ALLJOBS = 'ALLJOBS';

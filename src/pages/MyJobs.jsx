@@ -5,18 +5,24 @@ import { useDispatch } from 'react-redux'
 import { getUserAppliedJobs } from '../actions/jobs'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import googleLogo from "../assets/images/googleLogo.png"
+import { getTaskOfUser } from '../actions/user'
+import TaskCard from '../components/TaskCard/TaskCard'
 
 const MyJobs = () => {
 
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const dispatch = useDispatch()
     const appliedJobs = useSelector(state => state?.user?.appliedJobs)
+    const tasks = useSelector(state => state?.user?.tasks)
 
     useEffect(() => {
         dispatch(getUserAppliedJobs(user?.user._id))
+        dispatch(getTaskOfUser(user?.user._id))
     }, [])
-    
+
+
+    console.log(tasks);
+
     
     return (
         <div>
@@ -25,28 +31,13 @@ const MyJobs = () => {
             <div className="container mx-auto max-w-screen-lg mt-28">
 
                     <div className="my-4">
-                        <div className="w-72 h-64 bg-black rounded-md p-5">
-                        <div className="flex justify-between">
-                <Link className="flex items-center">
-                    <img src={googleLogo} alt="company logo" className="w-14 h-14 rounded-md" />
-                    <div className="ml-3">
-                    <h6 className=" text-md font-semibold text-white">Crossroads</h6>
-                    <div className="text-sm text-secondary flex items-center">
-                        <Icon icon="akar-icons:location" className="text-dark"/><p className="text-dark font-light ml-1">Kerala , India</p>
-                    </div>
-                    </div>
-                </Link>
 
-            </div>
-                <h4 className='text-white text-2xl font-semibold mt-3'>Complete Task.</h4>
-                <div className="text-white text-center mt-3">
-                    <p>Question : 4</p>
-                    <p>Time : 5 mint</p>
-                </div>
-                <div className="flex items-center justify-center mt-2">
-                <button className='text-white bg-primary p-2 rounded-md'>Start Task</button>
-                </div>
-                        </div>
+                        {
+                            !tasks.length == 0 ? tasks.map((task) => (
+                                <TaskCard task={task} />
+                            )) : <p className='text-center mt-4 text-danger'>No New Tasks.</p>
+                        }
+
                     </div>
             
                 <h4 className="text-2xl font-semibold">My <span className="text-primary">Job Details :</span> </h4>

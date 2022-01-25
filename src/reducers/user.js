@@ -1,6 +1,6 @@
-import { SIGNIN,SIGNUP,LOGOUT, APPLYJOBS , ALLAPPLIEDJOBS, JOBDETAILS, ALLUSERS} from "../constants/actionTypes"
+import { SIGNIN,SIGNUP,LOGOUT, APPLYJOBS , ALLAPPLIEDJOBS, JOBDETAILS, ALLUSERS, TASKOFUSER} from "../constants/actionTypes"
 
-export default  (state = {authData : null , appliedJobs : [] , jobDetailsByid : null , userDetails : null},action) => {
+export default  (state = {authData : null , appliedJobs : [] , jobDetailsByid : null , userDetails : null , tasks : []},action) => {
     switch (action.type) {
         case SIGNUP:
             localStorage.setItem('profile',JSON.stringify({...action?.data}))
@@ -20,6 +20,8 @@ export default  (state = {authData : null , appliedJobs : [] , jobDetailsByid : 
             return {...state ,  jobDetailsByid :action?.data}
         case ALLUSERS : 
             return {...state ,  userDetails :action?.data}
+        case TASKOFUSER : 
+            return {...state ,  tasks :action?.data}
         default:
             return state
     }

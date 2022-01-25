@@ -14,6 +14,7 @@ export const ForgotverifyOtp = (formData) => API.post('/forgot-otp-verify',formD
 
 //User
 export const getUserDetails = (id) => API.get(`/get-user/${id}`)
+export const getTaskOfUser = (id) => API.get(`/tasks/${id}`)
 
 //Jobs
 export const getAllJobs = () => API.get('/getjobs')

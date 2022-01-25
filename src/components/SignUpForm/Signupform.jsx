@@ -37,6 +37,7 @@ function Signupform() {
   const handleSubmit = (e) => {
     e.preventDefault()
     if(validateCaptcha(formData.captcha,false) !== true) return setCaptchaErr('Captcha verification failed')
+    setLoading(true)
     dispatch(signup(formData,history,setLoading))
   }
   const handleChange = (e) => {
@@ -50,12 +51,13 @@ function Signupform() {
   }
 
   const googleSuccess = async (res) => {
+    setLoading(true)
     const result = res?.profileObj
     const token = res?.tokenId
     console.log(res);
     const user = { email: result.email, firstName: result.givenName, lastName: result?.familyName, password: res.googleId }
     try {
-      dispatch(googlesign(user,history))
+      dispatch(googlesign(user,history,setLoading))
       history.push('/')
     } catch (error) {
       console.log("Google sign err : " + error);

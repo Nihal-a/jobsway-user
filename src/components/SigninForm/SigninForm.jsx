@@ -11,7 +11,7 @@ import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 
 
-const initialState = {phone:'',password:''}
+const initialState = {phone:'',password:'' , authmode : "phone"}
 
 function SigninForm() {
 
@@ -20,6 +20,7 @@ function SigninForm() {
   const dispatch = useDispatch()
   const history = useHistory()
   const location = useLocation()
+
 
   useEffect(() => {
     location.state = undefined
@@ -41,10 +42,11 @@ function SigninForm() {
   }
 
   const googleSuccess = (res) => {
+    setLoading(true)
     const result = res?.profileObj
-    const user = { email: result.email, firstName: result.givenName, lastName: result?.familyName, password: res.googleId }
+    const user = { email: result.email, firstName: result.givenName, lastName: result?.familyName, password: res.googleId , authmode : "email"}
     try {
-      dispatch(googlesign(user,history))
+      dispatch(googlesign(user,history,setLoading))
       history.push('/')
     } catch (error) {
       console.log("Google sign err : "+error);

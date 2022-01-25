@@ -40,16 +40,16 @@ const MyProfile = () => {
                         <h4 className='mt-2 font-semibold text-2xl'>{userDetails?.name ? userDetails?.name : 'No name'}</h4>
                         <h6 className='text-xl'>{userDetails?.designation ? userDetails?.designation : 'No Designation'}</h6>
                         <div className="flex mt-2">
-                        {userDetails?.github && <Link to={userDetails?.github}><Icon icon="akar-icons:github-fill" height="30" className='m-2' /></Link>}
-                        {userDetails?.linkedIn && <Link to={userDetails?.linkedIn}><Icon icon="ant-design:linkedin-filled" height="30" className='m-2' /></Link>}
-                        {userDetails?.instagram && <Link to={userDetails?.instagram}><Icon icon="ant-design:instagram-filled" height="30" className='m-2' /></Link>}
-                        {userDetails?.twitter && <Link to={userDetails?.twitter}><Icon icon="akar-icons:twitter-fill" height="30" className='m-2' /></Link>}
-                        {userDetails?.facebook && <Link to={userDetails?.facebook}><Icon icon="akar-icons:facebook-fill" height="30" className='m-2' /></Link>}
+                        {userDetails?.github && <a target={'_blank'} href={userDetails?.github}><Icon icon="akar-icons:github-fill" height="30" className='m-2' /></a>}
+                        {userDetails?.linkedIn && <a target={'_blank'} href={userDetails?.linkedIn}><Icon icon="ant-design:linkedin-filled" height="30" className='m-2' /></a>}
+                        {userDetails?.instagram && <a target={'_blank'} href={userDetails?.instagram}><Icon icon="ant-design:instagram-filled" height="30" className='m-2' /></a>}
+                        {userDetails?.twitter && <a target={'_blank'} href={userDetails?.twitter}><Icon icon="akar-icons:twitter-fill" height="30" className='m-2' /></a>}
+                        {userDetails?.facebook && <a target={'_blank'} href={userDetails?.facebook}><Icon icon="akar-icons:facebook-fill" height="30" className='m-2' /></a>}
                         </div>
                     </div>
                        <div className="w-full flex justify-around mt-7 text-xl underline">
-                       {userDetails?.resumeUrl ? <a href={userDetails?.resumeUrl}>Resume Link</a> : <a>No Resume Link</a>}
-                       {userDetails?.portfolio ? <a href={userDetails?.portfolio}>Portfolio Link</a> : <a>No Portfolio Link</a>}
+                       {userDetails?.resumeUrl ? <a target={'_blank'} href={userDetails?.resumeUrl}>Resume Link</a> : <a>No Resume Link</a>}
+                       {userDetails?.portfolio ? <a target={'_blank'} href={userDetails?.portfolio}>Portfolio Link</a> : <a>No Portfolio Link</a>}
                        </div>
                 </div>
                 <div className="flex-1 p-5 h-auto">

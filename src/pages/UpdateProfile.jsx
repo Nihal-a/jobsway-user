@@ -46,6 +46,20 @@ const UpdateProfile = () => {
         }else{
           setMode('email')
         }
+        setformData({
+          name : userDetails.name || '' ,
+          email : userDetails.email || '' ,
+          phone : userDetails.phone || '' ,
+          designatioin : userDetails.designatioin || '' ,
+          location : userDetails.location || '' ,
+          portfolio : userDetails.portfolio || '' ,
+          github : userDetails.github || '' ,
+          linkedIn : userDetails.linkedIn || '' ,
+          instagram : userDetails.instagram || '' ,
+          twitter : userDetails.twitter || '' ,
+          facebook : userDetails.facebook || '' ,
+          skills : userDetails.skills || '' ,
+        })
         // userDetails.skills = userDetails.skills.join()
     } , [])
     
@@ -81,15 +95,15 @@ const UpdateProfile = () => {
         fileData.append('name' , formData.name || userDetails.name)
         fileData.append('email' , formData.email || user?.user.email)
         fileData.append('phone' , formData.phone || user?.user.phone)
-        fileData.append('designatioin' , formData.designatioin || userDetails.designatioin || null)
-        fileData.append('location' , formData.location || userDetails.location || null)
-        fileData.append('portfolio' , formData.portfolio || userDetails.portfolio || null)
-        fileData.append('github' , formData.github || userDetails.github || null)
-        fileData.append('linkedIn' , formData.linkedIn || userDetails.linkedIn || null)
-        fileData.append('instagram' , formData.instagram || userDetails.instagram || null)
-        fileData.append('twitter' , formData.twitter || userDetails.twitter || null)
-        fileData.append('facebook' , formData.facebook || userDetails.facebook || null)
-        fileData.append('skills' , formData.skills || userDetails.skills || null)
+        fileData.append('designatioin' , formData.designatioin || userDetails.designatioin || '')
+        fileData.append('location' , formData.location || userDetails.location || '')
+        fileData.append('portfolio' , formData.portfolio || userDetails.portfolio || '')
+        fileData.append('github' , formData.github || userDetails.github || '')
+        fileData.append('linkedIn' , formData.linkedIn || userDetails.linkedIn || '')
+        fileData.append('instagram' , formData.instagram || userDetails.instagram || '')
+        fileData.append('twitter' , formData.twitter || userDetails.twitter || '')
+        fileData.append('facebook' , formData.facebook || userDetails.facebook || '')
+        fileData.append('skills' , formData.skills || userDetails.skills || '')
         fileData.append('image' , image || null)
         fileData.append('pdf' , pdf || null) 
 
@@ -139,7 +153,7 @@ const UpdateProfile = () => {
             <div className="flex flex-col ">
                 {/* <a className='underline' href={userDetails.resumeUrl} target={'_blank'}>Open Resume</a> */}
                 <div className="">
-                <PdfViewer pdf={userDetails.resumeUrl} />   
+                <PdfViewer pdf={formData.resumeUrl} />   
                 </div>
                 <button onClick={() => setResumeUrl(false)} className='p-2 mt-3 bg-black text-white rounded'>Change Resume</button>
             </div>
@@ -156,7 +170,7 @@ const UpdateProfile = () => {
               onChange={handlePdfChange}
             />
             {pdf && <button className="underline mt-1" onClick={handleViewPdf}>View Pdf</button>}
-            {userDetails.resumeUrl && <button className="underline mt-3" onClick={() => setResumeUrl(true)}>My Resume</button>}
+            {formData.resumeUrl && <button className="underline mt-3" onClick={() => setResumeUrl(true)}>My Resume</button>}
               </div>}
           </div>
        <div className="w-full flex">
@@ -164,13 +178,13 @@ const UpdateProfile = () => {
             <label className="block uppercase tracking-wide  text-gray-700 text-xs font-medium mb-2" htmlFor="grid-first-name">
             Full Name 
             </label>
-            <input value={userDetails.name} name='name' onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="" />
+            <input value={formData.name} name='name' onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="" />
         </div>
         <div className="w-full md:w-1/2 px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-medium mb-2" htmlFor="grid-last-name">
             Job Title *
             </label>
-            <input value={userDetails.designatioin} name='designatioin' onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="" />
+            <input value={formData.designatioin} name='designatioin' onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="" />
         </div>
        </div>
        
@@ -197,13 +211,13 @@ const UpdateProfile = () => {
             <label className="block uppercase tracking-wide  text-gray-700 text-xs font-medium mb-2" htmlFor="grid-first-name">
             Portfolio
             </label>
-            <input value={userDetails.portfolio}  name="portfolio" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="url" placeholder="" />
+            <input value={formData.portfolio}  name="portfolio" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="url" placeholder="" />
         </div>
         <div className="w-full md:w-1/2 px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-medium mb-2" htmlFor="grid-last-name">
             Github
             </label>
-            <input value={userDetails.github}  name="github" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="url" placeholder="" />
+            <input value={formData.github}  name="github" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="url" placeholder="" />
         </div>
        </div>
        <div className="w-full flex">
@@ -211,14 +225,14 @@ const UpdateProfile = () => {
             <label className="block uppercase tracking-wide  text-gray-700 text-xs font-medium mb-2" htmlFor="grid-first-name">
             Linked In
             </label>
-            <input value={userDetails.linkedIn}  name='linkedIn' onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="url" placeholder="" />
+            <input value={formData.linkedIn}  name='linkedIn' onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="url" placeholder="" />
             {/* <p className="text-red-500 text-xs italic">Please fill out this field.</p> */}
         </div>
         <div className="w-full md:w-1/2 px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-medium mb-2" htmlFor="grid-last-name">
             Twitter
             </label>
-            <input value={userDetails.twitter}  name="twitter" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="url" placeholder="" />
+            <input value={formData.twitter}  name="twitter" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="url" placeholder="" />
         </div>
        </div>
        <div className="w-full flex">
@@ -226,14 +240,14 @@ const UpdateProfile = () => {
             <label className="block uppercase tracking-wide  text-gray-700 text-xs font-medium mb-2" htmlFor="grid-first-name">
             Facebook
             </label>
-            <input value={userDetails.facebook}  name='facebook' onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="url" placeholder="" />
+            <input value={formData.facebook}  name='facebook' onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="url" placeholder="" />
             {/* <p className="text-red-500 text-xs italic">Please fill out this field.</p> */}
         </div>
         <div className="w-full md:w-1/2 px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-medium mb-2" htmlFor="grid-last-name">
             Instagram
             </label>
-            <input value={userDetails.instagram}  name="instagram" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="url" placeholder="" />
+            <input value={formData.instagram}  name="instagram" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="url" placeholder="" />
         </div>
 
        </div>
@@ -242,13 +256,13 @@ const UpdateProfile = () => {
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-medium mb-2" htmlFor="grid-last-name">
             Location
             </label>
-            <input value={userDetails.location}  name="location" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="" />
+            <input value={formData.location}  name="location" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="" />
         </div>
         <div className="w-full md:w-1/2 px-3">
             <label className="block uppercase tracking-wide text-gray-700 text-xs font-medium mb-2" htmlFor="grid-last-name">
             Skills
             </label>
-            <input value={userDetails.skills}  name="skills" onChange={handleSkillChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Separated By Coma" />
+            <input value={formData.skills}  name="skills" onChange={handleSkillChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Separated By Coma" />
         </div>
 
        </div>

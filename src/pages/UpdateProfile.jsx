@@ -25,6 +25,7 @@ const UpdateProfile = () => {
     const [Skills, setSkills] = useState([]);
     const [loading, setLoading] = useState(false);
     const [resumeUrl, setResumeUrl] = useState(false);
+    const [mode, setMode] = useState(null);
     const location = useLocation()
     const dispatch = useDispatch()
     const history = useHistory()
@@ -39,6 +40,11 @@ const UpdateProfile = () => {
     useEffect(()=>{
         if(userDetails.resumeUrl){
             setResumeUrl(true)
+        }
+        if(user?.user.authmode == 'phone'){
+          setMode('phone')
+        }else{
+          setMode('email')
         }
         // userDetails.skills = userDetails.skills.join()
     } , [])
@@ -109,6 +115,8 @@ const UpdateProfile = () => {
           return <LoadingSpinner />
       }
 
+
+
       console.log(userDetails);
 
   return <div>
@@ -167,7 +175,22 @@ const UpdateProfile = () => {
        </div>
        
 
-       {/* email or phone */}
+       
+    <div className="w-full flex">
+        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label className="block uppercase tracking-wide  text-gray-700 text-xs font-medium mb-2" htmlFor="grid-first-name">
+            Email *
+            </label>
+            <input disabled={mode == 'email'} value={mode == 'email' ? user?.user.email : formData.email} name='email' onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="email" placeholder="" />
+            {/* <p className="text-red-500 text-xs italic">Please fill out this field.</p> */}
+        </div>
+        <div className="w-full md:w-1/2 px-3">
+            <label className="block uppercase tracking-wide text-gray-700 text-xs font-medium mb-2" htmlFor="grid-last-name">
+            Phone *
+            </label>
+            <input disabled={mode == 'phone'} value={mode == 'phone' ? user?.user.phone : formData.phone} name="phone" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="tel" placeholder="" />
+        </div>
+       </div>
 
        <div className="w-full flex">
         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -241,19 +264,3 @@ const UpdateProfile = () => {
 export default UpdateProfile;
 
 
-
-// <div className="w-full flex">
-//         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-//             <label className="block uppercase tracking-wide  text-gray-700 text-xs font-medium mb-2" htmlFor="grid-first-name">
-//             Email *
-//             </label>
-//             <input value={formData.email} name='email' onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="email" placeholder="" />
-//             {/* <p className="text-red-500 text-xs italic">Please fill out this field.</p> */}
-//         </div>
-//         <div className="w-full md:w-1/2 px-3">
-//             <label className="block uppercase tracking-wide text-gray-700 text-xs font-medium mb-2" htmlFor="grid-last-name">
-//             Phone *
-//             </label>
-//             <input value={formData.phone} name="phone" onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="tel" placeholder="" />
-//         </div>
-//        </div>

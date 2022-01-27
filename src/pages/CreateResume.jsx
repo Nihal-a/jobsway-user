@@ -1,5 +1,8 @@
 import React, { Component, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
+import Navbar from '../components/navbar/Navbar';
 import Education from '../components/ResumeComponenets/Education';
 import Experience from '../components/ResumeComponenets/Experience';
 import ExtraDetails from '../components/ResumeComponenets/ExtraDetails';
@@ -55,6 +58,7 @@ const initialState = {
             skill5: '' ,
             skill6: '' ,
 
+
             language1: '' ,
             language2: '' ,
             language3: '' ,
@@ -67,8 +71,9 @@ const CreateResume = () => {
   
   const [step, setStep] = useState(0);
   const [formData, setFormdata] = useState(initialState);
-
-
+  const dispatch = useDispatch()
+  const {id} = useParams()
+  const [loading, setLoading] = useState(false);
 
   const nextStep = (e) => {
     setStep((step) => step + 1)
@@ -82,6 +87,11 @@ const CreateResume = () => {
     e.preventDefault()
     setFormdata({...formData ,[e.target.name] : e.target.value})
   }
+
+
+  if(loading){
+    return <LoadingSpinner />
+ }
 
   console.log(formData);
 
@@ -98,7 +108,7 @@ const CreateResume = () => {
           case 4:
           return <Education handleChange={handleChange} nextStep={nextStep} prevStep={prevStep} formData={formData} setFormdata={setFormdata}/>
           case 5:
-          return <ExtraDetails handleChange={handleChange} nextStep={nextStep} prevStep={prevStep} formData={formData} setFormdata={setFormdata}/>
+          return <ExtraDetails handleChange={handleChange}  prevStep={prevStep} formData={formData} setFormdata={setFormdata} setLoading={setLoading}/>
       default:
         break;
     }
@@ -107,10 +117,8 @@ const CreateResume = () => {
  
   return (
       <div className="">
-        <div className="md:container md:mx-auto flex justify-between items-center mt-5 ">
-        <Link to="/" className="text-3xl font-bold" >Jobs<span className="text-primary">Way.</span></Link>
-      </div>
-      <div className="text-center mt-14">
+       <Navbar />
+      <div className="text-center mt-28">
         <h3 className='font-semibold text-xl'>{!step == 0 && 'Step - '} <span className='text-primary'>{step == 0 ? 'Introduction' : `${step}` }</span></h3>
       </div>
       <div className="container mx-auto flex mt-2 justify-center  w-screen mb-10">

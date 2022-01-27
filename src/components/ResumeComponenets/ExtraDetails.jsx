@@ -1,14 +1,29 @@
 import { Button } from '@material-tailwind/react';
+import swal from '@sweetalert/with-react';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
+import { CreateResume } from '../../actions/user';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
-const ExtraDetails = ({prevStep , nextStep , formData , handleChange}) => {
+const ExtraDetails = ({prevStep , formData , handleChange , setLoading}) => {
 
 
+   const {id} = useParams()
     const [Err, setErr] = useState({});
+    const dispatch = useDispatch()
+    const history = useHistory()
 
     useEffect(() => {
      setErr({})
     }, [formData]);
+
+    const finalSubmit = (e) => {
+      e.preventDefault()
+      setLoading(true)
+      dispatch(CreateResume(id , formData , setLoading , history))
+  }
+
 
   return <div className='w-full'>
   <h3 className='text-xl text-center'>Extra Information</h3>
@@ -24,7 +39,7 @@ const ExtraDetails = ({prevStep , nextStep , formData , handleChange}) => {
    <input  name='skill2' value={formData.skill2}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Skill 2" />
 </div>
 <div className="w-full md:w-1/2 px-3">
-   <input  name='skill3' value={formData.skill3}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="number" placeholder="Skill 3" />
+   <input  name='skill3' value={formData.skill3}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Skill 3" />
 </div>
 </div>
 <div className="w-full flex">
@@ -35,7 +50,7 @@ const ExtraDetails = ({prevStep , nextStep , formData , handleChange}) => {
    <input  name='skill5' value={formData.skill5}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Skill 5" />
 </div>
 <div className="w-full md:w-1/2 px-3">
-   <input  name='skill6' value={formData.skill6}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="number" placeholder="Skill 6" />
+   <input  name='skill6' value={formData.skill6}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Skill 6" />
 </div>
 </div>
 </div>
@@ -50,7 +65,7 @@ const ExtraDetails = ({prevStep , nextStep , formData , handleChange}) => {
    <input  name='language2' value={formData.language2}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Language 2" />
 </div>
 <div className="w-full md:w-1/2 px-3">
-   <input  name='language3' value={formData.language3}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="number" placeholder="Language 3" />
+   <input  name='language3' value={formData.language3}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Language 3" />
 </div>
 </div>
 </div>
@@ -65,7 +80,7 @@ const ExtraDetails = ({prevStep , nextStep , formData , handleChange}) => {
    <input  name='interest2' value={formData.interest2}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Interest 2" />
 </div>
 <div className="w-full md:w-1/2 px-3">
-   <input  name='interest3' value={formData.interest3}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="number" placeholder="Interest 3" />
+   <input  name='interest3' value={formData.interest3}  onChange={handleChange} className="appearance-none block w-full bg-grey-200 text-gray-700 border  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Interest 3" />
 </div>
 </div>
 </div>
@@ -73,7 +88,7 @@ const ExtraDetails = ({prevStep , nextStep , formData , handleChange}) => {
     
 <div className="flex items-center justify-center font-light">
 <Button color="gray" className="m-2" onClick={prevStep} >Prev</Button>
-<Button className="m-2" onClick={nextStep}  >Create My JobsWay Resume</Button>
+<Button className="m-2" onClick={finalSubmit}  >Create My JobsWay Resume</Button>
 </div>
 </div>
 </div>

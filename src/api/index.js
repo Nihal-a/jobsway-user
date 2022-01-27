@@ -27,6 +27,8 @@ export const getJobDetailsById = (jobId) => API.get(`/job/details/${jobId}`)
 //search
 export const doSearch = (keyword) => API.get(`/search/${keyword}`)
 
+//Resume 
+export const createResume = (id , formData) => API.post(`/create-resume/${id}` , formData)
 //Company
 export const getCompanyDetails = (id) => API.get(`/getcompany/${id}`)
 export const getAllCompanies = () => API.get(`/companies`)

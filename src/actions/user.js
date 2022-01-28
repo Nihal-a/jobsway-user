@@ -34,6 +34,16 @@ export const search = (keyword , setLoading) => async (dispatch) => {
     }
 }
 
+export const startTask = (jobId , history , setLoading , userId) => async (dispatch) => {
+    try {
+        const {data} = await api.startTask(jobId)
+        setLoading(false)
+        history.push(`/task/${userId}/${data.task._id}/${data.token}` , { task : data.task })
+    } catch (error) {
+        console.log(error.response);
+    }
+}
+
 export const CreateResume = (id , formData , setLoading , history) => async (dispatch) => {
     try {
         const {data} = await api.createResume(id , formData)

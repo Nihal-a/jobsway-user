@@ -1,29 +1,43 @@
 import { Icon } from '@iconify/react';
 import swal from '@sweetalert/with-react';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { startTask } from '../../actions/user';
 import googleLogo from "../../assets/images/googleLogo.png"
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
 
 
-const TaskCard = ({task}) => {
+const TaskCard = ({task , setLoading}) => {
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const history = useHistory()
+  const dispatch = useDispatch()
 
-
-    console.log(task);
-    
     const handleTask = (e , id) => {
         e.preventDefault()
-        history.push(`/task/${user?.user._id}/${id}`)
+        swal({
+            title: "Are you sure to Start Task?",
+            text: "Warnings : Don't Quit or Close the Tab Until the task is submitted & you cannot Stop the Time or Restart",
+            icon: "warning",
+            buttons: true,
+            dangerMode: false,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                setLoading(true)
+                dispatch(startTask(task?._id , history ,setLoading , user?.user._id))
+            }
+          });
     }
+
 
   return <div className="w-72 h-64 bg-black rounded-md p-5">
                         <div className="flex justify-between">
                 <Link className="flex items-center">
-                    <img src={task?.companyDetails[0]?.imgUrl} alt="company logo" className="w-14 h-14 rounded-md" />
+                    <img src={task?.companyDetails[0]?.logoUrl} alt="company logo" className="w-14 h-14 rounded-md" />
                     <div className="ml-3">
                     <h6 className=" text-md font-semibold text-white">{task?.companyDetails[0]?.companyName}</h6>
                     <div className="text-sm text-secondary flex items-center">

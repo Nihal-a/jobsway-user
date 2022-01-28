@@ -1,76 +1,78 @@
-// import React, { Children } from 'react';
-// import Navbar from '../components/navbar/Navbar';
-// // import { CountdownCircleTimer } from 'react-countdown-circle-timer'
-// import { useTimer } from 'react-timer-hook';
-
-// const TaskPage = () => {
-//   return <div>
-//       <Navbar />
-//       <div className="container mx-auto max-w-screen-lg mt-28 flex items-center">
-//           <div className="">
-//               <ol className='list-decimal max-w-2xl'>
-//                   <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit repellat atque, maiores non aliquid magni?</li>
-//                   <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit repellat atque, maiores non aliquid magni?</li>
-//                   <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit repellat atque, maiores non aliquid magni?</li>
-//                   <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit repellat atque, maiores non aliquid magni?</li>
-//               </ol>
-//           </div>
-//           <div className="">
-              
-//           </div>
-//       </div>
-//       <div className="">
-//           <input type="url" name='submit' className='appearance-none block w-full bg-grey-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'/>
-//       </div>
-//   </div>;
-// };
-
-// export default TaskPage;
-
+import { Button, InputIcon } from '@material-tailwind/react';
 import React from 'react';
-import { useTimer } from 'react-timer-hook';
-
-function MyTimer({ expiryTimestamp }) {
-  const {
-    seconds,
-    minutes,
-    hours,
-    days,
-    isRunning,
-    start,
-    pause,
-    resume,
-    restart,
-  } = useTimer({ expiryTimestamp, onExpire: () => console.warn('onExpire called') });
+import AlertComponent from '../components/Alert/Alert';
+import Navbar from '../components/navbar/Navbar';
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import { useEffect } from 'react';
 
 
-  return (
-    <div style={{textAlign: 'center'}}>
-      <h1>react-timer-hook </h1>
-      <p>Timer Demo</p>
-      <div style={{fontSize: '100px'}}>
-        <span>{days}</span>:<span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
+const TaskPage = () => {
+
+
+  const renderTime = ({ remainingTime }) => {
+    if (remainingTime === 0) {
+      return <div className="timer">Too lale...</div>;
+    }
+    
+      const minutes = Math.floor(remainingTime / 60)
+      const seconds = remainingTime % 60
+  
+  
+    return (
+      <div className="timer text-center text-2xl">
+        <div className="text">Remaining</div>
+        <div className="value text-4xl font-semibold text-primary">{`${minutes}:${seconds}`}</div>
+        <div className="text">seconds</div>
       </div>
-      <p>{isRunning ? 'Running' : 'Not running'}</p>
-      <button onClick={start}>Start</button>
-      <button onClick={pause}>Pause</button>
-      <button onClick={resume}>Resume</button>
-      <button onClick={() => {
-        // Restarts to 5 minutes timer
-        const time = new Date();
-        time.setSeconds(time.getSeconds() + 300);
-        restart(time)
-      }}>Restart</button>
-    </div>
-  );
-}
+    );
+  };
 
-export default function App() {
-  const time = new Date();
-  time.setSeconds(time.getSeconds() + 600); // 10 minutes timer
-  return (
-    <div>
-      <MyTimer expiryTimestamp={time} />
-    </div>
-  );
-}
+
+  return <div>
+   <Navbar />
+
+<div className="container mx-auto flex flex-col items-center justify-center gap-4">
+<div className="container mx-auto max-w-screen-lg mt-28 flex items-center justify-center">
+      <div className=" flex flex-col justify-center items-center mt-10">
+        <p className='text-danger mb-10'>Warning : <span className='font-semibold'>Dont Quit or Close the tab until you submit the task</span></p>
+          <ol className='list-decimal max-w-lg flex flex-col gap-3'>
+              <li className='font-semibold'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit repellat atque, maiores non aliquid magni?</li>
+              <li className='font-semibold'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit repellat atque, maiores non aliquid magni?</li>
+              <li className='font-semibold'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit repellat atque, maiores non aliquid magni?</li>
+              <li className='font-semibold'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit repellat atque, maiores non aliquid magni?</li>
+          </ol>
+      </div>
+      <div className=" flex flex-col justity-center ">
+      <CountdownCircleTimer
+          isPlaying
+          duration={10}
+          colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
+          colorsTime={[10, 6, 3, 0]}
+          onComplete={() => ({ shouldRepeat: true, delay: 1 })}
+          size={280}
+        >
+          {renderTime}
+
+        </CountdownCircleTimer>
+      </div>
+  </div>
+    <form className="w-10/12 flex items-center justify-center gap-4 mt-6">
+    <InputIcon
+            type="link"
+            color="lightBlue"
+            size="lg"
+            outline={true}
+            placeholder="Answer URL"
+            iconFamily="material-icons"
+            iconName="link"
+
+        />
+        <input type="submit" className='px-6 py-2 rounded-md text-white bg-primary pointer'/>
+    </form>
+
+</div>
+
+  </div>;
+};
+
+export default TaskPage;

@@ -9,7 +9,6 @@ export const getAllCompanies = (setLoading) => async (dispatch) => {
     } catch (error) {
         setLoading(false)
         console.log(error);
-        alert('There is an error in company')
     }
 }
 export const getCompanyDetails = (id) => async (dispatch) => {

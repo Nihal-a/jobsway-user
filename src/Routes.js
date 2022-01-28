@@ -20,6 +20,8 @@ import CreateResume from "./pages/CreateResume";
 import UpdateProfile from "./pages/UpdateProfile";
 import TaskPage from "./pages/TaskPage";
 
+
+
 function Routed() {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const history = useHistory()
@@ -95,7 +97,7 @@ function Routed() {
             <Route path="/update-profile/:id">
                 {user ?  <UpdateProfile /> :  <Redirect to="/signin" />}
             </Route>
-            <Route path="/task/:userId/:taskId">
+            <Route path="/task/:userId/:taskId/:token">
                 {user ?  <TaskPage /> :  <Redirect to="/signin" />}
             </Route>
         </Switch>

@@ -23,6 +23,7 @@ export const getCompanyJobs = (id) => API.get(`/company-jobs/${id}`)
 export const applyForJob = (dataObj,id) => API.post(`/applyjob/${id}`,dataObj , {headers : { "Content-Type": "multipart/form-data" } })
 export const getUserAppliedJobs = (id) => API.get(`/applied/jobs/details/${id}`)
 export const getJobDetailsById = (jobId) => API.get(`/job/details/${jobId}`)
+export const startTask = (taskId) => API.patch(`/start-task/${taskId}`)
 
 //search
 export const doSearch = (keyword) => API.get(`/search/${keyword}`)

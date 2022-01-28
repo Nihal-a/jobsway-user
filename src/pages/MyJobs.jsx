@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getTaskOfUser } from '../actions/user'
 import TaskCard from '../components/TaskCard/TaskCard'
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner'
 
 const MyJobs = () => {
 
@@ -14,14 +15,16 @@ const MyJobs = () => {
     const dispatch = useDispatch()
     const appliedJobs = useSelector(state => state?.user?.appliedJobs)
     const tasks = useSelector(state => state?.user?.tasks)
+const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         dispatch(getUserAppliedJobs(user?.user._id))
         dispatch(getTaskOfUser(user?.user._id))
     }, [])
 
-
-    console.log(tasks);
+if(loading){
+    return <LoadingSpinner />
+}
 
     
     return (
@@ -29,18 +32,19 @@ const MyJobs = () => {
             <Navbar />
 
             <div className="container mx-auto max-w-screen-lg mt-28">
+            <h4 className="text-2xl font-semibold">Jobs <span className="text-primary">Tasks :</span> </h4>
 
-                    <div className="my-4">
+                    <div className="my-4 flex gap-3">
 
                         {
                             !tasks.length == 0 ? tasks.map((task) => (
-                                <TaskCard task={task} />
+                                <TaskCard task={task} setLoading={setLoading}/>
                             )) : <p className='text-center mt-4 text-danger'>No New Tasks.</p>
                         }
 
                     </div>
             
-                <h4 className="text-2xl font-semibold">My <span className="text-primary">Job Details :</span> </h4>
+                <h4 className="text-2xl font-semibold">My <span className="text-primary">Job Status :</span> </h4>
                             <div className="">
 
                             { !appliedJobs.length == 0 ? appliedJobs.map((appliedJob) => (
@@ -58,7 +62,7 @@ const MyJobs = () => {
                                     <h2 className="text-white text-3xl font-semibold">{ appliedJob?.jobDetails[0]?.jobTitle  }</h2>
                                     <div className="flex items-center  text-white">
                                         <p>Status : </p>
-                                        <div className="py-2 px-4 ml-3 font-semibold rounded-md" style={{backgroundColor:  appliedJob?.appliedJobs?.status == 'PENDING' ? '#FFE39C' : [ appliedJob?.appliedJobs?.status == 'APPROVED' ? '#03C852' : [appliedJob?.appliedJobs?.status == 'REJECTED' && '#FF4E4E' ]  ], color : appliedJob?.appliedJobs?.status == 'PENDING' ?  '#945900' : [ appliedJob?.appliedJobs?.status == 'APPROVED' ? '#016717' : [appliedJob?.appliedJobs?.status == 'REJECTED' && '#680000' ]  ]}}>{appliedJob?.appliedJobs?.status}</div>
+                                        <div className="py-2 px-4 ml-3 font-semibold rounded-md" style={{backgroundColor:  appliedJob?.appliedJobs?.status == 'PENDING' ? '#FFE39C' : [ appliedJob?.appliedJobs?.status == 'APPROVED' ? '#03C852' : [appliedJob?.appliedJobs?.status == 'REJECTED' ? '#FF4E4E' : [ appliedJob?.appliedJobs?.status == "SHORTLISTED" && '#A0AAFF' ] ]  ], color : appliedJob?.appliedJobs?.status == 'PENDING' ?  '#945900' : [ appliedJob?.appliedJobs?.status == 'APPROVED' ? '#016717' : [appliedJob?.appliedJobs?.status == 'REJECTED' && '#680000' ]  ]}}>{appliedJob?.appliedJobs?.status}</div>
                                         {/* <div className="py-2 px-4 ml-3 font-semibold rounded-md" style={{backgroundColor:'#03C852', color : '#016717'}}>APPROVED</div>
                                         <div className="py-2 px-4 ml-3 font-semibold rounded-md" style={{backgroundColor:'#FF4E4E', color : '#680000'}}>REJECTED</div> */}
                                     </div>

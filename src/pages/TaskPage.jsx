@@ -16,18 +16,33 @@ const TaskPage = () => {
   const [taskDetails, setTaskDetails] = useState();
   const [disable, setDisable] = useState(false);
   const [url, setUrl] = useState('');
-  const [formData, setformData] = useState({url : ''});
   const dispatch = useDispatch()
   const [loading, setLoading] = useState();
   const history = useHistory()
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  const [Err, setErr] = useState('');
 
 
   useEffect(() => {
    setTaskDetails(location?.state.task)
 
   }, []);
+
+  useEffect(() => {
+    
+  }, [url]);
   
+
+  
+  function validURL(str) {
+    var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+      '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    return !!pattern.test(str);
+  }
 
   const renderTime = ({ remainingTime }) => {
     if (remainingTime === 0) {
@@ -49,9 +64,12 @@ const TaskPage = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault()
+    if(url.trim() == '') return setErr("Answrel Url cannot be blank")
+  const statusOfUrl = validURL(url)
+    if(!statusOfUrl) return setErr("Enter a Valid Url input")
     setLoading(true)
     const formDetails = {
-      answerUrl : formData.url ,
+      answerUrl : url ,
       taskId : taskDetails?._id
     }
     dispatch(TaskCompleted(formDetails , user?.user._id , setLoading , history))
@@ -97,7 +115,7 @@ const TaskPage = () => {
         </CountdownCircleTimer>
       </div>
   </div>
-    <form className="w-10/12 flex items-center justify-center gap-4 mt-6" onSubmit={handleSubmit}>
+      <form className="w-10/12 flex items-center justify-center gap-4 mt-6" onSubmit={handleSubmit}>
     <InputIcon
             type="link"
             color="lightBlue"
@@ -107,9 +125,10 @@ const TaskPage = () => {
             iconFamily="material-icons"
             iconName="link"
             onChange={(e) => setUrl(e.target.value)}
-        />
+            />
         <button  type="submit" className={`px-6 py-2 rounded-md  ${disable ? 'bg-secondary cursor-none text-warning' : 'bg-primary cursor-pointer text-white'}`} disabled={disable}>{disable ? 'Expired' : 'Submit'}</button>
     </form>
+            {Err && <p className='text-danger'>{Err}</p>}
 
 </div>
 

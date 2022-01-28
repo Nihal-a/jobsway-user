@@ -1,17 +1,27 @@
 import { Button, InputIcon } from '@material-tailwind/react';
-import React from 'react';
+import React, { useState } from 'react';
 import AlertComponent from '../components/Alert/Alert';
 import Navbar from '../components/navbar/Navbar';
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 
 const TaskPage = () => {
 
+  const location = useLocation()
+  const [taskDetails, setTaskDetails] = useState();
+  const [disable, setDisable] = useState(false);
+
+  useEffect(() => {
+   setTaskDetails(location?.state.task)
+   
+  }, []);
+  
 
   const renderTime = ({ remainingTime }) => {
     if (remainingTime === 0) {
-      return <div className="timer">Too lale...</div>;
+      return <div className="timer">Too late...</div>;
     }
     
       const minutes = Math.floor(remainingTime / 60)
@@ -27,6 +37,13 @@ const TaskPage = () => {
     );
   };
 
+  const timeInMinute = taskDetails?.time * 60
+
+  console.log(timeInMinute);
+
+  const onComplete = () => {
+    setDisable(true)
+  }
 
   return <div>
    <Navbar />
@@ -36,19 +53,19 @@ const TaskPage = () => {
       <div className=" flex flex-col justify-center items-center mt-10">
         <p className='text-danger mb-10'>Warning : <span className='font-semibold'>Dont Quit or Close the tab until you submit the task</span></p>
           <ol className='list-decimal max-w-lg flex flex-col gap-3'>
-              <li className='font-semibold'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit repellat atque, maiores non aliquid magni?</li>
-              <li className='font-semibold'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit repellat atque, maiores non aliquid magni?</li>
-              <li className='font-semibold'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit repellat atque, maiores non aliquid magni?</li>
-              <li className='font-semibold'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit repellat atque, maiores non aliquid magni?</li>
+              <li className='font-semibold'>{taskDetails?.taskQuestions.q1}</li>
+              <li className='font-semibold'>{taskDetails?.taskQuestions.q2}</li>
+              <li className='font-semibold'>{taskDetails?.taskQuestions.q3}</li>
+              <li className='font-semibold'>{taskDetails?.taskQuestions.q4}</li>
           </ol>
       </div>
       <div className=" flex flex-col justity-center ">
       <CountdownCircleTimer
           isPlaying
-          duration={10}
+          duration={timeInMinute}
           colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
           colorsTime={[10, 6, 3, 0]}
-          onComplete={() => ({ shouldRepeat: true, delay: 1 })}
+          onComplete={onComplete}
           size={280}
         >
           {renderTime}
@@ -65,9 +82,8 @@ const TaskPage = () => {
             placeholder="Answer URL"
             iconFamily="material-icons"
             iconName="link"
-
         />
-        <input type="submit" className='px-6 py-2 rounded-md text-white bg-primary pointer'/>
+        <button type="submit" className={`px-6 py-2 rounded-md  ${disable ? 'bg-secondary cursor-none text-warning' : 'bg-primary cursor-pointer text-white'}`} disabled={disable}>{disable ? 'Expired' : 'Submit'}</button>
     </form>
 
 </div>

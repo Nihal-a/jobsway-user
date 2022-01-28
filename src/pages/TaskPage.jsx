@@ -4,7 +4,10 @@ import AlertComponent from '../components/Alert/Alert';
 import Navbar from '../components/navbar/Navbar';
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { TaskCompleted } from '../actions/user';
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 
 
 const TaskPage = () => {
@@ -12,10 +15,17 @@ const TaskPage = () => {
   const location = useLocation()
   const [taskDetails, setTaskDetails] = useState();
   const [disable, setDisable] = useState(false);
+  const [url, setUrl] = useState('');
+  const [formData, setformData] = useState({url : ''});
+  const dispatch = useDispatch()
+  const [loading, setLoading] = useState();
+  const history = useHistory()
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+
 
   useEffect(() => {
    setTaskDetails(location?.state.task)
-   
+
   }, []);
   
 
@@ -36,6 +46,16 @@ const TaskPage = () => {
       </div>
     );
   };
+  
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setLoading(true)
+    const formDetails = {
+      answerUrl : formData.url ,
+      taskId : taskDetails?._id
+    }
+    dispatch(TaskCompleted(formDetails , user?.user._id , setLoading , history))
+  }
 
   const timeInMinute = taskDetails?.time * 60
 
@@ -43,6 +63,10 @@ const TaskPage = () => {
 
   const onComplete = () => {
     setDisable(true)
+  }
+
+  if(loading){
+    return <LoadingSpinner />
   }
 
   return <div>
@@ -73,7 +97,7 @@ const TaskPage = () => {
         </CountdownCircleTimer>
       </div>
   </div>
-    <form className="w-10/12 flex items-center justify-center gap-4 mt-6">
+    <form className="w-10/12 flex items-center justify-center gap-4 mt-6" onSubmit={handleSubmit}>
     <InputIcon
             type="link"
             color="lightBlue"
@@ -82,8 +106,9 @@ const TaskPage = () => {
             placeholder="Answer URL"
             iconFamily="material-icons"
             iconName="link"
+            onChange={(e) => setUrl(e.target.value)}
         />
-        <button type="submit" className={`px-6 py-2 rounded-md  ${disable ? 'bg-secondary cursor-none text-warning' : 'bg-primary cursor-pointer text-white'}`} disabled={disable}>{disable ? 'Expired' : 'Submit'}</button>
+        <button  type="submit" className={`px-6 py-2 rounded-md  ${disable ? 'bg-secondary cursor-none text-warning' : 'bg-primary cursor-pointer text-white'}`} disabled={disable}>{disable ? 'Expired' : 'Submit'}</button>
     </form>
 
 </div>

@@ -44,6 +44,20 @@ export const startTask = (jobId , history , setLoading , userId) => async (dispa
     }
 }
 
+
+export const TaskCompleted = (formData , userId , setLoading , history) => async (dispatch) => {
+    try {
+        const {data} = await api.TaskCompleted(userId , formData)
+        setLoading(false)
+        toast.success(data.msg)
+        history.push('/my-jobs')
+    } catch (error) {
+        console.log(error.response);
+    }
+}
+
+
+
 export const CreateResume = (id , formData , setLoading , history) => async (dispatch) => {
     try {
         const {data} = await api.createResume(id , formData)

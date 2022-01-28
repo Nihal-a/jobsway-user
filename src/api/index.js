@@ -24,6 +24,7 @@ export const applyForJob = (dataObj,id) => API.post(`/applyjob/${id}`,dataObj , 
 export const getUserAppliedJobs = (id) => API.get(`/applied/jobs/details/${id}`)
 export const getJobDetailsById = (jobId) => API.get(`/job/details/${jobId}`)
 export const startTask = (taskId) => API.patch(`/start-task/${taskId}`)
+export const TaskCompleted = (userId , data) => API.post(`/task/completed/${userId}` , data)
 
 //search
 export const doSearch = (keyword) => API.get(`/search/${keyword}`)

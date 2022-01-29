@@ -171,13 +171,13 @@ const ApplyJob = () => {
               onChange={handlePdfChange}
             />
             {pdf && <button className="underline mt-1" onClick={handleViewPdf}>View Pdf</button>}
-            <p className="text-xs m-3">
+            {/* <p className="text-xs m-3">
               Don’t have one? No worries{" "}
               <Link to={'/create-resume'} className="text-primary underline">
                 {" "}
                 Create a JobsWay Resume
               </Link>
-            </p>
+            </p> */}
           </div>
           <div className="flex flex-col w-1/3 p-2 mt-3">
             <input

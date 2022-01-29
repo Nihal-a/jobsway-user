@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 import moment from 'moment'
 import { getJobDetailsById } from '../actions/jobs'
 import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner'
+import { useMediaQuery } from 'react-responsive'
 
 const JobDetails = () => {
     
@@ -20,6 +21,8 @@ const JobDetails = () => {
     const [premiumStatus, setPremiumStatus] = useState(false)
     const [loading, setLoading] = useState(true);
     const {jobDetailsByid : jobDetails} = useSelector(state => state.user)
+  const isMobile = useMediaQuery({ query: `(max-width: 770px)` });
+
     
 
     useEffect(() => {
@@ -47,11 +50,11 @@ const JobDetails = () => {
     return (
         <div>
             <Navbar />
-            <div className="container mx-auto mt-28 flex ">
-                <div className="flex flex-col w-1/2">
+            <div className={`container mx-auto mt-28 flex ${isMobile && 'flex-col text-center'}`}>
+                <div className={`flex flex-col flex-1 ${isMobile && 'justify-center items-center'}`}>
                     <div className="">
                         <h3 className="text-4xl font-semibold">{jobDetails?.jobTitle}</h3>
-                        <div className="flex items-center">
+                        <div className={`flex items-center ${isMobile && 'justify-center'}`}>
                         <span className="flex items-center mt-2">
                             <Icon icon="bx:bx-rupee" height="28" color="#00B512" />
                             <h6 className="text-2xl font-semibold" style={{color:'#00B512'}}>{jobDetails?.minSalary} - {jobDetails?.maxSalary}</h6>
@@ -59,7 +62,7 @@ const JobDetails = () => {
                         <p className="mt-2 ml-8">{jobDetails?.timeSchedule}</p>
                         </div>
                     </div>
-                    <div className=" mt-10">
+                    <div className={`${isMobile ? 'mt-5' : 'mt-10'}`}>
                         <h6 className="font-semibold">Qualifications : </h6>
                         <div className="pl-4 mt-2">
                             {jobDetails?.qualification.map((qualif) => (
@@ -67,19 +70,19 @@ const JobDetails = () => {
                             ))}
                         </div>
                     </div>
-                    <div className="mt-10 flex items-center">
-                        <h6 className="font-semibold">Education : </h6>
+                    <div className={`mt-10 flex items-center ${isMobile && 'justify-cneter flex-col '}`}>
+                        <h6 className="font-semibold">Education: </h6>
                         <h4 className="text-lg ml-4">{jobDetails?.education}</h4>
                     </div>
-                    <div className="mt-10 flex items-start">
-                        <h6 className="font-semibold">Languages : </h6>
+                    <div className={`mt-10 flex items-start ${isMobile && 'justify-cneter flex-col '}`}>
+                        <h6 className="font-semibold">Languages: </h6>
                         <div className="w-full max-w-xs h-auto pl-3 flex-wrap flex">
                             {jobDetails?.language.map((lang) => (
                                 <span className="text-lg font-medium mx-2">{lang}</span>
                             ))}
                         </div>
                     </div>
-                    <div className="mt-10 flex items-start">
+                    <div className={`mt-10 flex items-start ${isMobile && 'justify-cneter flex-col '}`}>
                         <h6 className="font-semibold">Skills : </h6>
                         <div className="w-full max-w-xs h-auto pl-3 flex-wrap flex">
                             {jobDetails?.skills.map((skill) => (
@@ -87,11 +90,11 @@ const JobDetails = () => {
                             ))}
                         </div>
                     </div>
-                    <div className="flex items-center justify-center mt-4">
+                    { !isMobile && <div className="flex items-center justify-center mt-4">
                         { premiumStatus ? <><button className="text-warning text-sm py-2 px-28 rounded-lg cursor-not-allowed" disabled style={{backgroundColor:'#dddddd'}} >Upgrade to Premium to <br /> Apply for more Jobs.</button> </> : <>{status ? <button className="text-success text-sm py-2 px-28 rounded-lg cursor-not-allowed" disabled style={{backgroundColor:'#dddddd'}} >You have Already Applied to this Job.</button> : <Link to={{pathname:"/apply-job" , state:{job : jobDetails}}} className="text-white py-2 px-28 rounded-lg" style={{backgroundColor:'#0060A5'}} >Apply Now</Link>}</>}
-                    </div>
+                    </div>}
                 </div>
-                <div className="w-1/2">
+                <div className="flex-1">
                 <div className="mt-10 flex flex-col w-full">
                         <h6 className="font-semibold">Job Overview : </h6>
                         <div className="w-full text-xl h-auto pl-3 flex mt-2 justify-around ">
@@ -121,6 +124,10 @@ const JobDetails = () => {
                             </div>
                         </div>
                     </Link>
+
+                    {isMobile && <div className="flex items-center justify-center pb-10">
+                        { premiumStatus ? <><button className="text-warning text-sm py-2 px-28 rounded-lg cursor-not-allowed" disabled style={{backgroundColor:'#dddddd'}} >Upgrade to Premium to <br /> Apply for more Jobs.</button> </> : <>{status ? <button className="text-success text-sm py-2 px-28 rounded-lg cursor-not-allowed" disabled style={{backgroundColor:'#dddddd'}} >You have Already Applied to this Job.</button> : <Link to={{pathname:"/apply-job" , state:{job : jobDetails}}} className="text-white py-2 px-28 rounded-lg" style={{backgroundColor:'#0060A5'}} >Apply Now</Link>}</>}
+                    </div>}
                 </div>
             </div>
         </div>

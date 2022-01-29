@@ -31,7 +31,8 @@ function Landing() {
       <Whyjobsway />
       <FeaturedJobs  />
       <PostJob />
-      <Footer /></>}
+      <Footer />
+      </>}
     </div>
   );
 }

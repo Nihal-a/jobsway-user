@@ -14,10 +14,10 @@ function FeaturedJobs() {
     }, [])
 
     return (
-        <div className="h-auto w-screen ">
+        <div className="h-auto w-screen p-3">
             <h4 className="text-4xl font-semibold text-center py-8"><span className="text-primary">Featured</span> Jobs.</h4>
             <div className="container mx-auto pb-8">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {featuredjobs.map((job) => (
                         <JobCard job={job}/>
                     ))}

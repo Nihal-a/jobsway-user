@@ -53,7 +53,7 @@ function Navbar({ hide }) {
 
   const NavItems = () => {
     return (
-      <div className="flex items-center fixed inset-0">
+      <div className="flex items-center absoluter inset-0">
         {!isMobile && <div className="gap-3 flex items-center justify-center">
         <Link to="/findjob" className=" text-black text-md ">Find Jobs</Link>
         <Link to={`/create-resume/${user?.user._id}`} className=" text-black text-md mr-5">Create Resume</Link>

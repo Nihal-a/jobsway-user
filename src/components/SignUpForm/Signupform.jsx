@@ -8,13 +8,14 @@ import { GoogleLoginButton } from "react-social-login-buttons";
 import { Icon } from '@iconify/react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha'
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import { useMediaQuery } from "react-responsive";
 
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '', type: '',captcha:''}
 
 function Signupform() {
-
-
+  
+  
   const [formData, setFormData] = useState(initialState)
   const [captchaErr, setCaptchaErr] = useState('')
   const [passwordErr, setPasswordErr] = useState('')
@@ -23,6 +24,7 @@ function Signupform() {
   const history = useHistory()
   const location = useLocation()
   const [loading, setLoading] = useState(false)
+  const isMobile = useMediaQuery({ query: `(max-width: 640px)` });
 
   useEffect(() => {
     loadCaptchaEnginge(6)
@@ -71,8 +73,8 @@ function Signupform() {
 
   return (
     <div className="signup-wrapper">
-      <form action="" onSubmit={handleSubmit}>
-        <h3 className="welcome ">Welcome to JobsWay.</h3>
+      <form className="" action="" onSubmit={handleSubmit}>
+        <h3 className={`welcome mt-4`} >Welcome to JobsWay.</h3>
         {captchaErr ? <p className="text-red-800" style={{ color: "red" }}>{captchaErr}</p> : null}
         {PhoneErr ? <p className="text-red-800" style={{ color: "red" }}>{PhoneErr}</p> : null}
         {passwordErr ? <p className="text-red-800" style={{ color: "red" }}>{passwordErr}</p> : null}
@@ -81,7 +83,7 @@ function Signupform() {
             <p className="text-red-800" style={{ color: "red" }}>{error.msg}</p>
           ))}</> : <><p className="text-red-800" style={{ color: "red" }}>{location?.state?.Err}</p></>
         }
-        <div className="inp-wrap d-flex" style={{ marginTop: "1rem" }}>
+        <div className={`inp-wrap d-flex ${isMobile && 'flex flex-col '}`} style={{ marginTop: "1rem" }}>
           <input onChange={handleChange}  name="firstName" placeholder="First Name" className="input" type="text" />
           <input onChange={handleChange}  name="lastName" placeholder="Last Name" className="input" type="text" />
         </div>

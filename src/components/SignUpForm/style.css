@@ -1,5 +1,5 @@
 .welcome{
-    font-size: 35px;
+    font-size: 30px;
     font-weight: 700;
     color: #212121;
 }
@@ -8,11 +8,13 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 450px;
+    max-width: 450px;
     margin: auto;
-    height: 90vh;
+    height: fit-content;
     text-align: center;
     margin-top: 4rem;
+    margin-bottom: 4rem;
+    padding: 1rem;
 }
 .inp-wrap{
     width: 100%;

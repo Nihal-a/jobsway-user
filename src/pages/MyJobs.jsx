@@ -36,10 +36,12 @@ if(loading){
         <div>
             <Navbar />
 
-            <div className="container mx-auto max-w-screen-lg mt-28 p-3">
+            <div className="container mx-auto  mt-28 p-3">
             <h4 className="text-2xl font-semibold">Jobs <span className="text-primary">Tasks :</span> </h4>
 
-                    <div className="my-4 flex gap-3">
+<div className="overflow-x-scroll overflow-y-hidden">
+
+                    <div className="w-max my-4 flex items-center justify-between gap-3 ">
 
                         {
                             !tasks.length == 0 ? tasks.map((task) => (
@@ -49,6 +51,7 @@ if(loading){
 
                     </div>
             
+</div>
                 <h4 className="text-2xl font-semibold">My <span className="text-primary">Job Status :</span> </h4>
                             <div className="">
 

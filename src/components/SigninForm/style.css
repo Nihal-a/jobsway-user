@@ -10,7 +10,7 @@
     flex-direction: column;
     width: 450px;
     margin: auto;
-    height: 80vh;
+    height: auto;
     text-align: center;
 }
 .inp-wrap{

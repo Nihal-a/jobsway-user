@@ -59,9 +59,9 @@ function SigninForm() {
   }
   return (
     <div>
-      <div className="signup-wrapper">
+      <div className="flex flex-col items-center justify-center text-center mt-28 p-4">
         <form action="" onSubmit={handleSubmit}>
-          <h3 className="welcome ">Sign In to JobsWay.</h3>
+          <h3 className="welcome mt-6">Sign In to JobsWay.</h3>
           {location?.state?.Err && <p className="text-red-800" style={{ color: "red" }}>{location.state.Err}</p> }
           <input onChange={handleChange} name="phone" placeholder="Phone" className="input" type="tel" />
           <input onChange={handleChange} name="password" placeholder="Password" className="input" type="password" />

@@ -9,12 +9,16 @@ import { getCompanyDetails } from '../actions/company';
 import { useSelector } from 'react-redux';
 import { getCompanyJobs } from '../actions/jobs';
 import { useParams } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
+
 
 const CompanyDetails = () => {
 
     const {cid} = useParams() 
     const dispatch = useDispatch()
     const location = useLocation()
+  const isMobile = useMediaQuery({ query: `(max-width: 790px)` });
+
     
     useEffect(() => {
         dispatch(getCompanyDetails(cid))
@@ -27,14 +31,15 @@ const CompanyDetails = () => {
         <div>
             <Navbar />
 
-            <div className="mt-28 flex container mx-auto">
-                <div className="w-1/2 p-8 ">
+            <div className={`mt-28 flex container mx-auto ${isMobile ? 'flex-col' : 'flex-row'}`}>
+                <div className="flex-1 p-3">
                     <div className="w-full p-5 flex flex-col items-center shadow-2xl ">
                         <img src={company?.logoUrl} alt="" className="w-20 h-20 rounded-md shadow-xl"/>
                         <h5 className="font-semibold text-xl mt-3">{company?.companyName}</h5>
                         <h6 className="text-dark text-md mt-3">{company?.industry}</h6>
                         <div className="text-xl flex items-center justify-between w-full p-6">
-                            <div className="">
+                            {!isMobile && <>
+                                <div className="">
                                 <span className="flex mt-4 items-center">
                                     <Icon icon="clarity:world-line" />
                                     <p className="ml-3">Website</p>
@@ -57,7 +62,7 @@ const CompanyDetails = () => {
                                 <p className="mt-4"> : </p>
                                 <p className="mt-4"> : </p>
                                 <p className="mt-4"> : </p>
-                            </div>
+                            </div></>}
                             <div className="">
                                 <h6 className="font-semibold mt-4"><Link className="underline">{company?.website}</Link></h6>
                                 <h6 className="font-semibold mt-4">{company?.location}</h6>
@@ -77,15 +82,15 @@ const CompanyDetails = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-1/2">
-                    <h5 className="p-6 text-xl">Jobs by <span className="font-semibold text-primary"> {company?.companyName} </span></h5>
+                <div className="flex-1">
+                    {/* <h5 className="p-6 text-xl">Jobs by <span className="font-semibold text-primary"> {company?.companyName} </span></h5>
                     <div className="">
-                        {/* {
+                        {
                             !company?.jobs == 0 ? <>{ company?.jobs.map((job) => (
                                 <JobCard job={job}/>
                             )) }</> : <p className='text-danger'>No Jobs Found</p>
-                        } */}
-                    </div>
+                        }
+                    </div> */}
                 </div>
             </div>
         </div>

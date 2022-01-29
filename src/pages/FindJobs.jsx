@@ -58,7 +58,7 @@ const FindJobs = () => {
             <Navbar />
             <div className="container mx-auto w-full h-20 mt-28">
                     <div className="flex justify-center w-full  p-4 items-center">
-                        <form className="m-2 w-6/12">
+                        <form className="m-2 w-full md:w-6/12">
                             <input name='search' onChange={handleSearch} placeholder="Job title, Keywords , Company or Location" className="text-md p-3 outline-0 border-0 h-12 w-full bg-secondary w-full h-14 rounded-lg" type="text" />
                         </form>
                         <div className="w-14 h-14 bg-primary flex items-center justify-center rounded-lg cursor-pointer">
@@ -69,7 +69,7 @@ const FindJobs = () => {
 
             <div className="h-auto w-screen ">
             <div className="container mx-auto pb-8 mt-12">
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid md:grid-cols-2 gap-4 p-3">
                     {jobs.length == 0 ? <div className="w-full text-center text-danger"><p className="text-center">No jobs Available right now, Try again later.</p></div> : <>{jobs.slice(pagesVisited , pagesVisited + jobsPerPage).map((job) =>(
                         <JobCard job={job}/>
                     ))}</>}
@@ -87,12 +87,12 @@ const FindJobs = () => {
                 nextLinkClassName="text-primary"
                 disabledClassName="text-dark"
                 activeClassName="px-3 py-1 bg-primary text-white"
-                className="m-3 flex w-1/4 justify-around"
+                className="m-3 flex w-2/4 justify-around"
             />
         </div>
         <div className="container mx-auto">
             <h5 className="font-semibold text-2xl my-3">Top Companies.</h5>
-            <div className="w-full h-20 flex justify-center mt-4">
+            <div className="h-auto flex items-center justify-center mt-4 overflow-x-scroll overflow-y-hidden">
                 {
                     !company?.allCompanies.length == 0 ? <>
                     {
@@ -105,10 +105,9 @@ const FindJobs = () => {
                 }
             </div>
         </div>
-        <div className="mt-60">
+        <div className="mt-10">
             <PostJob />
         </div>
-        <Footer />
         </div>
     )
 }

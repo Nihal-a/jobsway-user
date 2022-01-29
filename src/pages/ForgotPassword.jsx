@@ -34,7 +34,7 @@ const ForgotPassword = () => {
   return (
     <div className="">
       <Navbar />
-      <div className="flex items-center justify-center container mx-auto mt-28 flex-col">
+      <div className="flex items-center justify-center container mx-auto mt-28 flex-col p-4">
             <div className="text-center flex flex-col items-center justify-center mt-24">
                 <h3 className="text-3xl font-semibold mt-4">Reset Password.</h3>
                 <p className="text-center mt-3">Verify your phone number with OTP for setting the new Password</p>
@@ -45,7 +45,7 @@ const ForgotPassword = () => {
               name="phone"
               id=""
               placeholder="Phone Number"
-              className="bg-secondary p-4 m-2 mt-5 rounded-md w-1/4"
+              className="bg-secondary p-4 m-2 mt-5 rounded-md w-3/4 max-w-sm"
               required
             />
             <button className="py-2 px-7 rounded-md text-white mt-3 bg-primary" onClick={handleSubmit}>Get OTP</button>

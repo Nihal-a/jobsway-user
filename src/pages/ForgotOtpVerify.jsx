@@ -6,6 +6,9 @@ import { signup, verifyForgotOtp, verifyotp } from '../actions/auth';
 import { useLocation,useHistory} from 'react-router';
 import { useDispatch } from 'react-redux';
 import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
+import { useMediaQuery } from 'react-responsive';
+
+
 
 const initialState = {password : ''}
 
@@ -18,6 +21,8 @@ const [formData, setFormData] = useState(initialState)
     const history = useHistory()
     const [loading, setLoading] = useState(false)
     const [err, setErr] = useState(null)
+  const isMobile = useMediaQuery({ query: `(max-width: 640px)` });
+
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -38,10 +43,11 @@ const [formData, setFormData] = useState(initialState)
 
     const inputStyle = {
         backgroundColor : '#f2f2f2',
-        width : '90px',
-        height : '100px',
-        fontSize : '60px'
+        width : `${isMobile ? '45px' : '90px'}`,
+        height : `${isMobile ? '50px' : '100px'}`,
+        fontSize : `${isMobile ? '20px' : '90px'}`,
     }
+
 
     // const handleResend = (e) => {
     //     e.preventDefault()
@@ -60,11 +66,11 @@ const [formData, setFormData] = useState(initialState)
     return (
         <div>
             <Navbar hide={true} />
-            <div className="flex items-center flex-col justify-center text-center h-screen">
-                <h4 className="text-5xl font-semibold mb-4">Enter your Verification Code.</h4>
-                <h6 className="text-xl text-dark mb-4 font-light">We have sent a verification code to <span className="font-semibold">{`+91 ${location.state.phone}`}</span></h6>
+            <div className="flex items-center flex-col justify-center text-center h-screen p-2">
+                <h4 className="text-lg md:text-5xl font-semibold mb-4">Enter your Verification Code.</h4>
+                <h6 className="text-sm md:text-xl text-dark mb-4 font-light">We have sent a verification code to <span className="font-semibold">{`+91 ${location.state.phone}`}</span></h6>
                 {location.state.Err && <p className="text-red-800 text-lg mb-3" style={{color:'red'}} >{location.state.Err || err}</p>}
-                <form action="" className="flex flex-col items-center" onSubmit={handleSubmit}>
+                <form action="" className="flex flex-col items-center ml-5" onSubmit={handleSubmit}>
                     <OtpInput
                         value={otp}
                         onChange={setOtp}

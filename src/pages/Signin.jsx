@@ -8,7 +8,6 @@ function Signin() {
     <div>
       <Navbar hide={true} />
       <SigninForm />
-      <Footer />
     </div>
   );
 }

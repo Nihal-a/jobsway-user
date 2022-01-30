@@ -74,16 +74,16 @@ const JobDetails = () => {
                         <h6 className="font-semibold">Education: </h6>
                         <h4 className="text-lg ml-4">{jobDetails?.education}</h4>
                     </div>
-                    <div className={`mt-10 flex items-start ${isMobile && 'justify-cneter flex-col '}`}>
-                        <h6 className="font-semibold">Languages: </h6>
+                    <div className={`mt-10 flex items-start  ${isMobile && 'justify-cneter flex-col text-center'}`}>
+                        <h6 className={`font-semibold ${isMobile && 'w-full'}`}>Languages: </h6>
                         <div className="w-full max-w-xs h-auto pl-3 flex-wrap flex">
                             {jobDetails?.language.map((lang) => (
                                 <span className="text-lg font-medium mx-2">{lang}</span>
                             ))}
                         </div>
                     </div>
-                    <div className={`mt-10 flex items-start ${isMobile && 'justify-cneter flex-col '}`}>
-                        <h6 className="font-semibold">Skills : </h6>
+                    <div className={`mt-10 flex items-start ${isMobile && 'justify-center flex-col '}`}>
+                        <h6 className={`font-semibold ${isMobile && 'w-full'}`}>Skills : </h6>
                         <div className="w-full max-w-xs h-auto pl-3 flex-wrap flex">
                             {jobDetails?.skills.map((skill) => (
                             <span className="text-md font-semibold text-white bg-primary px-5 py-2  m-1 rounded-lg">{skill}</span>
@@ -125,8 +125,8 @@ const JobDetails = () => {
                         </div>
                     </Link>
 
-                    {isMobile && <div className="flex items-center justify-center pb-10">
-                        { premiumStatus ? <><button className="text-warning text-sm py-2 px-28 rounded-lg cursor-not-allowed" disabled style={{backgroundColor:'#dddddd'}} >Upgrade to Premium to <br /> Apply for more Jobs.</button> </> : <>{status ? <button className="text-success text-sm py-2 px-28 rounded-lg cursor-not-allowed" disabled style={{backgroundColor:'#dddddd'}} >You have Already Applied to this Job.</button> : <Link to={{pathname:"/apply-job" , state:{job : jobDetails}}} className="text-white py-2 px-28 rounded-lg" style={{backgroundColor:'#0060A5'}} >Apply Now</Link>}</>}
+                    {isMobile && <div className="flex items-center justify-center pb-10 p-3">
+                        { premiumStatus ? <><button className="text-warning text-sm py-2 px-28 rounded-lg cursor-not-allowed" disabled style={{backgroundColor:'#dddddd'}} >Upgrade to Premium to <br /> Apply for more Jobs.</button> </> : <>{status ? <button className="text-success text-sm py-2 px-14 rounded-lg cursor-not-allowed" disabled style={{backgroundColor:'#dddddd'}} >You have Already Applied to this Job.</button> : <Link to={{pathname:"/apply-job" , state:{job : jobDetails}}} className="text-white py-2 px-28 rounded-lg" style={{backgroundColor:'#0060A5'}} >Apply Now</Link>}</>}
                     </div>}
                 </div>
             </div>

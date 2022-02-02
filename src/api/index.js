@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // const API = axios.create({ baseURL:process.env.REACT_APP_PRODUCTION_BASE_URL })
 // const API = axios.create({ baseURL:process.env.REACT_APP_DEV_BASE_URL})
-const API = axios.create({ baseURL : "http://www.userapi.jobsway.online/api/v1/user"})
+const API = axios.create({ baseURL : "https://www.userapi.jobsway.online/api/v1/user"})
 
 
 //Auth

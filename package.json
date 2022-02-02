@@ -2,7 +2,7 @@
   "name": "jobsway-user",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://jobsway-user.herokuapp.com/api/v1/user/",
+  "proxy": "https://www.userapi.jobsway.online/api/v1/user/",
   "homepage": "http://jobsway.online/",
   "dependencies": {
     "@craco/craco": "^6.3.0",

@@ -7,8 +7,7 @@ export const getFeaturedJobs = () => async (dispatch) => {
         const {data} = await api.getFeaturedJobs()
         dispatch({type:FEATUREDJOBS,data})    
     } catch (error) {
-        console.log(error.response);
-        alert('There is an error in getFeaturedJobs')
+        console.log(error.response);         
     }
 }
 

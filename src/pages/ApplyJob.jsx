@@ -68,7 +68,7 @@ const ApplyJob = () => {
 
     axios({
       method: "post",
-      url: `${process.env.REACT_APP_DEV_BASE_URL}/applyjob/${location.state?.job._id}`,
+      url: `${process.env.REACT_APP_LIVE_BASE_URL}/applyjob/${location.state?.job._id}`,
       data: fileData,
       headers: { "Content-Type": "multipart/form-data" },
     })

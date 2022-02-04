@@ -9,6 +9,8 @@ import { Icon } from '@iconify/react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha'
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import { useMediaQuery } from "react-responsive";
+import { useForm } from "react-hook-form";
+
 
 
 const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '', type: '',captcha:''}
@@ -25,6 +27,8 @@ function Signupform() {
   const location = useLocation()
   const [loading, setLoading] = useState(false)
   const isMobile = useMediaQuery({ query: `(max-width: 640px)` });
+  const { register, formState: { errors }, handleSubmit: validateSubmit } = useForm();
+
 
   useEffect(() => {
     loadCaptchaEnginge(6)
@@ -36,8 +40,9 @@ function Signupform() {
     setCaptchaErr('')
   }, [location,formData])
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  
+
+  const handleSubmit = () => {
     if(validateCaptcha(formData.captcha,false) !== true) return setCaptchaErr('Captcha verification failed')
     setLoading(true)
     dispatch(signup(formData,history,setLoading))
@@ -73,7 +78,7 @@ function Signupform() {
 
   return (
     <div className="signup-wrapper">
-      <form className="" action="" onSubmit={handleSubmit}>
+      <form className="" action="" onSubmit={validateSubmit(handleSubmit)}>
         <h3 className={`welcome mt-4`} >Welcome to JobsWay.</h3>
         {captchaErr ? <p className="text-red-800" style={{ color: "red" }}>{captchaErr}</p> : null}
         {PhoneErr ? <p className="text-red-800" style={{ color: "red" }}>{PhoneErr}</p> : null}
@@ -83,13 +88,23 @@ function Signupform() {
             <p className="text-red-800" style={{ color: "red" }}>{error.msg}</p>
           ))}</> : <><p className="text-red-800" style={{ color: "red" }}>{location?.state?.Err}</p></>
         }
-        <div className={`inp-wrap d-flex ${isMobile && 'flex flex-col '}`} style={{ marginTop: "1rem" }}>
-          <input onChange={handleChange}  name="firstName" placeholder="First Name" className="input" type="text" />
-          <input onChange={handleChange}  name="lastName" placeholder="Last Name" className="input" type="text" />
+        <div className={`inp-wrap d-flex gap-1 ${isMobile && 'flex flex-col '}`} style={{ marginTop: "1rem" }}>
+          
+          <div className="w-full">
+          <input {...register("firstName", { required: true , minLength:3  })}  onChange={handleChange}  name="firstName" placeholder="First Name" className="input" type="text" />
+          {errors.firstName && <p className="text-danger text-xs text-left m-1">Enter a valid first name</p>}
+          </div>
+          <div className="w-full">
+          <input {...register("lastName", { required: true , minLength:1 })} onChange={handleChange}  name="lastName" placeholder="Last Name" className="input" type="text" />
+          {errors.lastName && <p className="text-danger text-xs text-left m-1">This field is required</p>}
+          </div>
         </div>
-        <input onChange={handleChange}  name="phone" placeholder="Phone No." className="input" type="tel" />
-        <input onChange={handleChange}  name="email" placeholder="Email (Optional)" className="input" type="email" />
-        <input onChange={handleChange}  name="password" placeholder="Password" className="input" type="password" />
+        <input {...register("phone", { required: true , minLength:10 , maxLength:10 })} onChange={handleChange}  name="phone" placeholder="Phone No." className="input" type="tel" />
+           {errors.phone &&  <p className="text-danger text-xs text-left m-1">Enter a valid a phone number</p>}
+        <input {...register("email", { required: false , pattern : { value :  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i } })}  onChange={handleChange}  name="email" placeholder="Email (Optional)" className="input" type="" />
+           {errors.email &&  <p className="text-danger text-xs text-left m-1">Enter a valid a email address</p>}
+        <input {...register("password", { required: true , minLength:8 })} onChange={handleChange}  name="password" placeholder="Password" className="input" type="password" />
+           {errors.password &&  <p className="text-danger text-xs text-left m-1">Password Must be 8 Charecter or more. </p>}
         <div className="p-3 rounded-md m-1 h-30 flex flex-col items-center justify-center"><LoadCanvasTemplate/>
         </div>
         <input onChange={handleChange}  name="captcha" placeholder="Enter the captcha" className="input" type="text" />

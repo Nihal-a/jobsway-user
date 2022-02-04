@@ -120,7 +120,6 @@ class ImageInput extends Component {
                   type='file' id='profile_pic'
                 value={profile_pic} 
                 onChange={this.handleFile}
-
                 />
               </div>
 

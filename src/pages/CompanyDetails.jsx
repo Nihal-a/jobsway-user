@@ -31,7 +31,7 @@ const CompanyDetails = () => {
         <div>
             <Navbar />
 
-            <div className={`mt-28 flex container mx-auto ${isMobile ? 'flex-col' : 'flex-row'}`}>
+            <div className={`mt-28 flex container mx-auto }`}>
                 <div className="flex-1 p-3">
                     <div className="w-full p-5 flex flex-col items-center shadow-2xl ">
                         <img src={company?.logoUrl} alt="" className="w-20 h-20 rounded-md shadow-xl"/>

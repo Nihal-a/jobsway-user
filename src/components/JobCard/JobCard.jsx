@@ -17,7 +17,7 @@ function JobCard({job}) {
                     </div>
                     </div>
                 </Link>
-                <div className="text-white">{moment(job?.createdAt , "YYYYMMDDhmmssa").startOf('hour').fromNow()}</div>
+                <div className="text-white capitalize">{moment(job?.createdAt , "YYYYMMDDhmmssa").startOf('hour').fromNow()}</div>
             </div>
             <div className="flex flex-col">
                 <h2 className="text-2xl font-semibold text-white mt-3">{job?.jobTitle}</h2>

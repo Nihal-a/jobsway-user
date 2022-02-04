@@ -31,8 +31,7 @@ function SigninForm() {
 
  
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = () => {
     setLoading(true)
     dispatch(signin(formData,history,setLoading))
   }
@@ -68,7 +67,7 @@ function SigninForm() {
           {location?.state?.Err && <p className="text-red-800" style={{ color: "red" }}>{location.state.Err}</p> }
           <input {...register("phone", { required: true , minLength:10 , maxLength:10 })} onChange={handleChange} name="phone" placeholder="Phone" className="input" type="tel" />
           {errors.phone && <p className="text-danger text-xs text-left m-1">Enter a Valid phone number</p>}
-          <input {...register("password", { required: true , minLength:8 })} onChange={handleChange} name="password" placeholder="Password" className="input" type="password" />
+          <input {...register("password", { required: true , minLength:8  })} onChange={handleChange} name="password" placeholder="Password" className="input" type="password" />
           {errors.password && <p className="text-danger text-xs text-left m-1 ">Password Must be 8 Charecter or more.</p>}
           <div className="text-right mt-2">
             <Link to="/forgot-password" className="font-light underline text-sm">Forgot Password</Link>

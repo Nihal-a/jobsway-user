@@ -7,6 +7,7 @@ import { googlesign, signin } from "../../actions/auth";
 import jwtDecode from "jwt-decode";
 import { Icon } from "@iconify/react";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import { useForm } from "react-hook-form";
 
 
 
@@ -20,6 +21,8 @@ function SigninForm() {
   const dispatch = useDispatch()
   const history = useHistory()
   const location = useLocation()
+  const { register, formState: { errors }, handleSubmit: validateSubmit } = useForm();
+
 
 
   useEffect(() => {
@@ -60,11 +63,13 @@ function SigninForm() {
   return (
     <div>
       <div className="flex flex-col items-center justify-center text-center mt-28 p-4">
-        <form action="" onSubmit={handleSubmit}>
+        <form action="" className="" onSubmit={validateSubmit(handleSubmit)}>
           <h3 className="welcome mt-6">Sign In to JobsWay.</h3>
           {location?.state?.Err && <p className="text-red-800" style={{ color: "red" }}>{location.state.Err}</p> }
-          <input onChange={handleChange} name="phone" placeholder="Phone" className="input" type="tel" />
-          <input onChange={handleChange} name="password" placeholder="Password" className="input" type="password" />
+          <input {...register("phone", { required: true , minLength:10 , maxLength:10 })} onChange={handleChange} name="phone" placeholder="Phone" className="input" type="tel" />
+          {errors.phone && <p className="text-danger text-xs text-left m-1">Enter a Valid phone number</p>}
+          <input {...register("password", { required: true , minLength:8 })} onChange={handleChange} name="password" placeholder="Password" className="input" type="password" />
+          {errors.password && <p className="text-danger text-xs text-left m-1 ">Password Must be 8 Charecter or more.</p>}
           <div className="text-right mt-2">
             <Link to="/forgot-password" className="font-light underline text-sm">Forgot Password</Link>
           </div>

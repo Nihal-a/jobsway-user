@@ -176,6 +176,7 @@ const ApplyJob = () => {
             <div className={`w-full flex  items-center justify-between gap-2 ${isMobile && 'flex-col '}`}>
               <div className="w-full flex-1">
               <input
+                {...register("email", { required : true   , pattern : { value :  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i } })}
                 onChange={handleChange}
                 type="email"
                 name="email"
@@ -183,7 +184,6 @@ const ApplyJob = () => {
                 placeholder="Email"
                 className={`bg-secondary w-full p-4 m-2 mt-5 rounded-md ${isMobile && 'w-full'}`}
                 value={user?.user.authmode == 'email' ? user?.user.email : formData.email}
-                {...register("email", { required:  user?.user.authmode == 'email' ? true :false  , pattern : { value :  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i } })}
               />
                 {errors.email  && <p className="text-danger text-xs text-left m-1">This field is required</p>}
               
